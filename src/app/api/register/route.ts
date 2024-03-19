@@ -31,7 +31,7 @@ export async function POST(req: NextApiRequest) {
       { message: "User Saved", newUser },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
     if (error.code === "P2002") {
       return NextResponse.json(
         { message: "This email already exist" },

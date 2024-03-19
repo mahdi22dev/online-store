@@ -1,5 +1,4 @@
 import { NextAuthOptions, getServerSession } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { useSession } from "next-auth/react";
 import { prisma } from "@/lib/prisma";
@@ -8,27 +7,14 @@ import bcrypt from "bcrypt";
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET as string,
   providers: [
-    // GithubProvider({
-    //   clientId: process.env.AUTH_GITHUB_ID as string,
-    //   clientSecret: process.env.AUTH_GITHUB_SECRET as string,
-    //   async profile(profile) {
-    //     await saveGithubUser(profile);
-    //     return {
-    //       id: profile.id.toString(),
-    //       name: profile.name || profile.login,
-    //       gh_username: profile.login,
-    //       email: profile.email,
-    //       image: profile.avatar_url,
-    //     };
-    //   },
-    // }),
     CredentialsProvider({
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      // @ts-ignore
+      async authorize(credentials: any, req) {
         try {
           if (!credentials.email || !credentials.password) {
             return null;
