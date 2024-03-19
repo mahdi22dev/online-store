@@ -18,11 +18,14 @@ export default async function Register(): Promise<JSX.Element> {
 
   return (
     <main className="w-full min-h-[100vh] p-5 flex justify-center items-center flex-col gap-5">
-      <div className="flex flex-col space-y-2 text-center">
-        <h1 className="text-2xl font-semibold ">Welcome to Starterpedia</h1>
-        <p className="text-sm  text-opacity-80">
-          Register new Account with Starterpedia
-        </p>
+      <div className="flex flex-col space-y-2 text-center justify-center items-center">
+        <div className="relative w-[150px] h-[150px]">
+          <img
+            src="/logo.png"
+            className="absolute top-0 left-0 right-0 bottom-0"
+            alt="shop logo"
+          />
+        </div>
       </div>
       <AuthRegisterForm />
       <p className="px-8 text-center text-sm  text-opacity-80 hover:underline hover:underline-offset-4">
