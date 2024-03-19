@@ -78,7 +78,7 @@ const AuthLoginForm = (): JSX.Element => {
           aria-label="Loading Spinner"
           data-testid="loader"
           loading={isLoading}
-          color="#333"
+          color="#fff"
         />
         Sign In
       </Button>
