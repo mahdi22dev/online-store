@@ -6,8 +6,9 @@ import { userAuthRigsterSchema } from "@/lib/validation";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "sonner";
 import { RegisterFormData } from "@/lib/types";
-import { FormInput } from "lucide-react";
+
 import { Button } from "../ui/button";
+import FormInput from "./FormInput";
 
 const AuthRegisterForm = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

@@ -9,6 +9,7 @@ import FormInput from "./FormInput";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 const AuthLoginForm = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [githubLoading, setGithubLoading] = useState<boolean>(false);
