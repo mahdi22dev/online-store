@@ -4,11 +4,9 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { CiSearch } from "react-icons/ci";
-import { Input } from "../ui/input";
 function Saerch() {
   return (
     <Sheet>
