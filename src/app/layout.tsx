@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/providers/Providers";
 import Navbar from "@/components/header/Navbar";
+import { cn } from "@/lib/utils";
+import { protoMono } from "@/styles/fonts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="">
-      <body className={inter.className}>
+    <html lang="en" className="bg-slate-50">
+      <body className={cn(protoMono.variable, inter.className)}>
         <Providers>
           <Navbar />
           {children}

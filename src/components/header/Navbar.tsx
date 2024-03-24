@@ -5,12 +5,11 @@ import { CiUser } from "react-icons/ci";
 import Saerch from "./Saerch";
 import Link from "next/link";
 import ResponsiveNav from "./ResponsiveNav";
-import { buttonVariants } from "../ui/button";
 import NavLinks from "./NavLinks";
 
 function Navbar() {
   return (
-    <nav className="w-full h-[65px] shadow-lg font-medium">
+    <nav className="w-full h-[75px] shadow-lg font-medium bg-white sticky top-0">
       <div className="w-full max-w-5xl flex justify-between items-center mx-auto mt-3 px-3">
         {/* links */}
         <div className="flex sm:hidden justify-between items-center">
