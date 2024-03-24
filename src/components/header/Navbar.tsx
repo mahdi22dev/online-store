@@ -5,6 +5,8 @@ import { CiUser } from "react-icons/ci";
 import Saerch from "./Saerch";
 import Link from "next/link";
 import ResponsiveNav from "./ResponsiveNav";
+import { buttonVariants } from "../ui/button";
+import NavLinks from "./NavLinks";
 
 function Navbar() {
   return (
@@ -14,12 +16,7 @@ function Navbar() {
         <div className="flex sm:hidden justify-between items-center">
           <ResponsiveNav /> <Saerch />
         </div>
-        <div className="gap-2 justify-between items-center capitalize hidden sm:flex">
-          <Link href={"/home"}>home</Link>
-          <Link href={"/products"}>products</Link>
-          <Link href={"/devices"}>devices</Link>
-        </div>
-
+        <NavLinks className="hidden sm:flex" />
         {/* logo */}
         <Link
           href={"/"}
