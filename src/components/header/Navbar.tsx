@@ -8,7 +8,7 @@ import ResponsiveNav from "./ResponsiveNav";
 
 function Navbar() {
   return (
-    <nav className="w-full fixed top-0 h-[75px] shadow-lg font-medium">
+    <nav className="w-full h-[65px] shadow-lg font-medium">
       <div className="w-full max-w-5xl flex justify-between items-center mx-auto mt-3 px-3">
         {/* links */}
         <div className="flex sm:hidden justify-between items-center">
@@ -40,7 +40,10 @@ function Navbar() {
             <Saerch />
           </div>
           <CiUser className="text-3xl cursor-pointer" />
-          <div className="flex justify-between items-center cursor-pointer">
+          <Link
+            href={"/cart"}
+            className="flex justify-between items-center cursor-pointer"
+          >
             <CiShoppingCart className="text-3xl" />
             <div>
               <Badge variant="outline" className="bg-black text-white text-sm">
@@ -48,7 +51,7 @@ function Navbar() {
               </Badge>
               <p className="text-sm">cart</p>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </nav>
