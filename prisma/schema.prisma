@@ -19,7 +19,8 @@ model User {
   image             String?
 }
 
-model NewsLetter {
-  id    String @id @default(cuid())
-  email String
+model Cartitems {
+  id       String @id @default(cuid())
+  cartId   String
+  quantity Int
 }
