@@ -27,7 +27,6 @@ export const authOptions: NextAuthOptions = {
           if (!existingUser) {
             return null;
           }
-          // compare passwords
           const passwordsMatch = await bcrypt.compare(
             credentials.password,
             existingUser.password

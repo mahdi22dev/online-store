@@ -1,26 +1,27 @@
 "use client";
 
+import { addToCartAction } from "@/actions/actions";
 import { Button } from "@/components/ui/button";
 import useLocalStorageState from "use-local-storage-state";
 
-const cartItem = [{ id: 1, title: "Iphone 15 pro", price: 150 }];
+const cartItem = [{ id: "wtretrtetert", title: "Iphone 15 pro", price: 150 }];
 
 export default function Products() {
-  const [cart, setCart] = useLocalStorageState("cart", {
-    defaultValue: [],
-  });
+  // const [cart, setCart] = useLocalStorageState("cart", {
+  //   defaultValue: [],
+  // });
 
-  const addToCart = () => {
-    // @ts-ignore
-    setCart([...cart, cartItem[0]]);
-    console.log(cart);
+  const addToCart = async () => {
+    addToCartAction("53frtrwtwtewrwtwet");
+    // setCart([...cart, cartItem[0]]);
+    // console.log(cart);
   };
 
   const removeFromCart = () => {
-    const updatecart = cart.filter(
-      (item: { id: number; title: string; price: number }, index) => index !== 0
-    );
-    setCart(updatecart);
+    // const updatecart = cart.filter(
+    //   (item: { id: number; title: string; price: number }, index) => index !== 0
+    // );
+    // setCart(updatecart);
   };
   return (
     <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
