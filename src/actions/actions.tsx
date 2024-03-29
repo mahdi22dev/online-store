@@ -9,9 +9,10 @@ export const addToCartAction = async (productId: string) => {
     const session = await getServerSession(authOptions);
     const cookieStore = cookies();
     const hasCartCookie = cookieStore.get("cart");
-    const cartId = hasCartCookie?.value;
+    let cart;
 
     if (hasCartCookie) {
+      cart = hasCartCookie?.value;
       //   const cart = await prisma.productItem.create({
       //     data: {
       //       productId: "popeorewr454fef5",
@@ -36,7 +37,6 @@ export const addToCartAction = async (productId: string) => {
       //   //   });
     } else {
       console.log("no coockie found");
-      let cart;
 
       // if user session exists
       if (session) {
@@ -78,7 +78,6 @@ export const addToCartAction = async (productId: string) => {
           data: {},
         });
         console.log(cart);
-
         cookies().set({
           name: "cart",
           value: cart.id,
@@ -86,33 +85,34 @@ export const addToCartAction = async (productId: string) => {
           path: "/",
         });
       }
+    }
 
-      //   create product and connect to cart
-      const proudctExists = await prisma.productItem.findUnique({
-        // @ts-ignore
-        where: { productId: "refefwef" },
+    //create product and connect to cart
+    const itemtExists = await prisma.productItem.findFirst({
+      // @ts-ignore
+      where: { productId: productId, CartId: cart?.id },
+    });
+    console.log(itemtExists);
+
+    if (itemtExists) {
+      console.log("Product exists");
+      await prisma.productItem.update({
+        where: { id: itemtExists.id },
+        data: {
+          quantity: itemtExists.quantity + 1,
+        },
       });
-      if (proudctExists) {
-        console.log("Product exists");
-        await prisma.productItem.update({
+    } else {
+      console.log("Product doesn't exists");
+      // @ts-ignore
+      await prisma.productItem.create({
+        data: {
+          productId: productId,
+          quantity: 1,
           // @ts-ignore
-          where: { productId: "refefwef" },
-          data: {
-            quantity: proudctExists.quantity + 1,
-          },
-        });
-      } else {
-        console.log("Product doesn't exists");
-        // @ts-ignore
-        await prisma.productItem.create({
-          data: {
-            productId: "refefwef",
-            quantity: 1,
-            // @ts-ignore
-            Cart: { connect: { id: cart.id } },
-          },
-        });
-      }
+          Cart: { connect: { id: cart?.id } },
+        },
+      });
     }
   } catch (error: any) {
     console.log(error.message);
