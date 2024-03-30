@@ -8,7 +8,7 @@ import { Toaster } from "sonner";
 export default function Providers({ children }: { children: ReactNode }) {
   return (
     <SessionProvider>
-      <Toaster closeButton richColors />
+      <Toaster closeButton expand={false} position="top-right" />
       <Provider store={store}>{children}</Provider>
     </SessionProvider>
   );

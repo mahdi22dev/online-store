@@ -1,10 +1,19 @@
 "use client";
 import { addToCartAction } from "@/actions/actions";
 import { Button } from "@/components/ui/button";
-
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 export default function Products() {
+  const router = useRouter();
+
   const addToCart = async (productId: string, quantity: number = 0) => {
-    addToCartAction(productId);
+    // addToCartAction(productId);
+    toast("Product has been added to your cart", {
+      action: {
+        label: "View cart",
+        onClick: () => router.push("/cart"),
+      },
+    });
   };
 
   return (

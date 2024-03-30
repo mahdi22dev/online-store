@@ -35,7 +35,9 @@ function Navbar() {
           <div className="hidden sm:block">
             <Saerch />
           </div>
-          <CiUser className="text-3xl cursor-pointer" />
+          <Link href={"/login"}>
+            <CiUser className="text-3xl cursor-pointer" />
+          </Link>
           <Link
             href={"/cart"}
             className="flex justify-between items-center cursor-pointer"

@@ -20,6 +20,9 @@ function NavLinks({ className }: { className?: string }) {
       <Link href={"/devices"} className={buttonVariants({ variant: "link" })}>
         devices
       </Link>
+      <Link href={"/customize"} className={buttonVariants({ variant: "link" })}>
+        custom case
+      </Link>
     </div>
   );
 }

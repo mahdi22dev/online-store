@@ -23,7 +23,6 @@ const AuthLoginForm = (): JSX.Element => {
 
   const onSubmit = async (data: LogInFormData) => {
     setIsLoading(true);
-    console.log(data);
 
     try {
       await signIn("credentials", { ...data, redirect: false }).then(
