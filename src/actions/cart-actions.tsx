@@ -1,6 +1,6 @@
 "use server";
 import { prisma } from "@/lib/prisma";
-import { UserServerSession } from "@/lib/types";
+import { UserServerSession, cartType } from "@/lib/types";
 import { authOptions } from "@/services/auth/auth.service";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
@@ -13,7 +13,6 @@ export const addToCartAction = async (productId: string) => {
     let cart;
 
     if (hasCartCookie) {
-      console.log("coockie found");
       if (session) {
         const userExists = await prisma.user.findUnique({
           where: { id: session?.user?.id },
@@ -55,7 +54,6 @@ export const addToCartAction = async (productId: string) => {
         }
       }
     } else {
-      console.log("no coockie found");
       if (session) {
         const userExists = await prisma.user.findUnique({
           where: { id: session?.user?.id },
@@ -118,6 +116,63 @@ export const addToCartAction = async (productId: string) => {
     }
   } catch (error: any) {
     console.log(error.message);
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+export const fetchCartData = async () => {
+  const cookieStore = cookies();
+  const hasCartCookie = cookieStore.get("cart");
+  try {
+    if (hasCartCookie) {
+      const cart: cartType = await prisma.cart.findUnique({
+        where: { id: hasCartCookie.value },
+        include: { ProductItems: true },
+      });
+      return cart;
+    } else {
+      const cart = await prisma.cart.create({
+        data: {},
+      });
+      if (cart)
+        cookies().set({
+          name: "cart",
+          value: cart.id,
+          httpOnly: true,
+          path: "/",
+        });
+      return cart;
+    }
+  } catch (error: any) {
+    console.log(error.message);
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+export const getCartLength: () => Promise<number> = async () => {
+  const cookieStore = cookies();
+  const hasCartCookie = cookieStore.get("cart");
+  try {
+    if (hasCartCookie) {
+      const cart = await prisma.cart.findUnique({
+        where: { id: hasCartCookie.value },
+        include: { ProductItems: true },
+      });
+      console.log("cart length:", cart?.ProductItems.length);
+
+      if (cart && cart.ProductItems) {
+        return cart?.ProductItems.length;
+      } else {
+        return 0;
+      }
+    } else {
+      return 0;
+    }
+  } catch (error) {
+    console.error("Error fetching cart items:", error);
+    return 0;
   } finally {
     await prisma.$disconnect();
   }

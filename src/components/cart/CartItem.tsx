@@ -31,7 +31,6 @@ const QuantityInput = () => {
       <Badge className="text-xl cursor-pointer w-8">
         <FaMinus />
       </Badge>
-
       <input
         type="number"
         className="w-11 h-7 border-black border-2 border-opacity-75 outline-none rounded-lg text-center"

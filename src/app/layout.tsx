@@ -22,6 +22,7 @@ export default function RootLayout({
     <html lang="en" className="bg-slate-50">
       <body className={cn(protoMono.variable, inter.className)}>
         <Providers>
+          {/* @ts-expect-error Server Component */}
           <Navbar />
           {children}
         </Providers>

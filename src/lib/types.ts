@@ -17,3 +17,17 @@ export type UserServerSession = {
     image: string;
   };
 } | null;
+
+export type cartType =
+  | ({
+      ProductItems: {
+        id: string;
+        productId: string;
+        quantity: number;
+        CartId: string;
+      }[];
+    } & {
+      id: string;
+      userId: string | null;
+    })
+  | null;
