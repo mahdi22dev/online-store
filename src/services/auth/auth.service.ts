@@ -74,7 +74,7 @@ export const ServerSession = async () => {
       email: string;
       image: string;
     };
-  } | null>;
+  }>;
 };
 
 export const ClientSession = () => {
