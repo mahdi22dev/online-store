@@ -177,3 +177,29 @@ export const getCartLength: () => Promise<number> = async () => {
     await prisma.$disconnect();
   }
 };
+export const adjustProductQuantity: () => Promise<number> = async () => {
+  const cookieStore = cookies();
+  const hasCartCookie = cookieStore.get("cart");
+  try {
+    if (hasCartCookie) {
+      const cart = await prisma.cart.findUnique({
+        where: { id: hasCartCookie.value },
+        include: { ProductItems: true },
+      });
+      console.log("cart length:", cart?.ProductItems.length);
+
+      if (cart && cart.ProductItems) {
+        return cart?.ProductItems.length;
+      } else {
+        return 0;
+      }
+    } else {
+      return 0;
+    }
+  } catch (error) {
+    console.error("Error fetching cart items:", error);
+    return 0;
+  } finally {
+    await prisma.$disconnect();
+  }
+};

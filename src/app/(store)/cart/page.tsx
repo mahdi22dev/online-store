@@ -4,15 +4,15 @@ import CartComponent from "@/components/cart/CartComponent";
 import { buttonVariants } from "@/components/ui/button";
 import { cartType } from "@/lib/types";
 import { CartDataUpdate } from "@/redux/cart/cartSlice";
-import { AppDispatch, RootState } from "@/redux/store";
+import { AppDispatch } from "@/redux/store";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CiShoppingCart } from "react-icons/ci";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import Loading from "./_components/Loading";
 
 export default function Cart() {
   const dispatch: AppDispatch = useDispatch();
-  const cartSlice = useSelector((state: RootState) => state.cart.cart);
   const [cart, setCart] = useState<cartType>();
   const [loading, setLoading] = useState(true);
 
@@ -22,6 +22,7 @@ export default function Cart() {
       const cartData = await fetchCartData();
       // @ts-ignore
       setCart(cartData);
+      // @ts-ignore
       dispatch(CartDataUpdate(cartData));
     } catch (error: any) {
       console.log(error.message);
@@ -35,9 +36,13 @@ export default function Cart() {
   }, []);
 
   return (
-    <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
+    <main
+      className={`w-full min-h-[90vh] flex justify-center ${
+        loading ? "items-center" : "items-start"
+      } p-5 sm:p-12`}
+    >
       {loading ? (
-        <div>Loading items</div>
+        <Loading />
       ) : cart?.ProductItems?.length == 0 ? (
         <div className="flex justify-center items-center flex-col gap-3">
           <CiShoppingCart className="text-[250px]" />

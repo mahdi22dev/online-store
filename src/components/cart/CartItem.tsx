@@ -2,9 +2,10 @@ import React from "react";
 import { Badge } from "../ui/badge";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
+
 function CartItem() {
   return (
-    <div className="flex justify-between gap-3 items-center px-5 ">
+    <div className="flex justify-between gap-3 items-center px-5">
       <div className="relative w-24 h-24">
         <img
           src="/devices/iphone15pro.jpg"
@@ -23,8 +24,6 @@ function CartItem() {
   );
 }
 
-export default CartItem;
-
 const QuantityInput = () => {
   return (
     <div className="w-24 h-7 flex justify-between items-center gap-2">
@@ -42,3 +41,4 @@ const QuantityInput = () => {
     </div>
   );
 };
+export default CartItem;
