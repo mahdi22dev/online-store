@@ -19,7 +19,7 @@ function ShoppingCart() {
       <Separator />
 
       {cart?.ProductItems.map((item) => {
-        return <CartItem />;
+        return <CartItem item={item} key={item.id} />;
       })}
     </div>
   );
