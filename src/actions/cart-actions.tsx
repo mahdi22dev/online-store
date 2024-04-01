@@ -145,7 +145,6 @@ export const fetchCartData = async () => {
       return cart;
     }
   } catch (error: any) {
-    console.log(error.message);
     throw error;
   } finally {
     await prisma.$disconnect();
