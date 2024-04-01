@@ -4,17 +4,21 @@ import CartComponent from "@/components/cart/CartComponent";
 import { buttonVariants } from "@/components/ui/button";
 import { cartType } from "@/lib/types";
 import { CartDataUpdate } from "@/redux/cart/cartSlice";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch, RootState } from "@/redux/store";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CiShoppingCart } from "react-icons/ci";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "./_components/Loading";
+import { toast } from "sonner";
 
 export default function Cart() {
   const dispatch: AppDispatch = useDispatch();
   const [cart, setCart] = useState<cartType>();
   const [loading, setLoading] = useState(true);
+  const refetchcart: boolean = useSelector(
+    (state: RootState) => state.cart.refetchCart
+  );
 
   const fetchCartItems = async () => {
     try {
@@ -25,15 +29,16 @@ export default function Cart() {
       // @ts-ignore
       dispatch(CartDataUpdate(cartData));
     } catch (error: any) {
-      console.log(error.message);
+      toast.error("Error accured when fetching items");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
+    console.log("checking if component will render if is not in view");
     fetchCartItems();
-  }, []);
+  }, [refetchcart]);
 
   return (
     <main

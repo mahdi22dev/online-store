@@ -3,9 +3,11 @@ import { cartType } from "@/lib/types";
 
 interface CartState {
   cart: cartType;
+  refetchCart: boolean;
 }
 const initialState: CartState = {
   cart: { id: "", userId: "", ProductItems: [] },
+  refetchCart: false,
 };
 export const cartSlice = createSlice({
   name: "cart",
@@ -14,9 +16,12 @@ export const cartSlice = createSlice({
     CartDataUpdate: (state, action: PayloadAction<cartType>) => {
       state.cart = action.payload;
     },
+    toggleCartRefetch: (state) => {
+      state.refetchCart = !state.refetchCart;
+    },
   },
 });
 
-export const { CartDataUpdate } = cartSlice.actions;
+export const { CartDataUpdate, toggleCartRefetch } = cartSlice.actions;
 
 export default cartSlice.reducer;

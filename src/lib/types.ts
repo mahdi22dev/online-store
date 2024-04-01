@@ -31,3 +31,10 @@ export type cartType =
       userId: string | null;
     })
   | null;
+
+export type ProductItems = {
+  id: string;
+  productId: string;
+  quantity: number;
+  CartId: string;
+};

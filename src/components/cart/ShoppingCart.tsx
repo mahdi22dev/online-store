@@ -17,7 +17,6 @@ function ShoppingCart() {
         <p className="flex gap-1">{cart?.ProductItems.length} items</p>
       </div>
       <Separator />
-
       {cart?.ProductItems.map((item) => {
         return <CartItem item={item} key={item.id} />;
       })}

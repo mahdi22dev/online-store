@@ -162,7 +162,6 @@ export const getCartLength: () => Promise<number> = async () => {
         where: { id: hasCartCookie.value },
         include: { ProductItems: true },
       });
-      console.log("cart length:", cart?.ProductItems.length);
 
       if (cart && cart.ProductItems) {
         return cart?.ProductItems.length;
@@ -179,21 +178,34 @@ export const getCartLength: () => Promise<number> = async () => {
     await prisma.$disconnect();
   }
 };
-export const adjustProductQuantity = async (productId: string, n: number) => {
+export const adjustProductQuantity = async (id: string, n: number) => {
   try {
-    const adjustedproduct = await prisma.productItem.findUnique({
-      where: { id: productId },
+    let adjustedproduct = await prisma.productItem.findUnique({
+      where: { id: id },
     });
     if (adjustedproduct) {
-      await prisma.productItem.update({
+      adjustedproduct = await prisma.productItem.update({
         where: { id: adjustedproduct.id },
         data: {
           quantity: adjustedproduct.quantity + n,
         },
       });
+      return adjustedproduct;
     } else {
       throw new Error("item not found");
     }
+  } catch (error) {
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+export const reomveProductfromcart = async (productId: string) => {
+  try {
+    await prisma.productItem.delete({
+      where: { id: productId },
+    });
   } catch (error) {
     throw error;
   } finally {
