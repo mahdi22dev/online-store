@@ -42,7 +42,6 @@ const AuthRegisterForm = (): JSX.Element => {
         toast.error(responseJson?.message);
       } else if (res.status == 200) {
         toast.success("new user registred successfully");
-        // for hard navigation
         setTimeout(() => {
           window.location.href = "/login";
         }, 500);
