@@ -5,7 +5,7 @@ import { authOptions } from "@/services/auth/auth.service";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 
-export const addToCartAction = async (productId: string) => {
+export const addToCartAction = async (productId: string, price: number = 0) => {
   try {
     const session: UserServerSession = await getServerSession(authOptions);
     const cookieStore = cookies();
@@ -110,6 +110,7 @@ export const addToCartAction = async (productId: string) => {
         data: {
           productId: productId,
           quantity: 1,
+          price: price,
           Cart: { connect: { id: cart?.id } },
         },
       });

@@ -10,8 +10,8 @@ import { toast } from "sonner";
 export default function Products() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
-  const addToCart = async (productId: string, quantity: number = 0) => {
-    addToCartAction(productId);
+  const addToCart = async (productId: string, price: number = 0) => {
+    addToCartAction(productId, price);
     dispatch(toggleCartRefetch());
     toast("Product has been added to your cart", {
       action: {
@@ -35,7 +35,7 @@ export default function Products() {
                 />
               </div>
               <Button
-                onClick={() => addToCart(product.productId)}
+                onClick={() => addToCart(product.productId, 19.99)}
                 variant={"default"}
               >
                 add to cart

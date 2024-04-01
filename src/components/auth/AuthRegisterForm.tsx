@@ -6,7 +6,6 @@ import { userAuthRigsterSchema } from "@/lib/validation";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "sonner";
 import { RegisterFormData } from "@/lib/types";
-
 import { Button } from "../ui/button";
 import FormInput from "./FormInput";
 
