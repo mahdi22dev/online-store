@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge } from "../ui/badge";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { toggleCartRefetch } from "@/redux/cart/cartSlice";
 import BeatLoader from "react-spinners/BeatLoader";
+
 function CartItem({ item }: { item: ProductItems }) {
   const dispatch: AppDispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,10 @@ function CartItem({ item }: { item: ProductItems }) {
   if (error.accured) {
     toast.error(error.message);
   }
+
+  useEffect(() => {
+    console.log("fetch cart product info like title and assests");
+  }, []);
 
   return (
     <div
