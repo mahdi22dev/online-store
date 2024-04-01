@@ -36,7 +36,6 @@ export default function Cart() {
   };
 
   useEffect(() => {
-    console.log("checking if component will render if is not in view");
     fetchCartItems();
   }, [refetchcart]);
 
