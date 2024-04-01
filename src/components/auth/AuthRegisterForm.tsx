@@ -29,7 +29,6 @@ const AuthRegisterForm = (): JSX.Element => {
     confirm_password: string;
   }) => {
     setIsLoading(true);
-    console.log(data);
     try {
       const res = await fetch("/api/register", {
         method: "POST",
