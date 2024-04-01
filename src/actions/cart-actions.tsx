@@ -115,7 +115,6 @@ export const addToCartAction = async (productId: string) => {
       });
     }
   } catch (error: any) {
-    console.log(error.message);
     throw error;
   } finally {
     await prisma.$disconnect();
