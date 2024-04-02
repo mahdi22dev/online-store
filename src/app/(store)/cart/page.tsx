@@ -23,7 +23,7 @@ export default function Cart() {
   const fetchCartItems = async () => {
     try {
       setLoading(true);
-      const cartData = await fetchCartData();
+      const cartData = await fetchCartItems();
       // @ts-ignore
       setCart(cartData);
       // @ts-ignore
@@ -36,6 +36,8 @@ export default function Cart() {
   };
 
   useEffect(() => {
+    console.log("refetching");
+
     fetchCartItems();
   }, [refetchcart]);
 

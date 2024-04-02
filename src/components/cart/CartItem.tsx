@@ -12,7 +12,7 @@ import { ProductItems } from "@/lib/types";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { toggleCartRefetch } from "@/redux/cart/cartSlice";
+import { toggleCartRefetch, toggleSummaryCalcu } from "@/redux/cart/cartSlice";
 import BeatLoader from "react-spinners/BeatLoader";
 
 function CartItem({ item }: { item: ProductItems }) {
@@ -26,7 +26,10 @@ function CartItem({ item }: { item: ProductItems }) {
   useEffect(() => {
     console.log("fetch cart product info like title and assests");
   }, []);
-
+  useEffect(() => {
+    console.log("re-culc summary when loading trriggred");
+    dispatch(toggleSummaryCalcu());
+  }, [loading]);
   return (
     <div
       className={`relative flex justify-between gap-3 items-center p-3 px-5 `}
@@ -83,7 +86,6 @@ const QuantityInput = ({
   dispatch,
   setError,
   setLoading,
-  loading,
 }: {
   item: ProductItems;
   dispatch: AppDispatch;

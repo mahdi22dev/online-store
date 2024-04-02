@@ -25,6 +25,7 @@ export type cartType =
         productId: string;
         quantity: number;
         CartId: string;
+        price: number;
       }[];
     } & {
       id: string;
