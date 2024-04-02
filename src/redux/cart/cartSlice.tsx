@@ -17,7 +17,6 @@ export const cartSlice = createSlice({
   reducers: {
     CartDataUpdate: (state, action: PayloadAction<cartType>) => {
       state.cart = action.payload;
-      console.log("from cart slice:", state.cart);
     },
     toggleCartRefetch: (state) => {
       state.refetchCart = !state.refetchCart;

@@ -8,13 +8,14 @@ import { RootState } from "@/redux/store";
 import { cartType } from "@/lib/types";
 function Summary() {
   const [totalPrice, setTotalPrice] = useState(0);
-  const cart: cartType = useSelector((state: RootState) => state.cart.cart);
+  const cartData: cartType = useSelector((state: RootState) => state.cart.cart);
+  const [cart, setCart] = useState<cartType>(cartData);
   const reculcSummary: boolean = useSelector(
     (state: RootState) => state.cart.reculcSummary
   );
   useEffect(() => {
     const totalsum = cart?.ProductItems.reduce((total, item) => {
-      const itemTotal = item.price * item.quantity;
+      const itemTotal: number = item.price * item.quantity;
       return total + itemTotal;
     }, 0);
     console.log(totalsum);

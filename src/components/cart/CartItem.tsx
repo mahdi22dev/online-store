@@ -104,6 +104,7 @@ const QuantityInput = ({
       setLoading(true);
       const adjustedProduct = await adjustProductQuantity(item.id, 1);
       setQuantity(adjustedProduct.quantity);
+      dispatch(toggleCartRefetch());
     } catch (error) {
       setError({
         accured: true,
@@ -123,6 +124,7 @@ const QuantityInput = ({
       } else {
         const adjustedProduct = await adjustProductQuantity(item.id, -1);
         setQuantity(adjustedProduct.quantity);
+        dispatch(toggleCartRefetch());
       }
     } catch (error) {
       setError({

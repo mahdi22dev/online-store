@@ -23,11 +23,13 @@ export default function Cart() {
   const fetchCartItems = async () => {
     try {
       setLoading(true);
-      const cartData = await fetchCartItems();
-      // @ts-ignore
-      setCart(cartData);
+      const cartData = await fetchCartData();
+      console.log("latest data from cart: ", cartData);
+
       // @ts-ignore
       dispatch(CartDataUpdate(cartData));
+      // @ts-ignore
+      setCart(cartData);
     } catch (error: any) {
       toast.error("Error accured when fetching items");
     } finally {
