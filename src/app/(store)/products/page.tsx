@@ -7,10 +7,11 @@ import { AppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
+
 export default function Products() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
-  const addToCart = async (productId: string, price: number = 0) => {
+  const addToCart = async (productId: string, price: number) => {
     addToCartAction(productId, price);
     dispatch(toggleCartRefetch());
     toast("Product has been added to your cart", {

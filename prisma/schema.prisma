@@ -29,7 +29,7 @@ model Cart {
 
 model ProductItem {
   id        String @id @default(cuid())
-  productId String
+  productId String //used to grab asessts and title amd others frp, contentful
   quantity  Int
   price     Int
   Cart      Cart   @relation(fields: [CartId], references: [id])

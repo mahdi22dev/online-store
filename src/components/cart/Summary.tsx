@@ -3,7 +3,12 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { IoBagCheckOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { cartType } from "@/lib/types";
 function Summary() {
+  const cart: cartType = useSelector((state: RootState) => state.cart.cart);
+
   return (
     <div className="bg-white rounded-md w-auto md:w-96 h-64 fixed md:sticky md:top-[10%] bottom-4 left-4 right-4 md:left-auto md:right-auto md:bottom-auto p-5 space-y-3 shadow hover:shadow-md focus:shadow-md border-t-4 border-black sm:border-none transition-all duration-200">
       <h2 className="font-bold text-xl">Summary</h2>
