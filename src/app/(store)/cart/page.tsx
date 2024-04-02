@@ -24,8 +24,6 @@ export default function Cart() {
     try {
       setLoading(true);
       const cartData = await fetchCartData();
-      console.log("latest data from cart: ", cartData);
-
       // @ts-ignore
       dispatch(CartDataUpdate(cartData));
       // @ts-ignore
@@ -38,8 +36,6 @@ export default function Cart() {
   };
 
   useEffect(() => {
-    console.log("refetching");
-
     fetchCartItems();
   }, [refetchcart]);
 

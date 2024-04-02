@@ -27,7 +27,6 @@ function CartItem({ item }: { item: ProductItems }) {
     console.log("fetch cart product info like title and assests");
   }, []);
   useEffect(() => {
-    console.log("re-culc summary when loading trriggred");
     dispatch(toggleSummaryCalcu());
   }, [loading]);
   return (

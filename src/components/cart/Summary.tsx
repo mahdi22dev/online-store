@@ -18,9 +18,6 @@ function Summary() {
       const itemTotal: number = item.price * item.quantity;
       return total + itemTotal;
     }, 0);
-    console.log(totalsum);
-    console.log(cart?.ProductItems);
-    console.log(reculcSummary);
     if (totalsum) {
       setTotalPrice(totalsum);
     } else {
