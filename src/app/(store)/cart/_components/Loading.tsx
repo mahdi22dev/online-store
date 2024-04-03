@@ -7,7 +7,7 @@ export default function Loading() {
     animationData: jsonfile,
     loop: true,
   };
-
+  // animation
   const { View } = useLottie(options);
   return <div className="w-64 h-64">{View}</div>;
 }
