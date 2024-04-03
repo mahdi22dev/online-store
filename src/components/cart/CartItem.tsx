@@ -26,19 +26,19 @@ function CartItem({ item }: { item: ProductItems }) {
   useEffect(() => {
     console.log("fetch cart product info like title and assests");
   }, []);
-  useEffect(() => {
-    dispatch(toggleSummaryCalcu());
-  }, [loading]);
+  // useEffect(() => {
+  //   dispatch(toggleSummaryCalcu());
+  // }, [loading]);
   return (
     <div
       className={`relative flex justify-between gap-3 items-center p-3 px-5 `}
     >
       {/* overlay */}
-      {loading && (
+      {/* {loading && (
         <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-slate-50/50 z-50">
           <BeatLoader color="#333" />
         </div>
-      )}
+      )} */}
       {/* overlay */}
       <div className="relative w-24 h-24">
         <img
@@ -119,6 +119,7 @@ const QuantityInput = ({
       setLoading(true);
       if (quantity === 1) {
         await reomveProductfromcart(item.id);
+        dispatch(toggleCartRefetch());
         dispatch(toggleCartRefetch());
       } else {
         const adjustedProduct = await adjustProductQuantity(item.id, -1);

@@ -9,5 +9,5 @@ export default function Loading() {
   };
 
   const { View } = useLottie(options);
-  return <div className="w-64 h-64">Loading items...</div>;
+  return <div className="w-64 h-64">{View}</div>;
 }
