@@ -6,7 +6,7 @@ export default function Home() {
     <main className="min-h-screen p-24">
       <h1 className="capitalize">Online store for phone cases</h1>
       <Button asChild variant={"secondary"}>
-        <Link href={"/login"}>Sign In</Link>
+        <Link href={"/login"}>Sign In here</Link>
       </Button>
     </main>
   );
