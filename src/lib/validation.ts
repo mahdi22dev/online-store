@@ -30,26 +30,3 @@ export const userAuthRigsterSchema = z
     path: ["confirm_password"],
     message: "Passwords does not match",
   });
-export const newsLetterSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: "Email is required" })
-    .email("Invalid email address"),
-});
-
-const MAX_FILE_SIZE = 5242880;
-
-export const resourceFormSchema = z.object({
-  name: z.string().min(1, { message: "Resource title is required" }),
-  author: z.string().min(1, { message: "Author name is required" }),
-  url: z.string().min(1, { message: "url is required" }),
-  description: z.string().min(1, { message: "Description is required" }),
-  file: z
-    .any()
-    .refine((files) => files?.length == 1, "Image is required.")
-    .refine(
-      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      `Max file size is 5MB.`
-    ),
-  type: z.string().min(1, { message: "Resource type is required" }),
-});

@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { useSession } from "next-auth/react";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
+import { UserServerSession } from "@/lib/types";
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET as string,
@@ -66,15 +67,7 @@ export const authOptions: NextAuthOptions = {
 };
 
 export const ServerSession = async () => {
-  return getServerSession(authOptions) as Promise<{
-    user: {
-      id: string;
-      name: string;
-      username: string;
-      email: string;
-      image: string;
-    };
-  }>;
+  return getServerSession(authOptions) as Promise<UserServerSession>;
 };
 
 export const ClientSession = () => {

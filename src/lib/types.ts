@@ -1,13 +1,8 @@
 import * as z from "zod";
-import {
-  userAuthRigsterSchema,
-  userAuthLoginSchema,
-  resourceFormSchema,
-} from "./validation";
+import { userAuthRigsterSchema, userAuthLoginSchema } from "./validation";
 
 export type LogInFormData = z.infer<typeof userAuthLoginSchema>;
 export type RegisterFormData = z.infer<typeof userAuthRigsterSchema>;
-export type ResourceFormData = z.infer<typeof resourceFormSchema>;
 export type UserServerSession = {
   user: {
     id: string;
