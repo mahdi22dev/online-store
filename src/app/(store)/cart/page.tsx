@@ -24,10 +24,12 @@ export default function Cart() {
     try {
       setLoading(true);
       const cartData = await fetchCartData();
-      // @ts-ignore
-      dispatch(CartDataUpdate(cartData));
-      // @ts-ignore
-      setCart(cartData);
+      if (cartData) {
+        console.log(cartData);
+        // @ts-ignore
+        dispatch(CartDataUpdate(cartData)); // @ts-ignore
+        setCart(cartData);
+      }
     } catch (error: any) {
       toast.error("Error accured when fetching items");
     } finally {
