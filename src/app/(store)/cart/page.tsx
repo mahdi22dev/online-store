@@ -11,11 +11,14 @@ import { CiShoppingCart } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./_components/Loading";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
 
 export default function Cart() {
   const dispatch: AppDispatch = useDispatch();
   const [cart, setCart] = useState<cartType>();
   const [loading, setLoading] = useState(true);
+  const session = useSession();
   const refetchcart: boolean = useSelector(
     (state: RootState) => state.cart.refetchCart
   );
@@ -53,7 +56,21 @@ export default function Cart() {
         <div className="flex justify-center items-center flex-col gap-3">
           <CiShoppingCart className="text-[250px]" />
           <p>No items yet? Continue shopping to explore more.</p>
-          <Link href={"/products"} className={buttonVariants({})}>
+          {session.status == "unauthenticated" && (
+            <Link
+              href={"/login"}
+              className={cn(buttonVariants({}), "w-[80%] md:w-36")}
+            >
+              Sign in
+            </Link>
+          )}
+          <Link
+            href={"/products"}
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "w-[80%] md:w-36"
+            )}
+          >
             Explore more
           </Link>
         </div>
