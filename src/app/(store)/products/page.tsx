@@ -2,7 +2,6 @@
 import { addToCartAction } from "@/actions/cart-actions";
 import { fetchAllProducts } from "@/actions/products-actions";
 import { Button } from "@/components/ui/button";
-import { product_mock_data } from "@/lib/data";
 import { toggleCartRefetch } from "@/redux/cart/cartSlice";
 import { AppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
