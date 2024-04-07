@@ -8,6 +8,9 @@ dependencies:
   '@apollo/client':
     specifier: ^3.9.10
     version: 3.9.10(@types/react@18.0.0)(graphql@16.8.1)(react-dom@18.0.0)(react@18.0.0)
+  '@apollo/experimental-nextjs-app-support':
+    specifier: ^0.10.0
+    version: 0.10.0(@apollo/client@3.9.10)(next@14.1.0)(react@18.0.0)
   '@hookform/resolvers':
     specifier: ^3.3.4
     version: 3.3.4(react-hook-form@7.49.3)
@@ -147,6 +150,18 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /@apollo/client-react-streaming@0.10.0(@apollo/client@3.9.10)(react@18.0.0):
+    resolution: {integrity: sha512-iZ2jYghRS71xFv6O3Js5Ojrrmk4SnIEKwPRKIswQyAtqjHrfvUTyXCDzxrhPcGQe/y7su/XcE7Xp0kOp7yTnlg==}
+    peerDependencies:
+      '@apollo/client': ^3.9.6
+      react: ^18
+    dependencies:
+      '@apollo/client': 3.9.10(@types/react@18.0.0)(graphql@16.8.1)(react-dom@18.0.0)(react@18.0.0)
+      react: 18.0.0
+      superjson: 2.2.1
+      ts-invariant: 0.10.3
+    dev: false
+
   /@apollo/client@3.9.10(@types/react@18.0.0)(graphql@16.8.1)(react-dom@18.0.0)(react@18.0.0):
     resolution: {integrity: sha512-w8i/Lk1P0vvWZF0Xb00XPonn79/0rgRJ1vopBlVudVuy9QP29/NZXK0rI2xJIN6VrKuEqJZaVGJC+7k23I2sfA==}
     peerDependencies:
@@ -184,6 +199,19 @@ packages:
       zen-observable-ts: 1.2.5
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /@apollo/experimental-nextjs-app-support@0.10.0(@apollo/client@3.9.10)(next@14.1.0)(react@18.0.0):
+    resolution: {integrity: sha512-S3mfZRnAAAaKwA8RNckS4TWYLX5utpmRTwG3WGFtpooYx8QQG8xft0p0a9eTQ53Jrw3nSMJc/wOOsT/5noMCQg==}
+    peerDependencies:
+      '@apollo/client': ^3.9.6
+      next: ^13.4.1 || ^14.0.0
+      react: ^18
+    dependencies:
+      '@apollo/client': 3.9.10(@types/react@18.0.0)(graphql@16.8.1)(react-dom@18.0.0)(react@18.0.0)
+      '@apollo/client-react-streaming': 0.10.0(@apollo/client@3.9.10)(react@18.0.0)
+      next: 14.1.0(react-dom@18.0.0)(react@18.0.0)
+      react: 18.0.0
     dev: false
 
   /@babel/runtime@7.23.9:
@@ -2261,6 +2289,13 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
+  /copy-anything@3.0.5:
+    resolution: {integrity: sha512-yCEafptTtb4bk7GLEQoM8KVJpxAfdBJYaXyzQEgQQQgYrZiDp8SJmGKlYza6CYjEDNstAdNdKA3UuoULlEbS6w==}
+    engines: {node: '>=12.13'}
+    dependencies:
+      is-what: 4.1.16
+    dev: false
+
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
@@ -3284,6 +3319,11 @@ packages:
       call-bind: 1.0.5
       get-intrinsic: 1.2.2
     dev: true
+
+  /is-what@4.1.16:
+    resolution: {integrity: sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A==}
+    engines: {node: '>=12.13'}
+    dev: false
 
   /isarray@1.0.0:
     resolution: {integrity: sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==}
@@ -4471,6 +4511,13 @@ packages:
       mz: 2.7.0
       pirates: 4.0.6
       ts-interface-checker: 0.1.13
+
+  /superjson@2.2.1:
+    resolution: {integrity: sha512-8iGv75BYOa0xRJHK5vRLEjE2H/i4lulTjzpUXic3Eg8akftYjkmQDa8JARQ42rlczXyFR3IeRoeFCc7RxHsYZA==}
+    engines: {node: '>=16'}
+    dependencies:
+      copy-anything: 3.0.5
+    dev: false
 
   /supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
