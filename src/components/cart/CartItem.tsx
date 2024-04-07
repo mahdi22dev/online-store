@@ -118,7 +118,6 @@ const QuantityInput = ({
       if (quantity === 1) {
         await reomveProductfromcart(item.id);
         dispatch(toggleCartRefetch());
-        dispatch(toggleCartRefetch());
       } else {
         const adjustedProduct = await adjustProductQuantity(item.id, -1);
         setQuantity(adjustedProduct.quantity);
