@@ -26,9 +26,7 @@ function CartItem({ item }: { item: ProductItems }) {
   useEffect(() => {
     console.log("fetch cart product info like title and assests");
   }, []);
-  // useEffect(() => {
-  //   dispatch(toggleSummaryCalcu());
-  // }, [loading]);
+
   return (
     <div
       className={`relative flex justify-between gap-3 items-center p-3 px-5 `}

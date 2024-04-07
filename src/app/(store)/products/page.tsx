@@ -13,22 +13,43 @@ import { toast } from "sonner";
 export default function Products() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const addToCart = async (productId: string, price: number) => {
-    addToCartAction(productId, price);
-    dispatch(toggleCartRefetch());
-    toast("Product has been added to your cart", {
-      action: {
-        label: "View cart",
-        onClick: () => router.push("/cart"),
-      },
-    });
+    try {
+      addToCartAction(productId, price);
+      dispatch(toggleCartRefetch());
+      toast("Product has been added to your cart", {
+        action: {
+          label: "View cart",
+          onClick: () => router.push("/cart"),
+        },
+      });
+    } catch (error) {
+      toast.error("Error adding item to your cart", {});
+    }
+  };
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      await fetchAllProducts();
+    } catch (error) {
+    } finally {
+      setLoading(true);
+    }
   };
 
   useEffect(() => {
-    fetchAllProducts();
+    fetchProducts();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
+        Loading
+      </div>
+    );
+  }
   return (
     <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
       <div className="grid grid-cols-5 gap-3">
