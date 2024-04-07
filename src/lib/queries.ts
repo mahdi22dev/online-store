@@ -7,6 +7,7 @@ export const GET_CONTENTFUL_PRODUCTS = gql`
           id
         }
         name
+        price
         imagesCollection {
           items {
             url

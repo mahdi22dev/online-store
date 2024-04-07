@@ -35,8 +35,7 @@ export default function Products() {
       setLoading(true);
       const data = await fetchAllProducts();
       console.log(data.phoneCasesProductCollection.items);
-
-      setProductsData(data);
+      setProductsData(data.phoneCasesProductCollection.items);
     } catch (error) {
     } finally {
       setLoading(false);
@@ -57,9 +56,9 @@ export default function Products() {
   return (
     <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
       <div className="grid grid-cols-5 gap-3">
-        {product_mock_data.map((product) => {
+        {productsData?.map((product: any) => {
           return (
-            <div key={product.id}>
+            <div key={product.sys.id}>
               <div className="relative w-24 h-24">
                 <img
                   src="/devices/iphone15pro.jpg"
@@ -68,7 +67,7 @@ export default function Products() {
                 />
               </div>
               <Button
-                onClick={() => addToCart(product.productId, 19.99)}
+                onClick={() => addToCart(product.sys.id, product.price)}
                 variant={"default"}
               >
                 add to cart
