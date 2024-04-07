@@ -58,7 +58,6 @@ export default function Products() {
       <div className="grid grid-cols-5 gap-3">
         {productsData?.map((product: any) => {
           const imgSrc = `${product.imagesCollection.items[0].url}?w=800&h=600&fm=webp&q=80`;
-          console.log(imgSrc);
           return (
             <div key={product.sys.id}>
               <div className="relative w-24 h-24">
