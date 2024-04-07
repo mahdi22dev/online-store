@@ -10,7 +10,6 @@ export const fetchAllProducts = async () => {
     });
     if (loading) return "Loading...";
     if (error) return `Error! ${error.message}`;
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);

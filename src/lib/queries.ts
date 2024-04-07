@@ -6,6 +6,12 @@ export const GET_CONTENTFUL_PRODUCTS = gql`
         sys {
           id
         }
+        name
+        imagesCollection {
+          items {
+            url
+          }
+        }
       }
     }
   }

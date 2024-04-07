@@ -14,6 +14,7 @@ export default function Products() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const [productsData, setProductsData] = useState([]);
   const addToCart = async (productId: string, price: number) => {
     try {
       addToCartAction(productId, price);
@@ -32,7 +33,10 @@ export default function Products() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      await fetchAllProducts();
+      const data = await fetchAllProducts();
+      console.log(data.phoneCasesProductCollection.items);
+
+      setProductsData(data);
     } catch (error) {
     } finally {
       setLoading(false);
