@@ -2,15 +2,19 @@
 import { addToCartAction } from "@/actions/cart-actions";
 import { Button } from "@/components/ui/button";
 import { product_mock_data } from "@/lib/data";
+import { GET_CONTENTFUL_PRODUCTS } from "@/lib/queries";
 import { toggleCartRefetch } from "@/redux/cart/cartSlice";
 import { AppDispatch } from "@/redux/store";
+import { useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 
 export default function Products() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
+  // const [loading, setLoading] = useState(false);
   const addToCart = async (productId: string, price: number) => {
     addToCartAction(productId, price);
     dispatch(toggleCartRefetch());
@@ -21,6 +25,19 @@ export default function Products() {
       },
     });
   };
+
+  // const fetchProducts = async () => {
+  //   try {
+
+  //   } catch (error) {
+  //   } finally {
+  //   }
+  // };
+
+  const { loading, error, data } = useQuery(GET_CONTENTFUL_PRODUCTS);
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+  console.log(data);
 
   return (
     <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
