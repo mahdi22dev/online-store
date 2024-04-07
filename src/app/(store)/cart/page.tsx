@@ -44,15 +44,16 @@ export default function Cart() {
     fetchCartItems();
   }, [refetchcart]);
 
-  return (
-    <main
-      className={`w-full min-h-[90vh] flex justify-center ${
-        loading ? "items-center" : "items-start"
-      } p-5 sm:p-12`}
-    >
-      {loading ? (
+  if (loading) {
+    return (
+      <div className="w-full min-h-[90vh] flex justify-center items-center p-5 sm:p-12">
         <Loading />
-      ) : cart?.ProductItems?.length == 0 ? (
+      </div>
+    );
+  }
+  return (
+    <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
+      {cart?.ProductItems?.length == 0 ? (
         <div className="flex justify-center items-center flex-col gap-3">
           <CiShoppingCart className="text-[250px]" />
           <p>No items yet? Continue shopping to explore more.</p>

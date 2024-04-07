@@ -13,7 +13,7 @@ import { toast } from "sonner";
 export default function Products() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const addToCart = async (productId: string, price: number) => {
     try {
       addToCartAction(productId, price);
@@ -35,7 +35,7 @@ export default function Products() {
       await fetchAllProducts();
     } catch (error) {
     } finally {
-      setLoading(true);
+      setLoading(false);
     }
   };
 
@@ -46,7 +46,7 @@ export default function Products() {
   if (loading) {
     return (
       <div className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
-        Loading
+        Loading items...
       </div>
     );
   }
