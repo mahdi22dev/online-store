@@ -57,11 +57,13 @@ export default function Products() {
     <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
       <div className="grid grid-cols-5 gap-3">
         {productsData?.map((product: any) => {
+          const imgSrc = `${product.imagesCollection.items[0].url}?w=800&h=600&fm=webp&q=80`;
+          console.log(imgSrc);
           return (
             <div key={product.sys.id}>
               <div className="relative w-24 h-24">
                 <img
-                  src="/devices/iphone15pro.jpg"
+                  src={imgSrc}
                   alt="iphone 15 pro case"
                   className="absolute top-0 left-0 right-0 bottom-0"
                 />
