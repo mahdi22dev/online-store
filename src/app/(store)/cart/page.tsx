@@ -3,10 +3,14 @@ import { fetchCartData } from "@/actions/cart-actions";
 import CartComponent from "@/components/cart/CartComponent";
 import { buttonVariants } from "@/components/ui/button";
 import { cartType } from "@/lib/types";
-import { CartDataUpdate } from "@/redux/cart/cartSlice";
+import {
+  CartDataUpdate,
+  toggleCartLoading,
+  untoggleCartLoading,
+} from "@/redux/cart/cartSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CiShoppingCart } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./_components/Loading";
@@ -17,15 +21,18 @@ import { useSession } from "next-auth/react";
 export default function Cart() {
   const dispatch: AppDispatch = useDispatch();
   const [cart, setCart] = useState<cartType>();
-  const [loading, setLoading] = useState(true);
+  const firstMount = useRef(true);
   const session = useSession();
   const refetchcart: boolean = useSelector(
     (state: RootState) => state.cart.refetchCart
   );
+  const loading: boolean = useSelector(
+    (state: RootState) => state.cart.cartfetchloading
+  );
 
   const fetchCartItems = async () => {
     try {
-      setLoading(true);
+      dispatch(toggleCartLoading());
       const cartData = await fetchCartData();
       if (cartData) {
         console.log(cartData);
@@ -36,13 +43,36 @@ export default function Cart() {
     } catch (error: any) {
       toast.error("Error accured when fetching items");
     } finally {
-      setLoading(false);
+      dispatch(untoggleCartLoading());
     }
   };
+  const fetchCartItemsWithoutloading = async () => {
+    try {
+      const cartData = await fetchCartData();
+      if (cartData) {
+        console.log(cartData);
+        // @ts-ignore
+        dispatch(CartDataUpdate(cartData)); // @ts-ignore
+        setCart(cartData);
+      }
+    } catch (error: any) {
+      toast.error("Error accured when fetching items");
+    }
+  };
+  useEffect(() => {
+    if (firstMount.current) {
+      firstMount.current = false;
+      console.log("first Mount");
+      return;
+    } else {
+      fetchCartItemsWithoutloading();
+      console.log("second Mount");
+    }
+  }, [refetchcart]);
 
   useEffect(() => {
     fetchCartItems();
-  }, [refetchcart]);
+  }, []);
 
   if (loading) {
     return (

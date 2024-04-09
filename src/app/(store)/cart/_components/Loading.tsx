@@ -1,15 +1,14 @@
 "use client";
 import React from "react";
-import ClipLoader from "react-spinners/ClipLoader";
+import Loadings from "react-spinners/HashLoader";
 export default function Loading() {
   return (
     <div className="w-64 h-64">
-      Loading{" "}
-      <ClipLoader
-        size={40}
+      <Loadings
+        size={60}
         aria-label="Loading Spinner"
         data-testid="loader"
-        color="#fff"
+        color="#333"
       />
     </div>
   );

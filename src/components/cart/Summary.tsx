@@ -10,22 +10,19 @@ function Summary() {
   const [totalPrice, setTotalPrice] = useState(0);
   const cartData: cartType = useSelector((state: RootState) => state.cart.cart);
   const [cart, setCart] = useState<cartType>(cartData);
-  const reculcSummary: boolean = useSelector(
-    (state: RootState) => state.cart.reculcSummary
-  );
   useEffect(() => {
+    setCart(cartData);
+    console.log(cartData);
+
     const totalsum = cart?.ProductItems.reduce((total, item) => {
       const itemTotal: number = item.price * item.quantity;
       return total + itemTotal;
     }, 0);
-    console.log(reculcSummary);
+    // @ts-expect-error
+    setTotalPrice(totalsum);
+    console.log("total price state changes:", totalPrice);
+  }, [cartData]);
 
-    if (totalsum) {
-      setTotalPrice(totalsum);
-    } else {
-      setTotalPrice(0);
-    }
-  }, [reculcSummary]);
   return (
     <div className="bg-white rounded-md w-auto md:w-96 h-64 fixed md:sticky md:top-[10%] bottom-4 left-4 right-4 md:left-auto md:right-auto md:bottom-auto p-5 space-y-3 shadow hover:shadow-md focus:shadow-md border-t-4 border-black sm:border-none transition-all duration-200">
       <h2 className="font-bold text-xl">Summary</h2>
@@ -35,7 +32,7 @@ function Summary() {
       </div>
       <div className="flex justify-between items-center gap-5">
         <p>Shipping fee</p>
-        <p>free shipping!</p>
+        <p>free</p>
       </div>
       <div className="flex justify-between items-center gap-5">
         <p className="font-bold">Total</p> <p> US ${totalPrice}</p>

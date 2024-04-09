@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
+import Loading from "../cart/_components/Loading";
 
 export default function Products() {
   const router = useRouter();
@@ -48,7 +49,7 @@ export default function Products() {
   if (loading) {
     return (
       <div className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
-        Loading items...
+        <Loading />
       </div>
     );
   }

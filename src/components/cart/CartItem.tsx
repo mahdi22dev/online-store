@@ -12,12 +12,12 @@ import { ProductItems } from "@/lib/types";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { toggleCartRefetch, toggleSummaryCalcu } from "@/redux/cart/cartSlice";
+import { toggleCartLoading, toggleCartRefetch } from "@/redux/cart/cartSlice";
 import BeatLoader from "react-spinners/BeatLoader";
-
 function CartItem({ item }: { item: ProductItems }) {
+  const [loading, setloading] = useState(false);
   const dispatch: AppDispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState({ accured: false, message: "" });
   if (error.accured) {
     toast.error(error.message);
@@ -31,12 +31,13 @@ function CartItem({ item }: { item: ProductItems }) {
     <div
       className={`relative flex justify-between gap-3 items-center p-3 px-5 `}
     >
+      {" "}
       {/* overlay */}
-      {/* {loading && (
-        <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-slate-50/50 z-50">
+      {loading && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-slate-50/50 z-50 hover:cursor-not-allowed">
           <BeatLoader color="#333" />
         </div>
-      )} */}
+      )}
       {/* overlay */}
       <div className="relative w-24 h-24">
         <img
@@ -54,7 +55,7 @@ function CartItem({ item }: { item: ProductItems }) {
           item={item}
           dispatch={dispatch}
           setError={setError}
-          setLoading={setLoading}
+          setLoading={setloading}
           loading={loading}
         />
       </div>
@@ -63,13 +64,14 @@ function CartItem({ item }: { item: ProductItems }) {
           className="text-red-500 text-3xl cursor-pointer focus:opacity-50 hover:opacity-50 transition-all duration-150"
           onClick={async () => {
             try {
-              setLoading(true);
+              // dispatch(toggleCartLoading());
+              setloading(true);
               await reomveProductfromcart(item.id);
               dispatch(toggleCartRefetch());
             } catch (error) {
               setError({ accured: true, message: "error deleting cart item" });
             } finally {
-              setLoading(false);
+              setloading(false);
             }
           }}
         />
@@ -83,10 +85,10 @@ const QuantityInput = ({
   dispatch,
   setError,
   setLoading,
+  loading,
 }: {
   item: ProductItems;
   dispatch: AppDispatch;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   loading: boolean;
   setError: React.Dispatch<
     React.SetStateAction<{
@@ -94,10 +96,12 @@ const QuantityInput = ({
       message: string;
     }>
   >;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [quantity, setQuantity] = useState(item.quantity);
   const plusItem = async () => {
     try {
+      // dispatch(toggleCartLoading()); setloading(true);
       setLoading(true);
       const adjustedProduct = await adjustProductQuantity(item.id, 1);
       setQuantity(adjustedProduct.quantity);
@@ -114,11 +118,14 @@ const QuantityInput = ({
   };
   const minusItem = async () => {
     try {
-      setLoading(true);
+      // dispatch(toggleCartLoading());
       if (quantity === 1) {
+        setLoading(true);
         await reomveProductfromcart(item.id);
         dispatch(toggleCartRefetch());
       } else {
+        // dispatch(toggleCartLoading());
+        setLoading(true);
         const adjustedProduct = await adjustProductQuantity(item.id, -1);
         setQuantity(adjustedProduct.quantity);
         dispatch(toggleCartRefetch());
