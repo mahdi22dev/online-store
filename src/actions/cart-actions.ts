@@ -121,7 +121,6 @@ export const addToCartAction = async (productId: string, price: number) => {
     await prisma.$disconnect();
   }
 };
-
 export const fetchCartData = async () => {
   const cookieStore = cookies();
   const hasCartCookie = cookieStore.get("cart");
@@ -151,7 +150,6 @@ export const fetchCartData = async () => {
     await prisma.$disconnect();
   }
 };
-
 export const getCartLength: () => Promise<number> = async () => {
   const cookieStore = cookies();
   const hasCartCookie = cookieStore.get("cart");
@@ -199,7 +197,6 @@ export const adjustProductQuantity = async (id: string, n: number) => {
     await prisma.$disconnect();
   }
 };
-
 export const reomveProductfromcart = async (productId: string) => {
   try {
     await prisma.productItem.delete({
