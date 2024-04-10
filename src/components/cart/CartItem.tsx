@@ -23,9 +23,16 @@ function CartItem({ item }: { item: ProductItems }) {
     toast.error(error.message);
   }
 
-  useEffect(() => {
-    console.log("fetch cart product info like title and assests");
-  }, []);
+  const fetchcartItem = async (id: string) => {
+    try {
+      setloading(true);
+    } catch (error) {
+    } finally {
+      setloading(false);
+    }
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <div
