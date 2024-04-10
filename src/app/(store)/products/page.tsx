@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import Loading from "../cart/_components/Loading";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function Products() {
   const router = useRouter();
@@ -55,18 +56,19 @@ export default function Products() {
   }
   return (
     <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
-      <div className="grid grid-cols-5 gap-3">
+      {/* grid grid-cols-5 gap-3 grid-flow-row */}
+      <div className="pt-[200%]">
         {productsData?.map((product: any) => {
-          const imgSrc = `${product.imagesCollection.items[0].url}?w=800&h=600&fm=webp&q=80`;
           return (
             <div key={product.sys.id}>
-              <div className="relative w-24 h-24">
-                <img
-                  src={imgSrc}
-                  alt="iphone 15 pro case"
-                  className="absolute top-0 left-0 right-0 bottom-0"
-                />
-              </div>
+              <LazyLoadImage
+                alt="iphone 15 pro case"
+                width={800}
+                height={600}
+                placeholderSrc={`${product.imagesCollection.items[0].url}?w=300&h=300&fm=webp&q=80`}
+                threshold={399}
+              />
+
               <Button
                 onClick={() => addToCart(product.sys.id, product.price)}
                 variant={"default"}
