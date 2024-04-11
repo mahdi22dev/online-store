@@ -12,7 +12,6 @@ function Summary() {
   const [cart, setCart] = useState<cartType>(cartData);
   useEffect(() => {
     setCart(cartData);
-    console.log(cartData);
 
     const totalsum = cart?.ProductItems.reduce((total, item) => {
       const itemTotal: number = item.price * item.quantity;
@@ -20,7 +19,6 @@ function Summary() {
     }, 0);
     // @ts-expect-error
     setTotalPrice(totalsum);
-    console.log("total price state changes:", totalPrice);
   }, [cartData]);
 
   return (
