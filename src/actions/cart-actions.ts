@@ -203,7 +203,7 @@ export const reomveProductfromcart = async (productId: string) => {
       where: { id: productId },
     });
   } catch (error) {
-    throw error;
+    throw new Error("can't remove the cart");
   } finally {
     await prisma.$disconnect();
   }

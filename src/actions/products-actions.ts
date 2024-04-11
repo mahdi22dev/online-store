@@ -1,17 +1,32 @@
 "use server";
 
 import { getClient } from "@/lib/apolloClient";
-import { GET_CONTENTFUL_PRODUCTS } from "@/lib/queries";
+import {
+  GET_CONTENTFUL_PRODUCTS,
+  GET_CONTENTFUL_SINGLE_PRODUCT,
+} from "@/lib/queries";
 
 export const fetchAllProducts = async () => {
   try {
-    const { data, error, loading } = await getClient().query({
+    const { data } = await getClient().query({
       query: GET_CONTENTFUL_PRODUCTS,
     });
-    if (loading) return "Loading...";
-    if (error) return `Error! ${error.message}`;
+
     return data;
   } catch (error) {
-    console.log(error);
+    throw error;
+  }
+};
+
+export const fetchSingleProduct = async (id: string) => {
+  try {
+    const { data } = await getClient().query({
+      query: GET_CONTENTFUL_SINGLE_PRODUCT,
+      variables: { id: id },
+    });
+
+    return data;
+  } catch (error) {
+    throw error;
   }
 };

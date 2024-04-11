@@ -10,12 +10,14 @@ import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import Loading from "../cart/_components/Loading";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { GetContentfulProductsQuery } from "@/__generated__/graphql";
 
 export default function Products() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const [productsData, setProductsData] = useState([]);
+  const [productsData, setProductsData] =
+    useState<GetContentfulProductsQuery>();
   const addToCart = async (productId: string, price: number) => {
     try {
       addToCartAction(productId, price);
@@ -35,8 +37,9 @@ export default function Products() {
     try {
       setLoading(true);
       const data = await fetchAllProducts();
-      console.log(data.phoneCasesProductCollection.items);
-      setProductsData(data.phoneCasesProductCollection.items);
+      if (data) {
+        setProductsData(data);
+      }
     } catch (error) {
     } finally {
       setLoading(false);
@@ -58,27 +61,29 @@ export default function Products() {
     <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
       {/* grid grid-cols-5 gap-3 grid-flow-row */}
       <div className="">
-        {productsData?.map((product: any) => {
-          return (
-            <div key={product.sys.id}>
-              <LazyLoadImage
-                alt="iphone 15 pro case"
-                width={300}
-                height={300}
-                src={`${product.imagesCollection.items[0].url}?w=300&h=300&fm=webp&q=80`}
-                effect="opacity"
-                threshold={100}
-              />
+        {productsData?.phoneCasesProductCollection?.items.map(
+          (product: any) => {
+            return (
+              <div key={product.sys.id}>
+                <LazyLoadImage
+                  alt="iphone 15 pro case"
+                  width={300}
+                  height={300}
+                  src={`${product.imagesCollection.items[0].url}?w=300&h=300&fm=webp&q=80`}
+                  effect="opacity"
+                  threshold={100}
+                />
 
-              <Button
-                onClick={() => addToCart(product.sys.id, product.price)}
-                variant={"default"}
-              >
-                add to cart
-              </Button>
-            </div>
-          );
-        })}
+                <Button
+                  onClick={() => addToCart(product.sys.id, product.price)}
+                  variant={"default"}
+                >
+                  add to cart
+                </Button>
+              </div>
+            );
+          }
+        )}
       </div>
     </main>
   );

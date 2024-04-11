@@ -3,16 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "prisma generate && next dev",
+    "dev": "prisma generate && next dev && graphql-codegen",
     "build": "prisma generate && next build",
     "start": "prisma generate && next start",
     "lint": "next lint",
     "ui:add": "pnpm dlx shadcn-ui@latest add",
-    "db": "prisma generate && prisma migrate dev"
+    "db": "prisma generate && prisma migrate dev",
+    "compile": "graphql-codegen",
+    "watch": "graphql-codegen -w"
   },
   "dependencies": {
     "@apollo/client": "^3.9.10",
     "@apollo/experimental-nextjs-app-support": "^0.10.0",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/client-preset": "^4.2.5",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@hookform/resolvers": "^3.3.4",
     "@prisma/client": "5.8.1",
     "@radix-ui/react-aspect-ratio": "^1.0.3",

@@ -18,7 +18,8 @@ function ShoppingCart() {
       </div>
       <Separator />
       {cart?.ProductItems.map((item) => {
-        return <CartItem item={item} key={item.id} />;
+        // @ts-expect-error
+        return <CartItem item={item} key={item.index} />;
       })}
     </div>
   );

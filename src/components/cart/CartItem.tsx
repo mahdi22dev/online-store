@@ -8,14 +8,18 @@ import {
   reomveProductfromcart,
 } from "@/actions/cart-actions";
 import { toast } from "sonner";
-import { ProductItems } from "@/lib/types";
+import { ProductICartitemstype } from "@/lib/types";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { toggleCartLoading, toggleCartRefetch } from "@/redux/cart/cartSlice";
+import { toggleCartRefetch } from "@/redux/cart/cartSlice";
 import BeatLoader from "react-spinners/BeatLoader";
-function CartItem({ item }: { item: ProductItems }) {
+import { fetchSingleProduct } from "@/actions/products-actions";
+import { GetContentSingleProductQuery } from "@/__generated__/graphql";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+function CartItem({ item }: { item: ProductICartitemstype }) {
   const [loading, setloading] = useState(false);
+  const [cartItem, setcartitem] = useState<GetContentSingleProductQuery>();
   const dispatch: AppDispatch = useDispatch();
 
   const [error, setError] = useState({ accured: false, message: "" });
@@ -23,17 +27,24 @@ function CartItem({ item }: { item: ProductItems }) {
     toast.error(error.message);
   }
 
-  const fetchcartItem = async (id: string) => {
+  const fetchcartItemData = async () => {
     try {
       setloading(true);
+      const cartitemData = await fetchSingleProduct(item.productId);
+      setcartitem(cartitemData);
     } catch (error) {
     } finally {
       setloading(false);
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchcartItemData();
+  }, []);
 
+  if (!cartItem) {
+    return;
+  }
   return (
     <div
       className={`relative flex justify-between gap-3 items-center p-3 px-5 `}
@@ -46,18 +57,21 @@ function CartItem({ item }: { item: ProductItems }) {
         </div>
       )}
       {/* overlay */}
-      <div className="relative w-24 h-24">
-        <img
-          src="/devices/iphone15pro.jpg"
-          className="absolute top-0 left-0 right-0 bottom-0"
-          alt=""
-        />
-      </div>
+      <LazyLoadImage
+        alt="iphone 15 pro case"
+        width={96}
+        height={96}
+        src={`${cartItem?.phoneCasesProduct?.imagesCollection?.items[0]?.url}?w=96&h=96&fm=webp&q=80`}
+        effect="opacity"
+        threshold={100}
+      />
       <div className="space-y-2">
         <p className="text-md capitalize">
-          Strawberries Personalised MagSafe iPhone Case
+          {cartItem?.phoneCasesProduct?.name}
         </p>
-        <p className="text-sm opacity-50 capitalize">iPhone 15 Pro</p>
+        <p className="text-sm opacity-50 capitalize">
+          {cartItem?.phoneCasesProduct?.deviceName}
+        </p>
         <QuantityInput
           item={item}
           dispatch={dispatch}
@@ -76,7 +90,7 @@ function CartItem({ item }: { item: ProductItems }) {
               await reomveProductfromcart(item.id);
               dispatch(toggleCartRefetch());
             } catch (error) {
-              setError({ accured: true, message: "error deleting cart item" });
+              setError({ accured: true, message: "Error deleting cart item" });
             } finally {
               setloading(false);
             }
@@ -94,7 +108,7 @@ const QuantityInput = ({
   setLoading,
   loading,
 }: {
-  item: ProductItems;
+  item: ProductICartitemstype;
   dispatch: AppDispatch;
   loading: boolean;
   setError: React.Dispatch<

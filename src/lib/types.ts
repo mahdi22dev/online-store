@@ -1,5 +1,6 @@
 import * as z from "zod";
 import { userAuthRigsterSchema, userAuthLoginSchema } from "./validation";
+import { GetContentfulProductsQuery } from "@/__generated__/graphql";
 
 export type LogInFormData = z.infer<typeof userAuthLoginSchema>;
 export type RegisterFormData = z.infer<typeof userAuthRigsterSchema>;
@@ -28,7 +29,7 @@ export type cartType =
     })
   | null;
 
-export type ProductItems = {
+export type ProductICartitemstype = {
   id: string;
   productId: string;
   quantity: number;

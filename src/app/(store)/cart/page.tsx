@@ -35,7 +35,6 @@ export default function Cart() {
       dispatch(toggleCartLoading());
       const cartData = await fetchCartData();
       if (cartData) {
-        console.log(cartData);
         // @ts-ignore
         dispatch(CartDataUpdate(cartData)); // @ts-ignore
         setCart(cartData);
@@ -50,10 +49,8 @@ export default function Cart() {
     try {
       const cartData = await fetchCartData();
       if (cartData) {
-        console.log(cartData);
         // @ts-ignore
         dispatch(CartDataUpdate(cartData)); // @ts-ignore
-        setCart(cartData);
       }
     } catch (error: any) {
       toast.error("Error accured when fetching items");
@@ -62,11 +59,10 @@ export default function Cart() {
   useEffect(() => {
     if (firstMount.current) {
       firstMount.current = false;
-      console.log("first Mount");
+
       return;
     } else {
       fetchCartItemsWithoutloading();
-      console.log("second Mount");
     }
   }, [refetchcart]);
 
