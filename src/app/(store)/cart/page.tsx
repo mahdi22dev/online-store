@@ -29,6 +29,7 @@ export default function Cart() {
   const loading: boolean = useSelector(
     (state: RootState) => state.cart.cartfetchloading
   );
+  const cartItems = useSelector((state: RootState) => state.cart.cart);
 
   const fetchCartItems = async () => {
     try {
@@ -61,7 +62,6 @@ export default function Cart() {
   useEffect(() => {
     if (firstMount.current) {
       firstMount.current = false;
-
       return;
     } else {
       fetchCartItemsWithoutloading();
@@ -71,6 +71,15 @@ export default function Cart() {
   useEffect(() => {
     fetchCartItems();
   }, []);
+
+  useEffect(() => {
+    if (firstMount.current) {
+      firstMount.current = false;
+      return;
+    } else {
+      setCart(cartItems);
+    }
+  }, [cartItems]);
 
   if (loading) {
     return (
