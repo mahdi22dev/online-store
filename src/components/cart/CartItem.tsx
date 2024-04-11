@@ -12,7 +12,7 @@ import { ProductICartitemstype } from "@/lib/types";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { toggleCartRefetch } from "@/redux/cart/cartSlice";
+import { toggleCartLoading, toggleCartRefetch } from "@/redux/cart/cartSlice";
 import BeatLoader from "react-spinners/BeatLoader";
 import { fetchSingleProduct } from "@/actions/products-actions";
 import { GetContentSingleProductQuery } from "@/__generated__/graphql";
@@ -49,7 +49,6 @@ function CartItem({ item }: { item: ProductICartitemstype }) {
     <div
       className={`relative flex justify-between gap-3 items-center p-3 px-5 `}
     >
-      {" "}
       {/* overlay */}
       {loading && (
         <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-slate-50/50 z-50 hover:cursor-not-allowed">
@@ -88,11 +87,11 @@ function CartItem({ item }: { item: ProductICartitemstype }) {
               // dispatch(toggleCartLoading());
               setloading(true);
               await reomveProductfromcart(item.id);
+              setloading(false);
+              dispatch(toggleCartLoading());
               dispatch(toggleCartRefetch());
             } catch (error) {
               setError({ accured: true, message: "Error deleting cart item" });
-            } finally {
-              setloading(false);
             }
           }}
         />

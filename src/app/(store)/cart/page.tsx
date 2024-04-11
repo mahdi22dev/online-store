@@ -54,6 +54,8 @@ export default function Cart() {
       }
     } catch (error: any) {
       toast.error("Error accured when fetching items");
+    } finally {
+      dispatch(untoggleCartLoading());
     }
   };
   useEffect(() => {
