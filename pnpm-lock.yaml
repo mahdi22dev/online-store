@@ -65,6 +65,9 @@ dependencies:
   date-fns:
     specifier: ^3.3.1
     version: 3.3.1
+  dotenv:
+    specifier: ^16.4.5
+    version: 16.4.5
   graphql:
     specifier: ^16.8.1
     version: 16.8.1

@@ -17,6 +17,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 import { fetchSingleProduct } from "@/actions/products-actions";
 import { GetContentSingleProductQuery } from "@/__generated__/graphql";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+
 function CartItem({ item }: { item: ProductICartitemstype }) {
   const [loading, setloading] = useState(false);
   const [cartItem, setcartitem] = useState<GetContentSingleProductQuery>();
@@ -84,7 +85,6 @@ function CartItem({ item }: { item: ProductICartitemstype }) {
           className="text-red-500 text-3xl cursor-pointer focus:opacity-50 hover:opacity-50 transition-all duration-150"
           onClick={async () => {
             try {
-              // dispatch(toggleCartLoading());
               setloading(true);
               await reomveProductfromcart(item.id);
               setloading(false);
@@ -118,10 +118,13 @@ const QuantityInput = ({
   >;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [quantity, setQuantity] = useState(item.quantity);
+  const [quantity, setQuantity] = useState<number>();
+
+  useEffect(() => {
+    setQuantity(item.quantity);
+  }, [item.quantity]);
   const plusItem = async () => {
     try {
-      // dispatch(toggleCartLoading()); setloading(true);
       setLoading(true);
       const adjustedProduct = await adjustProductQuantity(item.id, 1);
       setQuantity(adjustedProduct.quantity);
@@ -138,13 +141,12 @@ const QuantityInput = ({
   };
   const minusItem = async () => {
     try {
-      // dispatch(toggleCartLoading());
       if (quantity === 1) {
         setLoading(true);
         await reomveProductfromcart(item.id);
+        dispatch(toggleCartLoading());
         dispatch(toggleCartRefetch());
       } else {
-        // dispatch(toggleCartLoading());
         setLoading(true);
         const adjustedProduct = await adjustProductQuantity(item.id, -1);
         setQuantity(adjustedProduct.quantity);
