@@ -50,12 +50,13 @@ function CartItem({ item }: { item: ProductICartitemstype }) {
     <div
       className={`relative flex justify-between gap-3 items-center p-3 px-5 `}
     >
+      {/* overlay */}
       {loading && (
         <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-slate-50/50 z-50 hover:cursor-not-allowed">
           <BeatLoader color="#333" />
         </div>
       )}
-
+      {/* overlay */}
       <LazyLoadImage
         alt="iphone 15 pro case"
         width={96}
