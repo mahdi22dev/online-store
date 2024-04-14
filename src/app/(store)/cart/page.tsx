@@ -2,7 +2,6 @@
 import { fetchCartData } from "@/actions/cart-actions";
 import CartComponent from "@/components/cart/CartComponent";
 import { buttonVariants } from "@/components/ui/button";
-import { cartType } from "@/lib/types";
 import {
   CartDataUpdate,
   toggleCartLoading,
@@ -20,7 +19,6 @@ import { useSession } from "next-auth/react";
 
 export default function Cart() {
   const dispatch: AppDispatch = useDispatch();
-  const [cart, setCart] = useState<cartType>();
   const firstMount = useRef(true);
   const session = useSession();
   const refetchcart: boolean = useSelector(
@@ -31,29 +29,13 @@ export default function Cart() {
   );
   const cartItems = useSelector((state: RootState) => state.cart.cart);
 
-  useEffect(() => {
-    if (cartItems) {
-      setCart(cartItems);
-    }
-  }, [cartItems]);
-
-  const fetchCartItems = async () => {
+  const fetchCartItems = async (loading?: boolean) => {
     try {
-      dispatch(toggleCartLoading());
-      const cartData = await fetchCartData();
-      if (cartData) {
-        // @ts-ignore
-        dispatch(CartDataUpdate(cartData));
+      if (loading) {
+        dispatch(toggleCartLoading());
       }
-    } catch (error: any) {
-      toast.error("Error accured when fetching items");
-    } finally {
-      dispatch(untoggleCartLoading());
-    }
-  };
-  const fetchCartItemsWithoutloading = async () => {
-    try {
       const cartData = await fetchCartData();
+
       if (cartData) {
         // @ts-ignore
         dispatch(CartDataUpdate(cartData));
@@ -67,15 +49,14 @@ export default function Cart() {
 
   useEffect(() => {
     if (firstMount.current) {
-      firstMount.current = false;
-      return;
+      fetchCartItems(true);
     } else {
-      fetchCartItemsWithoutloading();
+      fetchCartItems(false);
     }
   }, [refetchcart]);
 
   useEffect(() => {
-    fetchCartItems();
+    fetchCartItems(true);
   }, []);
 
   if (loading) {
@@ -87,7 +68,7 @@ export default function Cart() {
   }
   return (
     <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
-      {cart?.ProductItems?.length == 0 ? (
+      {cartItems?.ProductItems?.length == 0 ? (
         <div className="flex justify-center items-center flex-col gap-3">
           <CiShoppingCart className="text-[250px]" />
           <p>No items yet? Continue shopping to explore more.</p>
