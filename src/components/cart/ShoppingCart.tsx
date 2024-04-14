@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Separator } from "../ui/separator";
 import { AiOutlineShopping } from "react-icons/ai";
 import CartItem from "./CartItem";
@@ -10,6 +10,10 @@ import { cartType } from "@/lib/types";
 function ShoppingCart() {
   const cart: cartType = useSelector((state: RootState) => state.cart.cart);
 
+  useEffect(() => {
+    console.log("first render and these are cart items info :", cart);
+  }, [cart]);
+
   return (
     <div className="bg-white rounded-sm  min-h-[384px] md:w-[450px] py-5 px-0 space-y-3 shadow hover:shadow-md focus:shadow-md duration-200">
       <div className="px-5 font-bold text-xl uppercase flex justify-start items-center gap-2">
@@ -19,7 +23,7 @@ function ShoppingCart() {
       <Separator />
       {cart?.ProductItems.map((item) => {
         // @ts-expect-error
-        return <CartItem item={item} key={item.index} />;
+        return <CartItem item={item} key={item.productId} />;
       })}
     </div>
   );

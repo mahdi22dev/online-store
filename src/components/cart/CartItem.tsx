@@ -49,6 +49,7 @@ function CartItem({ item }: { item: ProductICartitemstype }) {
   return (
     <div
       className={`relative flex justify-between gap-3 items-center p-3 px-5 `}
+      key={item.productId}
     >
       {/* overlay */}
       {loading && (

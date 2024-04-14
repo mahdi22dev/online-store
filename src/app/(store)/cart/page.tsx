@@ -31,14 +31,19 @@ export default function Cart() {
   );
   const cartItems = useSelector((state: RootState) => state.cart.cart);
 
+  useEffect(() => {
+    if (cartItems) {
+      setCart(cartItems);
+    }
+  }, [cartItems]);
+
   const fetchCartItems = async () => {
     try {
       dispatch(toggleCartLoading());
       const cartData = await fetchCartData();
       if (cartData) {
         // @ts-ignore
-        dispatch(CartDataUpdate(cartData)); // @ts-ignore
-        setCart(cartData);
+        dispatch(CartDataUpdate(cartData));
       }
     } catch (error: any) {
       toast.error("Error accured when fetching items");
@@ -51,7 +56,7 @@ export default function Cart() {
       const cartData = await fetchCartData();
       if (cartData) {
         // @ts-ignore
-        dispatch(CartDataUpdate(cartData)); // @ts-ignore
+        dispatch(CartDataUpdate(cartData));
       }
     } catch (error: any) {
       toast.error("Error accured when fetching items");
@@ -59,6 +64,7 @@ export default function Cart() {
       dispatch(untoggleCartLoading());
     }
   };
+
   useEffect(() => {
     if (firstMount.current) {
       firstMount.current = false;
@@ -71,15 +77,6 @@ export default function Cart() {
   useEffect(() => {
     fetchCartItems();
   }, []);
-
-  useEffect(() => {
-    if (firstMount.current) {
-      firstMount.current = false;
-      return;
-    } else {
-      setCart(cartItems);
-    }
-  }, [cartItems]);
 
   if (loading) {
     return (
