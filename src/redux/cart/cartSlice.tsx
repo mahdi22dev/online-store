@@ -1,6 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ProductICartitemstype, cartType } from "@/lib/types";
 
+// interface cartStateType {
+//   byID: {
+//     id: string;
+//   };
+//   items: cartType[];
+// }
 interface CartState {
   cart: cartType;
   refetchCart: boolean;
@@ -16,7 +22,17 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     CartDataUpdate: (state, action: PayloadAction<cartType>) => {
-      state.cart = action.payload;
+      if (action.payload) {
+        const sortedData = action.payload?.ProductItems?.slice().sort(
+          (a, b) => {
+            if (a.productId < b.productId) return -1;
+            if (a.productId > b.productId) return 1;
+            return 0;
+          }
+        );
+
+        state.cart = { ...action.payload, ProductItems: sortedData };
+      }
     },
     toggleCartRefetch: (state) => {
       state.refetchCart = !state.refetchCart;

@@ -35,7 +35,6 @@ export default function Cart() {
         dispatch(toggleCartLoading());
       }
       const cartData = await fetchCartData();
-
       if (cartData) {
         // @ts-ignore
         dispatch(CartDataUpdate(cartData));
@@ -49,7 +48,8 @@ export default function Cart() {
 
   useEffect(() => {
     if (firstMount.current) {
-      fetchCartItems(true);
+      firstMount.current = false;
+      return;
     } else {
       fetchCartItems(false);
     }
