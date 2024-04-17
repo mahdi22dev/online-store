@@ -16,9 +16,7 @@ function BannerItem({ item }: { item: PhonearmomorBanner }) {
       <div className="absolute bottom-[20%] right-[35%] flex flex-col gap-4 font-semibold capitalize md:bottom-[50%] md:right-[80%]">
         <p className="text-lg text-white">{item.title}</p>
         <Button variant={"outline"} size={"lg"} asChild>
-          <Link href={"/" + item.destantion} className="">
-            {item.buttonText}
-          </Link>
+          <Link href={"/" + item.destantion}>{item.buttonText}</Link>
         </Button>
       </div>
     </div>

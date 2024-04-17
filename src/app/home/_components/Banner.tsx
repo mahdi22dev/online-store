@@ -22,6 +22,7 @@ function Banner({ data }: { data: GetContentHomeBannersQuery }) {
       {data.phonearmomorBannerCollection?.items.map((item) => {
         return (
           <SwiperSlide key={item?.sys.id}>
+            {/* @ts-expect-error */}
             <BannerItem item={item} />
           </SwiperSlide>
         );
