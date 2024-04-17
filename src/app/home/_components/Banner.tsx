@@ -19,12 +19,13 @@ function Banner({ data }: { data: GetContentHomeBannersQuery }) {
       modules={[Navigation, Pagination]}
       className="mySwiper"
     >
-      <SwiperSlide>
-        <BannerItem item={data.phonearmomorBannerCollection?.items[0]} />
-      </SwiperSlide>
-      <SwiperSlide>
-        <BannerItem item={data.phonearmomorBannerCollection?.items[1]} />
-      </SwiperSlide>
+      {data.phonearmomorBannerCollection?.items.map((item) => {
+        return (
+          <SwiperSlide key={item?.sys.id}>
+            <BannerItem item={item} />
+          </SwiperSlide>
+        );
+      })}
     </Swiper>
   );
 }
