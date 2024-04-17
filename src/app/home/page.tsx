@@ -1,16 +1,14 @@
 import { getClient } from "@/lib/apolloClient";
-import { GET_CONTENTFUL_Home_Banners } from "@/lib/queries";
+import { GET_CONTENTFUL_HOME_BANNERS } from "@/lib/queries";
 import Banner from "./_components/Banner";
 
 export default async function Home() {
   const { data } = await getClient().query({
-    query: GET_CONTENTFUL_Home_Banners,
+    query: GET_CONTENTFUL_HOME_BANNERS,
   });
 
-  console.log(data);
-
   return (
-    <main className="min-h-screen p-5">
+    <main className="min-h-screen p-5 pt-1">
       <Banner data={data} />
     </main>
   );
