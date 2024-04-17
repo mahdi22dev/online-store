@@ -36,7 +36,6 @@ export default function Cart() {
       }
       const cartData = await fetchCartData();
       if (cartData) {
-        // @ts-ignore
         dispatch(CartDataUpdate(cartData));
       }
     } catch (error: any) {
