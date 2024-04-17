@@ -15,6 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\nquery GetContentfulProducts {\n  phoneCasesProductCollection(limit: 10) {\n    items {\n      sys {\n        id\n      }\n      name\n      price\n      imagesCollection {\n        items {\n          url\n        }\n      }\n    }\n  }\n}\n": types.GetContentfulProductsDocument,
     "\nquery GetContentSingleProduct($id: String!) {\n  phoneCasesProduct(id: $id) {\n    name\n    deviceName\n    price\n    imagesCollection {\n      items {\n        url\n      }\n    }\n  }\n}\n": types.GetContentSingleProductDocument,
+    "\nquery GetContentHomeBanners {\n  phonearmomorBannerCollection {\n    items {\n      sys {\n        id\n      }\n      title\n      destantion\n      buttonText\n      banner{\n        url\n      }\n    }\n  }\n}\n": types.GetContentHomeBannersDocument,
 };
 
 /**
@@ -39,6 +40,10 @@ export function gql(source: "\nquery GetContentfulProducts {\n  phoneCasesProduc
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\nquery GetContentSingleProduct($id: String!) {\n  phoneCasesProduct(id: $id) {\n    name\n    deviceName\n    price\n    imagesCollection {\n      items {\n        url\n      }\n    }\n  }\n}\n"): (typeof documents)["\nquery GetContentSingleProduct($id: String!) {\n  phoneCasesProduct(id: $id) {\n    name\n    deviceName\n    price\n    imagesCollection {\n      items {\n        url\n      }\n    }\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nquery GetContentHomeBanners {\n  phonearmomorBannerCollection {\n    items {\n      sys {\n        id\n      }\n      title\n      destantion\n      buttonText\n      banner{\n        url\n      }\n    }\n  }\n}\n"): (typeof documents)["\nquery GetContentHomeBanners {\n  phonearmomorBannerCollection {\n    items {\n      sys {\n        id\n      }\n      title\n      destantion\n      buttonText\n      banner{\n        url\n      }\n    }\n  }\n}\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

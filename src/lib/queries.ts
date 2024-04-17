@@ -32,3 +32,21 @@ query GetContentSingleProduct($id: String!) {
   }
 }
 `);
+
+export const GET_CONTENTFUL_Home_Banners = gql(`
+query GetContentHomeBanners {
+  phonearmomorBannerCollection {
+    items {
+      sys {
+        id
+      }
+      title
+      destantion
+      buttonText
+      banner{
+        url
+      }
+    }
+  }
+}
+`);
