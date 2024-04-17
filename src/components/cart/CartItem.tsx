@@ -48,12 +48,12 @@ function CartItem({ item }: { item: ProductICartitemstype }) {
   }
   return (
     <div
-      className={`relative flex justify-between gap-3 items-center p-3 px-5 `}
+      className={`relative flex items-center justify-between gap-3 border p-3 px-5`}
       key={item.productId}
     >
       {/* overlay */}
       {loading && (
-        <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-slate-50/50 z-50 hover:cursor-not-allowed">
+        <div className="absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-slate-50/50 hover:cursor-not-allowed">
           <BeatLoader color="#333" />
         </div>
       )}
@@ -70,7 +70,7 @@ function CartItem({ item }: { item: ProductICartitemstype }) {
         <p className="text-md capitalize">
           {cartItem?.phoneCasesProduct?.name}
         </p>
-        <p className="text-sm opacity-50 capitalize">
+        <p className="text-sm capitalize opacity-50">
           {cartItem?.phoneCasesProduct?.deviceName}
         </p>
         <QuantityInput
@@ -81,9 +81,12 @@ function CartItem({ item }: { item: ProductICartitemstype }) {
           loading={loading}
         />
       </div>
-      <div>
+      <div className="flex h-[100px] flex-col justify-between">
+        <p className="text-lg font-semibold capitalize">
+          {cartItem?.phoneCasesProduct?.price || 0}$
+        </p>
         <MdDeleteOutline
-          className="text-red-500 text-3xl cursor-pointer focus:opacity-50 hover:opacity-50 transition-all duration-150"
+          className="cursor-pointer text-3xl text-red-500 transition-all duration-150 hover:opacity-50 focus:opacity-50"
           onClick={async () => {
             try {
               setloading(true);
@@ -165,17 +168,17 @@ const QuantityInput = ({
   };
 
   return (
-    <div className="w-24 h-7 flex justify-between items-center gap-2">
-      <Badge className="text-xl cursor-pointer w-8" onClick={minusItem}>
+    <div className="flex h-7 w-24 items-center justify-between gap-2">
+      <Badge className="w-8 cursor-pointer text-xl" onClick={minusItem}>
         <FaMinus />
       </Badge>
       <input
         type="number"
-        className="w-11 h-7 border-black border-2 border-opacity-75 outline-none rounded-lg text-center disabled:bg-slate-100"
+        className="h-7 w-11 rounded-lg border-2 border-black border-opacity-75 text-center outline-none disabled:bg-slate-100"
         value={quantity}
         disabled={true}
       />
-      <Badge className="text-xl cursor-pointer w-8" onClick={plusItem}>
+      <Badge className="w-8 cursor-pointer text-xl" onClick={plusItem}>
         <FaPlus />
       </Badge>
     </div>

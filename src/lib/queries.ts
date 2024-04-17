@@ -23,6 +23,7 @@ query GetContentSingleProduct($id: String!) {
   phoneCasesProduct(id: $id) {
     name
     deviceName
+    price
     imagesCollection {
       items {
         url
