@@ -14,7 +14,7 @@ export const fetchAllProducts = async () => {
 
     return data;
   } catch (error) {
-    throw error;
+    throw new Error("Error Fetching Products");
   }
 };
 
@@ -27,6 +27,6 @@ export const fetchSingleProduct = async (id: string) => {
 
     return data;
   } catch (error) {
-    throw error;
+    throw new Error("Error Fetching Single Product");
   }
 };

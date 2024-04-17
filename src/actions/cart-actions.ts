@@ -116,7 +116,7 @@ export const addToCartAction = async (productId: string, price: number) => {
       });
     }
   } catch (error: any) {
-    throw error;
+    throw new Error("Error Adding item to cart");
   } finally {
     await prisma.$disconnect();
   }
@@ -169,7 +169,7 @@ export const getCartLength: () => Promise<number> = async () => {
       return 0;
     }
   } catch (error) {
-    console.error("Error fetching cart items:", error);
+    throw new Error("Error getting cart length");
     return 0;
   } finally {
     await prisma.$disconnect();
@@ -192,7 +192,7 @@ export const adjustProductQuantity = async (id: string, n: number) => {
       throw new Error("item not found");
     }
   } catch (error) {
-    throw error;
+    throw new Error("Could't adjust item quantity");
   } finally {
     await prisma.$disconnect();
   }
