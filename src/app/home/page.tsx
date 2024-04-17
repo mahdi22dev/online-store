@@ -10,7 +10,7 @@ export default async function Home() {
   console.log(data);
 
   return (
-    <main className="min-h-screen p-24">
+    <main className="min-h-screen p-5">
       <Banner data={data} />
     </main>
   );

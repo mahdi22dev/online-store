@@ -1,36 +1,31 @@
 "use client";
 
 import { GetContentHomeBannersQuery } from "@/__generated__/graphql";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import React, { useRef, useState } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+// import required modules
+import { Navigation, Pagination } from "swiper/modules";
+import BannerItem from "./BannerItem";
 
 function Banner({ data }: { data: GetContentHomeBannersQuery }) {
   return (
-    <div>
-      <Carousel className="w-full">
-        <CarouselContent className="w-[1000px] bg-red-50">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index} className="w-[1000px]">
-              <div className="w-[1000px] p-1">
-                <Card className="w-[1000px] bg-black text-white">
-                  <CardContent className=" flex aspect-square w-[1000px] items-center justify-center p-6">
-                    <span className="text-4xl font-semibold">{index + 1}</span>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-    </div>
+    <Swiper
+      navigation={true}
+      modules={[Navigation, Pagination]}
+      className="mySwiper"
+    >
+      <SwiperSlide>
+        <BannerItem item={data.phonearmomorBannerCollection?.items[0]} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <BannerItem item={data.phonearmomorBannerCollection?.items[1]} />
+      </SwiperSlide>
+    </Swiper>
   );
 }
 
