@@ -1,6 +1,6 @@
 "use client";
 import { fetchCartData } from "@/actions/cart-actions";
-import CartComponent from "@/components/cart/CartComponent";
+import CartComponent from "@/app/(store)/cart/_components/CartComponent";
 import { buttonVariants } from "@/components/ui/button";
 import {
   CartDataUpdate,
@@ -22,10 +22,10 @@ export default function Cart() {
   const firstMount = useRef(true);
   const session = useSession();
   const refetchcart: boolean = useSelector(
-    (state: RootState) => state.cart.refetchCart
+    (state: RootState) => state.cart.refetchCart,
   );
   const loading: boolean = useSelector(
-    (state: RootState) => state.cart.cartfetchloading
+    (state: RootState) => state.cart.cartfetchloading,
   );
   const cartItems = useSelector((state: RootState) => state.cart.cart);
 
@@ -36,6 +36,7 @@ export default function Cart() {
       }
       const cartData = await fetchCartData();
       if (cartData) {
+        // @ts-expect-error
         dispatch(CartDataUpdate(cartData));
       }
     } catch (error: any) {
@@ -60,15 +61,15 @@ export default function Cart() {
 
   if (loading) {
     return (
-      <div className="w-full min-h-[90vh] flex justify-center items-center p-5 sm:p-12">
+      <div className="flex min-h-[90vh] w-full items-center justify-center p-5 sm:p-12">
         <Loading />
       </div>
     );
   }
   return (
-    <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
+    <main className="flex min-h-[90vh] w-full items-start justify-center p-5 sm:p-12">
       {cartItems?.ProductItems?.length == 0 ? (
-        <div className="flex justify-center items-center flex-col gap-3">
+        <div className="flex flex-col items-center justify-center gap-3">
           <CiShoppingCart className="text-[250px]" />
           <p>No items yet? Continue shopping to explore more.</p>
           {session.status == "unauthenticated" && (
@@ -83,7 +84,7 @@ export default function Cart() {
             href={"/products"}
             className={cn(
               buttonVariants({ variant: "outline" }),
-              "w-[80%] md:w-36"
+              "w-[80%] md:w-36",
             )}
           >
             Explore more

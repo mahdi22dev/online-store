@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
+import { Button } from "../../../../components/ui/button";
+import { Separator } from "../../../../components/ui/separator";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -12,7 +12,6 @@ function Summary() {
   const [cart, setCart] = useState<cartType>(cartData);
   useEffect(() => {
     setCart(cartData);
-
     const totalsum = cart?.ProductItems.reduce((total, item) => {
       const itemTotal: number = item.price * item.quantity;
       return total + itemTotal;
@@ -22,23 +21,23 @@ function Summary() {
   }, [cartData]);
 
   return (
-    <div className="bg-white rounded-md w-auto md:w-96 h-64 fixed md:sticky md:top-[10%] bottom-4 left-4 right-4 md:left-auto md:right-auto md:bottom-auto p-5 space-y-3 shadow hover:shadow-md focus:shadow-md border-t-4 border-black sm:border-none transition-all duration-200">
-      <h2 className="font-bold text-xl">Summary</h2>
-      <div className="flex justify-between items-center gap-5">
+    <div className="fixed bottom-4 left-4 right-4 h-64 w-auto space-y-3 rounded-md border-t-4 border-black bg-white p-5 shadow transition-all duration-200 hover:shadow-md focus:shadow-md sm:border-none md:sticky md:bottom-auto md:left-auto md:right-auto md:top-[10%] md:w-96">
+      <h2 className="text-xl font-bold">Summary</h2>
+      <div className="flex items-center justify-between gap-5">
         <p>Subtotal</p>
         <p>US ${totalPrice}</p>
       </div>
-      <div className="flex justify-between items-center gap-5">
+      <div className="flex items-center justify-between gap-5">
         <p>Shipping fee</p>
         <p>free</p>
       </div>
-      <div className="flex justify-between items-center gap-5">
+      <div className="flex items-center justify-between gap-5">
         <p className="font-bold">Total</p> <p> US ${totalPrice}</p>
       </div>
       <Separator className="my-3" />
       <Button
         variant={"default"}
-        className="w-full mt-auto uppercase rounded-xl font-normal flex justify-center items-center gap-1"
+        className="mt-auto flex w-full items-center justify-center gap-1 rounded-xl font-normal uppercase"
       >
         <IoBagCheckOutline className="text-xl" /> Checkout (1)
       </Button>

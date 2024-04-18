@@ -4,7 +4,7 @@ import ShoppingCart from "./ShoppingCart";
 
 function CartComponent() {
   return (
-    <div className="flex justify-between items-start gap-5 flex-col sm:flex-row">
+    <div className="flex flex-col items-start justify-between gap-5 sm:flex-row">
       <ShoppingCart />
       <Summary />
     </div>

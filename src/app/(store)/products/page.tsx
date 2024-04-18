@@ -52,13 +52,13 @@ export default function Products() {
 
   if (loading) {
     return (
-      <div className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
+      <div className="flex min-h-[90vh] w-full items-start justify-center p-5 sm:p-12">
         <Loading />
       </div>
     );
   }
   return (
-    <main className="w-full min-h-[90vh] flex justify-center items-start p-5 sm:p-12">
+    <main className="flex min-h-[90vh] w-full items-start justify-center p-5 sm:p-12">
       {/* grid grid-cols-5 gap-3 grid-flow-row */}
       <div className="">
         {productsData?.phoneCasesProductCollection?.items.map(
@@ -82,7 +82,7 @@ export default function Products() {
                 </Button>
               </div>
             );
-          }
+          },
         )}
       </div>
     </main>

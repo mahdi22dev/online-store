@@ -14,7 +14,7 @@ async function Collections() {
   }
 
   return (
-    <div className="mt-20 flex flex-col items-center justify-center py-5 md:px-20">
+    <section className="mt-20 flex flex-col items-center justify-center py-5 md:px-20">
       <SectionTitle text="FEATURED COLLECTION" />
       <div className="mt-20 grid h-[700px] max-w-[90%] grid-cols-1 items-start gap-10  md:grid-cols-2 lg:grid-cols-3 ">
         {data.phonearmomorCollectionsCollection?.items.map((item) => {
@@ -22,7 +22,7 @@ async function Collections() {
           return <CollectionsItems item={item} key={item?.sys.id} />;
         })}
       </div>
-    </div>
+    </section>
   );
 }
 
