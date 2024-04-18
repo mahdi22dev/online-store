@@ -15,6 +15,7 @@ export default async function Home() {
       <Banner data={data} />
       {/* @ts-expect-error */}
       <Collections />
+      <div className="pt-96"></div>
     </main>
   );
 }

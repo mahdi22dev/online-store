@@ -5,6 +5,7 @@ const nextConfig = {
       {
         hostname: "images.unsplash.com",
       },
+      { hostname: "images.ctfassets.net" },
     ],
   },
   async redirects() {
