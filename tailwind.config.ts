@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        protoMono: ["var(--font-protomono)", "sans-serif"],
+        poppins: ["var(--font-poppins)", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

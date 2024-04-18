@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/providers/Providers";
 import Navbar from "@/components/header/Navbar";
 import { cn } from "@/lib/utils";
-import { protoMono } from "@/styles/fonts";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Poppins } from "@/styles/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-slate-50">
-      <body className={cn(protoMono.variable, inter.className)}>
+      <body className={cn(Poppins.variable)}>
         <Providers>
           {/* @ts-expect-error Server Component */}
           <Navbar />

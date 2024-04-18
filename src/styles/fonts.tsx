@@ -1,8 +1,8 @@
 import localFont from "next/font/local";
 
-export const protoMono = localFont({
-  src: "../styles/ProtoMono-Regular.woff2",
-  variable: "--font-protomono",
+export const Poppins = localFont({
+  src: "../styles/Poppins-Medium.ttf",
+  variable: "--font-poppins",
   weight: "300 700 900",
   display: "swap",
   style: "normal",

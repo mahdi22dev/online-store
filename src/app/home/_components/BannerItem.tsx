@@ -4,8 +4,6 @@ import Link from "next/link";
 import React from "react";
 
 function BannerItem({ item }: { item: PhonearmomorBanner }) {
-  console.log(item);
-
   return (
     <div className="relative h-[700px] w-full">
       <img
