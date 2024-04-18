@@ -50,3 +50,20 @@ query GetContentHomeBanners {
   }
 }
 `);
+
+export const GET_CONTENTFUL_COLLECTIONS = gql(`
+query GetContentfulCollections {
+  phonearmomorCollectionsCollection(limit: 6) {
+    items {
+      sys {
+        id
+      }
+      name
+      slug
+      collectionImage {
+        url
+      }
+    }
+  }
+}
+`);

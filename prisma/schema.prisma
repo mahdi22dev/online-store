@@ -35,7 +35,3 @@ model ProductItem {
   Cart      Cart   @relation(fields: [CartId], references: [id])
   CartId    String
 }
-
-model CustomProduct {
-  id String @id @default(cuid())
-}
