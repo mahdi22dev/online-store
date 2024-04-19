@@ -20,7 +20,7 @@ export default function Products() {
     useState<GetContentfulProductsQuery>();
   const addToCart = async (productId: string, price: number) => {
     try {
-      addToCartAction(productId, price);
+      await addToCartAction(productId, price);
       dispatch(toggleCartRefetch());
       toast("Product has been added to your cart", {
         action: {
