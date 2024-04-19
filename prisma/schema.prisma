@@ -32,6 +32,7 @@ model ProductItem {
   productId String //used to grab asessts and title amd others frp, contentful
   quantity  Int
   price     Int
+  device    String
   Cart      Cart   @relation(fields: [CartId], references: [id])
   CartId    String
 }

@@ -10,12 +10,12 @@ import { Navigation, Pagination } from "swiper/modules";
 
 function TrendingProducts() {
   return (
-    <section className="mb-96 mt-20 h-[60vh] ">
+    <section className="mt-20 h-[60vh] ">
       <SectionTitle text="Trending Products" />
       <Swiper
         navigation={true}
         modules={[Navigation, Pagination]}
-        className="mySwiper mx-auto mt-20 flex h-2/4 min-h-[300px] w-full items-start gap-3 md:h-2/3 lg:h-full"
+        className="mySwiper mx-auto mt-20 flex h-full min-h-[300px] w-full items-start gap-3"
         lazyPreloadPrevNext={1}
         breakpoints={{
           640: {

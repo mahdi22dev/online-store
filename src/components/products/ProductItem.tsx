@@ -29,7 +29,7 @@ function ProductItem() {
 
   return (
     <div className="h-full rounded-xl border-4 bg-slate-200">
-      <div className="h-3/4 w-full p-5">
+      <div className="h-2/3 w-full p-5">
         <img
           alt="iphone 15 pro case"
           src={`https://images.ctfassets.net/xp3ehvbs6dy6/6OxuBIhxR2ojxHEfri2GyD/978fbd96e31e0f084abf4c526aacb4e9/2024-04-18_20-48-35_2716.png?w=700&h=700&fm=webp&q=80`}
@@ -37,7 +37,9 @@ function ProductItem() {
         />
       </div>
 
-      <div className="mt-5 flex flex-col items-center gap-10 ">
+      <div className="mt-1 flex flex-col items-center gap-3 ">
+        <p className="text-md capitalize">iPhone case 15 pro</p>
+        <p className="text-sm capitalize ">$12.99</p>
         <DeviceSlector />
         <Button onClick={() => addToCart("3556456", 11)} variant={"default"}>
           add to cart

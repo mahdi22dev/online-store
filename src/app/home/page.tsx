@@ -17,6 +17,7 @@ export default async function Home() {
       {/* @ts-expect-error */}
       <Collections />
       <FeaturedProducts />
+      <section className="mt-20 h-96"></section>
     </main>
   );
 }

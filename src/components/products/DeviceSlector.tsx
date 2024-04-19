@@ -41,7 +41,7 @@ export function DeviceSlector() {
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search device..." />
+          <CommandInput placeholder="Search device..." className="rounded" />
           <CommandEmpty>No device found.</CommandEmpty>
           <CommandGroup>
             <CommandList data-disabled="true">
