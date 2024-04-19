@@ -21,6 +21,7 @@ export type cartType =
         quantity: number;
         CartId: string;
         price: number;
+        device: string;
       }[];
     } & {
       id: string;
@@ -33,4 +34,5 @@ export type ProductICartitemstype = {
   productId: string;
   quantity: number;
   CartId: string;
+  device: string;
 };

@@ -107,6 +107,7 @@ export const addToCartAction = async (
         where: { id: itemtExists.id },
         data: {
           quantity: itemtExists.quantity + 1,
+          device: device,
         },
       });
     } else {
@@ -115,6 +116,7 @@ export const addToCartAction = async (
           productId: productId,
           quantity: 1,
           price: price,
+          device: device,
           Cart: { connect: { id: cart?.id } },
         },
       });

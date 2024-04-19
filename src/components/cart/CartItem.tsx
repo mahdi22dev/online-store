@@ -70,9 +70,9 @@ function CartItem({ item }: { item: ProductICartitemstype }) {
         <p className="text-md capitalize">
           {cartItem?.phoneCasesProduct?.name}
         </p>
-        <p className="text-sm capitalize opacity-50">
-          {cartItem?.phoneCasesProduct?.deviceName}
-        </p>
+
+        {/* display device name from db not contentful */}
+        <p className="text-sm capitalize opacity-50">{item?.device}</p>
         <QuantityInput
           item={item}
           dispatch={dispatch}
