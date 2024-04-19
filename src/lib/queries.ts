@@ -1,7 +1,29 @@
 import { gql } from "@/__generated__";
 
+// products
+
+// product pagination
 export const GET_CONTENTFUL_PRODUCTS = gql(`
 query GetContentfulProducts {
+  phoneCasesProductCollection(limit: 10) {
+    items {
+      sys {
+        id
+      }
+      name
+      price
+      imagesCollection {
+        items {
+          url
+        }
+      }
+    }
+  }
+}
+`);
+
+export const GET_CONTENTFUL_TRENDING_PRODUCTS = gql(`
+query GetContentfulTrendingproducts {
   phoneCasesProductCollection(limit: 10) {
     items {
       sys {
@@ -33,6 +55,7 @@ query GetContentSingleProduct($id: String!) {
 }
 `);
 
+// others
 export const GET_CONTENTFUL_HOME_BANNERS = gql(`
 query GetContentHomeBanners {
   phonearmomorBannerCollection {

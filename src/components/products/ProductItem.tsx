@@ -62,7 +62,12 @@ function ProductItem() {
         <p className="text-md capitalize">iPhone case 15 pro</p>
         <p className="text-sm capitalize ">$12.99</p>
         <DeviceSlector setValue={setValue} value={value} />
-        <Button onClick={() => addToCart("3556456", 11)} variant={"default"}>
+        <Button
+          onClick={() => addToCart("3556456", 11)}
+          variant={"default"}
+          className="cursor-pointer disabled:cursor-not-allowed"
+          disabled={!value ? true : false}
+        >
           add to cart
         </Button>
       </div>

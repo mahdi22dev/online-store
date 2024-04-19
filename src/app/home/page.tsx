@@ -5,12 +5,13 @@ import Collections from "./_components/Collections";
 import FeaturedProducts from "@/app/home/_components/TrendingProducts";
 
 export default async function Home() {
-  const { data, error } = await getClient().query({
+  const { data, error: getting_banners_error } = await getClient().query({
     query: GET_CONTENTFUL_HOME_BANNERS,
   });
-  if (error) {
+  if (getting_banners_error) {
     throw new Error("Error getting banners");
   }
+
   return (
     <main className="min-h-screen p-5 pt-1">
       <Banner data={data} />
