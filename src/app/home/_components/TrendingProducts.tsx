@@ -10,7 +10,7 @@ import { Navigation, Pagination } from "swiper/modules";
 
 function TrendingProducts() {
   return (
-    <section className="mb-20 mt-20 h-[60vh] ">
+    <section className="mb-96 mt-20 h-[60vh] ">
       <SectionTitle text="Trending Products" />
       <Swiper
         navigation={true}
