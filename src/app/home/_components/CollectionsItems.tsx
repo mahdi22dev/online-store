@@ -6,7 +6,7 @@ function CollectionsItems({ item }: { item: PhonearmomorCollections }) {
   return (
     <Link
       href={`/collections/${item.slug}`}
-      className="relative h-full w-full cursor-pointer overflow-hidden"
+      className="relative h-full w-full cursor-pointer overflow-hidden rounded hover:shadow-lg"
     >
       <div className="h-full w-full ">
         {/* <Image src={`${item.collectionImage?.url}`} alt="" fill /> */}
