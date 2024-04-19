@@ -7,7 +7,7 @@ export const product_mock_data = [
   { id: 6, device: "iPhone 15 Pro" },
 ];
 
-const devices = [
+export const devices = [
   {
     value: "iPhone 15 Pro",
     label: "iPhone 15 Pro",
