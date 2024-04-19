@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-import { ComboboxDemo } from "./DeviceSlector";
+import { DeviceSlector } from "./DeviceSlector";
 
 function ProductItem() {
   const dispatch: AppDispatch = useDispatch();
@@ -38,7 +38,7 @@ function ProductItem() {
       </div>
 
       <div className="mt-5 flex flex-col items-center gap-10 ">
-        <ComboboxDemo />
+        <DeviceSlector />
         <Button onClick={() => addToCart("3556456", 11)} variant={"default"}>
           add to cart
         </Button>
