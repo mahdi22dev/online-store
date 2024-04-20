@@ -4,7 +4,7 @@ import { gql } from "@/__generated__";
 
 // product pagination
 export const GET_CONTENTFUL_PRODUCTS = gql(`
-query GetContentfulProducts {
+query GetContentfullProducts {
   phoneCasesProductCollection(limit: 10) {
     items {
       sys {
@@ -22,24 +22,25 @@ query GetContentfulProducts {
 }
 `);
 
-export const GET_CONTENTFUL_TRENDING_PRODUCTS = gql(`
-query GetContentfulTrendingproducts {
-  phoneCasesProductCollection(limit: 10) {
-    items {
-      sys {
-        id
-      }
-      name
-      price
-      imagesCollection {
-        items {
-          url
-        }
-      }
-    }
-  }
-}
-`);
+// export const GET_CONTENTFUL_PRODUCTS_BY_TYPE = gql(`
+// query GetContentfulProductsByType($limit: number!, $type:string!) {
+//   phoneCasesProductCollection(limit: $limit, where:{$type:true}) {
+//     items {
+//       sys {
+//         id
+//       }
+//       name
+//       price
+//       imagesCollection {
+//         items {
+//           url
+//         }
+//       }
+//     }
+//   }
+// }
+// `);
+
 export const GET_CONTENTFUL_SINGLE_PRODUCT = gql(`
 query GetContentSingleProduct($id: String!) {
   phoneCasesProduct(id: $id) {
