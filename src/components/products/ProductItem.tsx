@@ -32,7 +32,6 @@ function ProductItem({ item }: { item: PhoneCasesProduct }) {
   const router = useRouter();
   const addToCart = async (productId: string, price: number) => {
     try {
-      console.log(value);
       if (!value) {
         toast("Please chose a device for the phone case");
         return;
@@ -61,11 +60,11 @@ function ProductItem({ item }: { item: PhoneCasesProduct }) {
         />
       </div>
       <div className="mt-1 flex flex-col items-center gap-3 ">
-        <p className="text-md capitalize">iPhone case 15 pro</p>
-        <p className="text-sm capitalize ">$12.99</p>
+        <p className="text-md capitalize">{item.name}</p>
+        <p className="text-sm capitalize ">${item.price}</p>
         <DeviceSlector setValue={setValue} value={value} />
         <Button
-          onClick={() => addToCart("3556456", 11)}
+          onClick={() => addToCart(item.sys.id, item.price || 0)}
           variant={"default"}
           className="cursor-pointer disabled:cursor-not-allowed"
           disabled={!value ? true : false}
