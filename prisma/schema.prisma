@@ -14,10 +14,14 @@ model User {
   name              String
   email             String    @unique
   password          String
-  emailVerified     Boolean?
+  emailVerified     Boolean?  @default(false)
   emailVerifiedDate DateTime?
+  createdAt         DateTime? @default(now())
   image             String?
   cart              Cart[]
+
+  @@index([id])
+  @@index([userId])
 }
 
 model Cart {
@@ -25,14 +29,22 @@ model Cart {
   user         User?         @relation(fields: [userId], references: [id])
   userId       String?
   ProductItems ProductItem[]
+  createdAt    DateTime?     @default(now())
+
+  @@index([id])
 }
 
 model ProductItem {
-  id        String  @id @default(cuid())
+  id        String    @id @default(cuid())
   productId String //used to grab asessts and title amd others frp, contentful
   quantity  Int
   price     Int
   device    String?
-  Cart      Cart    @relation(fields: [CartId], references: [id])
+  Cart      Cart      @relation(fields: [CartId], references: [id])
   CartId    String
+  createdAt DateTime? @default(now())
+
+  @@index([id])
+  @@index([productId])
+  @@index([CartId])
 }
