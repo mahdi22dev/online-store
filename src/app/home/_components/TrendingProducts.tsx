@@ -1,14 +1,18 @@
 "use client";
 import SectionTitle from "../../../components/text/SectionTitle";
-import { product_mock_data } from "@/config/data";
 import ProductItem from "@/components/products/ProductItem";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
+import { GetContentfullProductsByTrendingQuery } from "@/__generated__/graphql";
 
-function TrendingProducts() {
+function TrendingProducts({
+  data,
+}: {
+  data: GetContentfullProductsByTrendingQuery;
+}) {
   return (
     <section className="mt-20 h-[60vh] ">
       <SectionTitle text="Trending Products" />
@@ -40,10 +44,11 @@ function TrendingProducts() {
           },
         }}
       >
-        {product_mock_data.map((item) => {
+        {data.phoneCasesProductCollection?.items.map((item) => {
           return (
-            <SwiperSlide key={item.id}>
-              <ProductItem />
+            <SwiperSlide key={item?.sys.id}>
+              {/* @ts-expect-error */}
+              <ProductItem item={item} />
             </SwiperSlide>
           );
         })}

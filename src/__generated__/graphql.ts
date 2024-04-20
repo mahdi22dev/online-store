@@ -882,15 +882,15 @@ export type PhoneCasesProduct = Entry & {
   __typename?: 'PhoneCasesProduct';
   brand?: Maybe<Scalars['String']['output']>;
   collection?: Maybe<Entry>;
-  color?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<PhoneCasesProductDescription>;
-  deviceName?: Maybe<Scalars['String']['output']>;
   imagesCollection?: Maybe<AssetCollection>;
   linkedFrom?: Maybe<PhoneCasesProductLinkingCollections>;
   name?: Maybe<Scalars['String']['output']>;
+  new?: Maybe<Scalars['Boolean']['output']>;
   price?: Maybe<Scalars['Float']['output']>;
   sys: Sys;
+  trending?: Maybe<Scalars['Boolean']['output']>;
 };
 
 
@@ -908,19 +908,7 @@ export type PhoneCasesProductCollectionArgs = {
 
 
 /** Phone cases product content type for online store for selling phone cases [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phoneCasesProduct) */
-export type PhoneCasesProductColorArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** Phone cases product content type for online store for selling phone cases [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phoneCasesProduct) */
 export type PhoneCasesProductDescriptionArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** Phone cases product content type for online store for selling phone cases [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phoneCasesProduct) */
-export type PhoneCasesProductDeviceNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -947,7 +935,19 @@ export type PhoneCasesProductNameArgs = {
 
 
 /** Phone cases product content type for online store for selling phone cases [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phoneCasesProduct) */
+export type PhoneCasesProductNewArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Phone cases product content type for online store for selling phone cases [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phoneCasesProduct) */
 export type PhoneCasesProductPriceArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Phone cases product content type for online store for selling phone cases [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phoneCasesProduct) */
+export type PhoneCasesProductTrendingArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1018,21 +1018,10 @@ export type PhoneCasesProductFilter = {
   brand_not_contains?: InputMaybe<Scalars['String']['input']>;
   brand_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   collection_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  color_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  color_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  color_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  color_exists?: InputMaybe<Scalars['Boolean']['input']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   description_contains?: InputMaybe<Scalars['String']['input']>;
   description_exists?: InputMaybe<Scalars['Boolean']['input']>;
   description_not_contains?: InputMaybe<Scalars['String']['input']>;
-  deviceName?: InputMaybe<Scalars['String']['input']>;
-  deviceName_contains?: InputMaybe<Scalars['String']['input']>;
-  deviceName_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  deviceName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  deviceName_not?: InputMaybe<Scalars['String']['input']>;
-  deviceName_not_contains?: InputMaybe<Scalars['String']['input']>;
-  deviceName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   imagesCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   name_contains?: InputMaybe<Scalars['String']['input']>;
@@ -1041,6 +1030,9 @@ export type PhoneCasesProductFilter = {
   name_not?: InputMaybe<Scalars['String']['input']>;
   name_not_contains?: InputMaybe<Scalars['String']['input']>;
   name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  new?: InputMaybe<Scalars['Boolean']['input']>;
+  new_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  new_not?: InputMaybe<Scalars['Boolean']['input']>;
   price?: InputMaybe<Scalars['Float']['input']>;
   price_exists?: InputMaybe<Scalars['Boolean']['input']>;
   price_gt?: InputMaybe<Scalars['Float']['input']>;
@@ -1051,6 +1043,9 @@ export type PhoneCasesProductFilter = {
   price_not?: InputMaybe<Scalars['Float']['input']>;
   price_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
   sys?: InputMaybe<SysFilter>;
+  trending?: InputMaybe<Scalars['Boolean']['input']>;
+  trending_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  trending_not?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type PhoneCasesProductLinkingCollections = {
@@ -1069,10 +1064,10 @@ export type PhoneCasesProductLinkingCollectionsEntryCollectionArgs = {
 export enum PhoneCasesProductOrder {
   BrandAsc = 'brand_ASC',
   BrandDesc = 'brand_DESC',
-  DeviceNameAsc = 'deviceName_ASC',
-  DeviceNameDesc = 'deviceName_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
+  NewAsc = 'new_ASC',
+  NewDesc = 'new_DESC',
   PriceAsc = 'price_ASC',
   PriceDesc = 'price_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -1082,7 +1077,9 @@ export enum PhoneCasesProductOrder {
   SysPublishedAtAsc = 'sys_publishedAt_ASC',
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TrendingAsc = 'trending_ASC',
+  TrendingDesc = 'trending_DESC'
 }
 
 /** [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phonearmomorBanner) */
@@ -1542,17 +1539,24 @@ export type CfAuthorNestedFilter = {
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type GetContentfulProductsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetContentfullProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetContentfulProductsQuery = { __typename?: 'Query', phoneCasesProductCollection?: { __typename?: 'PhoneCasesProductCollection', items: Array<{ __typename?: 'PhoneCasesProduct', name?: string | null, price?: number | null, sys: { __typename?: 'Sys', id: string }, imagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null } | null> } | null } | null> } | null };
+export type GetContentfullProductsQuery = { __typename?: 'Query', phoneCasesProductCollection?: { __typename?: 'PhoneCasesProductCollection', items: Array<{ __typename?: 'PhoneCasesProduct', name?: string | null, price?: number | null, sys: { __typename?: 'Sys', id: string }, imagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null } | null> } | null } | null> } | null };
+
+export type GetContentfullProductsByTrendingQueryVariables = Exact<{
+  limit: Scalars['Int']['input'];
+}>;
+
+
+export type GetContentfullProductsByTrendingQuery = { __typename?: 'Query', phoneCasesProductCollection?: { __typename?: 'PhoneCasesProductCollection', items: Array<{ __typename?: 'PhoneCasesProduct', name?: string | null, price?: number | null, new?: boolean | null, sys: { __typename?: 'Sys', id: string }, imagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null } | null> } | null } | null> } | null };
 
 export type GetContentSingleProductQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type GetContentSingleProductQuery = { __typename?: 'Query', phoneCasesProduct?: { __typename?: 'PhoneCasesProduct', name?: string | null, deviceName?: string | null, price?: number | null, imagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null } | null> } | null } | null };
+export type GetContentSingleProductQuery = { __typename?: 'Query', phoneCasesProduct?: { __typename?: 'PhoneCasesProduct', name?: string | null, price?: number | null, imagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null } | null> } | null } | null };
 
 export type GetContentHomeBannersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1565,7 +1569,8 @@ export type GetContentfulCollectionsQueryVariables = Exact<{ [key: string]: neve
 export type GetContentfulCollectionsQuery = { __typename?: 'Query', phonearmomorCollectionsCollection?: { __typename?: 'PhonearmomorCollectionsCollection', items: Array<{ __typename?: 'PhonearmomorCollections', name?: string | null, slug?: string | null, sys: { __typename?: 'Sys', id: string }, collectionImage?: { __typename?: 'Asset', url?: string | null } | null } | null> } | null };
 
 
-export const GetContentfulProductsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentfulProducts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phoneCasesProductCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"imagesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentfulProductsQuery, GetContentfulProductsQueryVariables>;
-export const GetContentSingleProductDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentSingleProduct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phoneCasesProduct"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"deviceName"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"imagesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentSingleProductQuery, GetContentSingleProductQueryVariables>;
+export const GetContentfullProductsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentfullProducts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phoneCasesProductCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"imagesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentfullProductsQuery, GetContentfullProductsQueryVariables>;
+export const GetContentfullProductsByTrendingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentfullProductsByTrending"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phoneCasesProductCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"trending"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"new"}},{"kind":"Field","name":{"kind":"Name","value":"imagesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentfullProductsByTrendingQuery, GetContentfullProductsByTrendingQueryVariables>;
+export const GetContentSingleProductDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentSingleProduct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phoneCasesProduct"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"imagesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentSingleProductQuery, GetContentSingleProductQueryVariables>;
 export const GetContentHomeBannersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentHomeBanners"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phonearmomorBannerCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"destantion"}},{"kind":"Field","name":{"kind":"Name","value":"buttonText"}},{"kind":"Field","name":{"kind":"Name","value":"banner"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentHomeBannersQuery, GetContentHomeBannersQueryVariables>;
 export const GetContentfulCollectionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentfulCollections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phonearmomorCollectionsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"6"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"collectionImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentfulCollectionsQuery, GetContentfulCollectionsQueryVariables>;

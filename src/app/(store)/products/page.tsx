@@ -10,14 +10,14 @@ import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import Loading from "../cart/_components/Loading";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { GetContentfulProductsQuery } from "@/__generated__/graphql";
+import { GetContentfullProductsQuery } from "@/__generated__/graphql";
 
 export default function Products() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [productsData, setProductsData] =
-    useState<GetContentfulProductsQuery>();
+    useState<GetContentfullProductsQuery>();
   const addToCart = async (productId: string, price: number) => {
     try {
       await addToCartAction(productId, price, "");

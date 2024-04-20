@@ -23,8 +23,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { devices } from "@/config/devices";
+import { PhoneCasesProduct } from "@/__generated__/graphql";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-function ProductItem() {
+function ProductItem({ item }: { item: PhoneCasesProduct }) {
   const [value, setValue] = React.useState("");
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
@@ -51,13 +53,13 @@ function ProductItem() {
   return (
     <div className="h-full rounded-xl border-4 bg-slate-200">
       <div className="h-2/3 w-full p-5">
-        <img
-          alt="iphone 15 pro case"
-          src={`https://images.ctfassets.net/xp3ehvbs6dy6/6OxuBIhxR2ojxHEfri2GyD/978fbd96e31e0f084abf4c526aacb4e9/2024-04-18_20-48-35_2716.png?w=700&h=700&fm=webp&q=80`}
+        <LazyLoadImage
+          alt={item.name || "iPhone 15 pro"}
+          src={`${item.imagesCollection?.items[0]?.url}?w=700&h=700&fm=webp&q=80`}
           className="duration-350 h-full w-full object-cover"
+          threshold={100}
         />
       </div>
-
       <div className="mt-1 flex flex-col items-center gap-3 ">
         <p className="text-md capitalize">iPhone case 15 pro</p>
         <p className="text-sm capitalize ">$12.99</p>

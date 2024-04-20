@@ -22,30 +22,30 @@ query GetContentfullProducts {
 }
 `);
 
-// export const GET_CONTENTFUL_PRODUCTS_BY_TYPE = gql(`
-// query GetContentfulProductsByType($limit: number!, $type:string!) {
-//   phoneCasesProductCollection(limit: $limit, where:{$type:true}) {
-//     items {
-//       sys {
-//         id
-//       }
-//       name
-//       price
-//       imagesCollection {
-//         items {
-//           url
-//         }
-//       }
-//     }
-//   }
-// }
-// `);
+export const GET_CONTENTFUL_PRODUCTS_BY_trending = gql(`
+query GetContentfullProductsByTrending($limit: Int!) {
+  phoneCasesProductCollection(limit: $limit, where: {trending : true}) {
+    items {
+      sys {
+        id
+      }
+      name
+      price
+      new
+      imagesCollection {
+        items {
+          url
+        }
+      }
+    }
+  }
+}
+`);
 
 export const GET_CONTENTFUL_SINGLE_PRODUCT = gql(`
 query GetContentSingleProduct($id: String!) {
   phoneCasesProduct(id: $id) {
     name
-    deviceName
     price
     imagesCollection {
       items {
