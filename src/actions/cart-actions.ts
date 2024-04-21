@@ -132,7 +132,7 @@ export const fetchCartData = async () => {
   const hasCartCookie = cookieStore.get("cart");
   try {
     if (hasCartCookie) {
-      const cart: cartType = await prisma.cart.findUnique({
+      const cart = await prisma.cart.findUnique({
         where: { id: hasCartCookie.value },
         include: { ProductItems: true },
       });
@@ -175,6 +175,8 @@ export const getCartLength: () => Promise<number> = async () => {
       return 0;
     }
   } catch (error) {
+    console.log(error);
+
     throw new Error("Error getting cart length");
     return 0;
   } finally {
