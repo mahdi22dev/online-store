@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import Loading from "../cart/_components/Loading";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { GetContentfullProductsQuery } from "@/__generated__/graphql";
+import Images from "./_components/Images";
 
 export default function Products() {
   const router = useRouter();
@@ -36,10 +37,10 @@ export default function Products() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const data = await fetchAllProducts();
-      if (data) {
-        setProductsData(data);
-      }
+      // const data = await fetchAllProducts();
+      // if (data) {
+      //   setProductsData(data);
+      // }
     } catch (error) {
     } finally {
       setLoading(false);
@@ -59,32 +60,7 @@ export default function Products() {
   }
   return (
     <main className="flex min-h-[90vh] w-full items-start justify-center p-5 sm:p-12">
-      {/* grid grid-cols-5 gap-3 grid-flow-row */}
-      <div className="">
-        {productsData?.phoneCasesProductCollection?.items.map(
-          (product: any) => {
-            return (
-              <div key={product.sys.id}>
-                <LazyLoadImage
-                  alt="iphone 15 pro case"
-                  width={300}
-                  height={300}
-                  src={`${product.imagesCollection.items[0].url}?w=300&h=300&fm=webp&q=80`}
-                  effect="opacity"
-                  threshold={100}
-                />
-
-                <Button
-                  onClick={() => addToCart(product.sys.id, product.price)}
-                  variant={"default"}
-                >
-                  add to cart
-                </Button>
-              </div>
-            );
-          },
-        )}
-      </div>
+      <Images />
     </main>
   );
 }
