@@ -56,7 +56,7 @@ function ProductItem({ item }: { item: PhoneCasesProduct }) {
           alt={item.name || "iPhone 15 pro"}
           src={`${item.imagesCollection?.items[0]?.url}?w=700&h=700&fm=webp&q=80`}
           className="duration-350 h-full w-full object-cover"
-          threshold={100}
+          threshold={10}
         />
       </div>
       <div className="mt-1 flex flex-col items-center gap-3 ">
