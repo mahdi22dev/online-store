@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import Loading from "../cart/_components/Loading";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { GetContentfullProductsQuery } from "@/__generated__/graphql";
-import Images from "./_components/Images";
+import { Gallery } from "./_components/Gallery";
 
 export default function Products() {
   const router = useRouter();
@@ -60,7 +60,7 @@ export default function Products() {
   }
   return (
     <main className="flex min-h-[90vh] w-full items-start justify-center p-5 sm:p-12">
-      <Images />
+      Products page
     </main>
   );
 }
