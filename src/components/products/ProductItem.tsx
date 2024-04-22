@@ -77,7 +77,7 @@ function ProductItem({ item }: { item: PhoneCasesProduct }) {
         </Button>
       </div>
       <Badge
-        className="tex-white absolute left-1 top-1 rounded-full bg-sky-800 hover:bg-opacity-80"
+        className="tex-white absolute left-1 top-1 rounded-full bg-sky-400 hover:bg-opacity-80"
         variant="default"
       >
         {item.trending && "Trending"}
