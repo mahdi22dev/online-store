@@ -10,14 +10,8 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { Button } from "@/components/ui/button";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const Images = [
-  { id: 1, img: "1" },
-  { id: 2, img: "2" },
-  { id: 3, img: "3" },
-];
 export function Gallery({ Images }) {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
@@ -60,7 +54,7 @@ export function Gallery({ Images }) {
         {Images.map((img) => {
           return (
             <div
-              className={`rounded ${current == img.id && "border-4 border-foreground"}`}
+              className={`rounded  ${current == img.id ? "border-4 border-foreground opacity-100" : "border border-foreground  opacity-20"}`}
             >
               <LazyLoadImage
                 alt={"iPhone 15 pro"}
