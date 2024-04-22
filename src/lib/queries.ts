@@ -32,6 +32,7 @@ query GetContentfullProductsByTrending($limit: Int!) {
       name
       price
       new
+      trending
       imagesCollection {
         items {
           url
