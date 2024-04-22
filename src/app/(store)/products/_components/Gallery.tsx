@@ -11,7 +11,16 @@ import {
 } from "@/components/ui/carousel";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-export function Gallery({ Images }) {
+export function Gallery({
+  Images,
+}: {
+  Images:
+    | ({
+        __typename?: "Asset" | undefined;
+        url?: string | null | undefined;
+      } | null)[]
+    | undefined;
+}) {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -31,13 +40,13 @@ export function Gallery({ Images }) {
     <div className="w-full lg:w-2/4">
       <Carousel setApi={setApi} className="max-w-3xl">
         <CarouselContent>
-          {Array.from({ length: 3 }).map((_, index) => (
+          {Images?.map((img, index) => (
             <CarouselItem key={index}>
               <Card className="">
                 <CardContent className="p-5">
                   <LazyLoadImage
                     alt={"iPhone 15 pro"}
-                    src={`https://images.ctfassets.net/xp3ehvbs6dy6/4PaTWj4YgCfyFqKu0U1UoB/15eb68ecc21f93f7605ddec8cb21f357/LadybugsPersonalisedMagSafeiPhoneCase.jpg?w=700&h=700&fm=webp&q=80`}
+                    src={`${img?.url}?w=700&h=700&fm=webp&q=80`}
                     className="duration-350 h-full w-full object-cover"
                     threshold={10}
                   />
@@ -50,17 +59,17 @@ export function Gallery({ Images }) {
         <CarouselNext />
       </Carousel>
       <div className="mt-5 flex gap-5 py-2 text-center text-sm text-muted-foreground">
-        {Images.map((img) => {
+        {Images?.map((img, index) => {
           return (
             <div
-              className={`rounded  ${current == img.id ? "border-4 border-foreground opacity-100" : "border border-foreground  opacity-20"}`}
+              className={`rounded  ${current == index + 1 ? "border-4 border-foreground opacity-100" : "border border-foreground  opacity-20"}`}
             >
               <LazyLoadImage
                 alt={"iPhone 15 pro"}
-                src={`https://images.ctfassets.net/xp3ehvbs6dy6/4PaTWj4YgCfyFqKu0U1UoB/15eb68ecc21f93f7605ddec8cb21f357/LadybugsPersonalisedMagSafeiPhoneCase.jpg?w=50&h=50&fm=webp&q=80`}
+                src={`${img?.url}?w=50&h=50&fm=webp&q=80`}
                 className="duration-350 h-24 w-24 cursor-pointer rounded object-cover"
                 threshold={10}
-                onClick={() => api?.scrollTo(img.id - 1)}
+                onClick={() => api?.scrollTo(index)}
               />
             </div>
           );

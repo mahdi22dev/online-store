@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Badge } from "../ui/badge";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
 import {
+  addToCartAction,
   adjustProductQuantity,
   reomveProductfromcart,
 } from "@/actions/cart-actions";
@@ -17,87 +17,70 @@ import BeatLoader from "react-spinners/BeatLoader";
 import { fetchSingleProduct } from "@/actions/products-actions";
 import { GetContentSingleProductQuery } from "@/__generated__/graphql";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { DeviceSlector } from "@/components/products/Deviceselector";
 
-function CartItem({ item }: { item: ProductICartitemstype }) {
+function AddToCartComponent({ item }: { item: any }) {
   const [loading, setloading] = useState(false);
   const [cartItem, setcartitem] = useState<GetContentSingleProductQuery>();
   const dispatch: AppDispatch = useDispatch();
-
+  const [value, setValue] = React.useState("");
   const [error, setError] = useState({ accured: false, message: "" });
+  const router = useRouter();
+  const addToCart = async (productId: string, price: number) => {
+    try {
+      if (!value) {
+        toast("Please chose a device for the phone case");
+        return;
+      }
+      addToCartAction(productId, price, value);
+      dispatch(toggleCartRefetch());
+      toast("Product has been added to your cart", {
+        action: {
+          label: "View cart",
+          onClick: () => router.push("/cart"),
+        },
+      });
+    } catch (error) {
+      toast.error("Error adding item to your cart");
+    }
+  };
   if (error.accured) {
     toast.error(error.message);
   }
 
-  const fetchcartItemData = async () => {
-    try {
-      setloading(true);
-      const cartitemData = await fetchSingleProduct(item.productId);
-      setcartitem(cartitemData);
-    } catch (error) {
-    } finally {
-      setloading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchcartItemData();
-  }, []);
-
-  if (!cartItem) {
-    return;
-  }
+  //   if (!cartItem) {
+  //     return;
+  //   }
   return (
-    <div
-      className={`relative flex items-center justify-between gap-3 border p-3 px-5`}
-      key={item.productId}
-    >
-      {/* overlay */}
-      {loading && (
-        <div className="absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-slate-50/50 hover:cursor-not-allowed">
-          <BeatLoader color="#333" />
-        </div>
-      )}
-      {/* overlay */}
-      <LazyLoadImage
-        alt="iphone 15 pro case"
-        width={96}
-        height={96}
-        src={`${cartItem?.phoneCasesProduct?.imagesCollection?.items[0]?.url}?w=96&h=96&fm=webp&q=80`}
-        effect="opacity"
-        threshold={100}
+    <div className={`relative flex flex-col gap-10`}>
+      <QuantityInput
+        item={item}
+        dispatch={dispatch}
+        setError={setError}
+        setLoading={setloading}
       />
-      <div className="space-y-2">
-        <p className="text-md capitalize">
-          {cartItem?.phoneCasesProduct?.name}
-        </p>
+      <DeviceSlector setValue={setValue} value={value} />
+      <div className="flex flex-col gap-2">
+        <Button
+          onClick={() => addToCart(item.sys.id, item.price || 0)}
+          variant={"default"}
+          className="h-16 cursor-pointer disabled:cursor-not-allowed"
+          disabled={!value ? true : false}
+        >
+          add to cart
+        </Button>
 
-        {/* display device name from db not contentful */}
-        <p className="text-sm capitalize opacity-50">{item?.device}</p>
-        <QuantityInput
-          item={item}
-          dispatch={dispatch}
-          setError={setError}
-          setLoading={setloading}
-        />
-      </div>
-      <div className="flex h-[100px] flex-col justify-between">
-        <p className="text-lg font-semibold capitalize">
-          {cartItem?.phoneCasesProduct?.price || 0}$
-        </p>
-        <MdDeleteOutline
-          className="cursor-pointer text-3xl text-red-500 transition-all duration-150 hover:opacity-50 focus:opacity-50"
-          onClick={async () => {
-            try {
-              setloading(true);
-              await reomveProductfromcart(item.id);
-              setloading(false);
-              dispatch(toggleCartLoading());
-              dispatch(toggleCartRefetch());
-            } catch (error) {
-              setError({ accured: true, message: "Error deleting cart item" });
-            }
-          }}
-        />
+        <Button
+          onClick={() => addToCart(item.sys.id, item.price || 0)}
+          variant={"outline"}
+          className="h-16 cursor-pointer disabled:cursor-not-allowed"
+          disabled={!value ? true : false}
+        >
+          Buy Now
+        </Button>
       </div>
     </div>
   );
@@ -124,6 +107,7 @@ const QuantityInput = ({
   useEffect(() => {
     setQuantity(item.quantity);
   }, [item.quantity]);
+
   const plusItem = async () => {
     try {
       setLoading(true);
@@ -181,4 +165,4 @@ const QuantityInput = ({
     </div>
   );
 };
-export default CartItem;
+export default AddToCartComponent;

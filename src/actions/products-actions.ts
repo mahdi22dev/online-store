@@ -20,7 +20,7 @@ export const fetchAllProducts = async () => {
 
 export const fetchSingleProduct = async (id: string) => {
   try {
-    const { data } = await getClient().query({
+    const { data, error } = await getClient().query({
       query: GET_CONTENTFUL_SINGLE_PRODUCT,
       variables: { id: id },
     });
