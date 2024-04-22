@@ -25,6 +25,7 @@ import {
 import { devices } from "@/config/devices";
 import { PhoneCasesProduct } from "@/__generated__/graphql";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Badge } from "../ui/badge";
 
 function ProductItem({ item }: { item: PhoneCasesProduct }) {
   const [value, setValue] = React.useState("");
@@ -50,11 +51,14 @@ function ProductItem({ item }: { item: PhoneCasesProduct }) {
   };
 
   return (
-    <div className="h-full rounded-xl border-4 bg-slate-200">
-      <div className="h-2/3 w-full p-5">
+    <div className="relative h-full rounded-xl border-4 bg-slate-200">
+      <div
+        onClick={() => router.push("/products/" + item.sys.id)}
+        className="h-2/3 w-full cursor-pointer p-5"
+      >
         <LazyLoadImage
           alt={item.name || "iPhone 15 pro"}
-          src={`${item.imagesCollection?.items[0]?.url}?w=700&h=700&fm=webp&q=80`}
+          src={`${item.imagesCollection?.items[0]?.url}?w=500&h=500&fm=webp&q=80`}
           className="duration-350 h-full w-full object-cover"
           threshold={10}
         />
@@ -72,6 +76,12 @@ function ProductItem({ item }: { item: PhoneCasesProduct }) {
           add to cart
         </Button>
       </div>
+      <Badge
+        className="tex-white absolute left-1 top-1 rounded-full bg-sky-800 "
+        variant="default"
+      >
+        Trending
+      </Badge>
     </div>
   );
 }
