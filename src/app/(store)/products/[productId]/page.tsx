@@ -14,6 +14,7 @@ import { IoStarSharp } from "react-icons/io5";
 import AddToCartComponent from "../_components/AddToCartComponent";
 import { fetchSingleProduct } from "@/actions/products-actions";
 import { notFound } from "next/navigation";
+import SectionTitle from "@/components/text/SectionTitle";
 
 async function page({ params }: { params: { productId: string } }) {
   const product = await fetchSingleProduct(params.productId);
@@ -21,6 +22,7 @@ async function page({ params }: { params: { productId: string } }) {
     return notFound();
   }
 
+  const randomN = Math.floor(Math.random() * 20) + 1;
   return (
     <main className="min-h-screen w-full p-5 md:px-24 md:py-10">
       {product.phoneCasesProduct?.name && (
@@ -33,12 +35,12 @@ async function page({ params }: { params: { productId: string } }) {
           }
         />
         {/* product info etc */}
-        <div className="w-full space-y-4 lg:w-2/4">
+        <div className="mt-10 w-full space-y-4 lg:mt-0 lg:w-2/4">
           <p className="text-3xl font-bold uppercase">
             {product.phoneCasesProduct?.name}
           </p>
           <p className="text-2xl font-normal">
-            US {product.phoneCasesProduct?.price}
+            US ${product.phoneCasesProduct?.price}
           </p>
           {/* reviews section */}
           <div className="flex gap-4">
@@ -49,16 +51,29 @@ async function page({ params }: { params: { productId: string } }) {
               <IoStarSharp className="text-2xl text-yellow-200" />
               <IoStarSharp className="text-2xl text-yellow-200" />
             </div>
-            <p className="cursor-pointer">3 reviews</p>
+            <p className="cursor-pointer">{randomN} reviews</p>
           </div>
           <Separator className="mx-auto mt-5 bg-black opacity-50" />
           {/* add to cart section */}
           <p>Quantity</p>
 
           <AddToCartComponent item={product.phoneCasesProduct} />
+
+          <div className="mt-44 flex flex-col gap-2">
+            <p className="text-xl uppercase">descreption</p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure
+              reprehenderit fugiat nisi unde distinctio ex perspiciatis sed
+              dolore ab, impedit soluta esse aut odio consequuntur, est ratione
+              quis debitis maiores Lorem ipsum dolor, sit amet consectetur
+              adipisicing elit. Ipsum incidunt hic aliquam quasi voluptate
+              quisquam blanditiis laudantium similique accusamus! Natus eaque
+              quam aliquid dolor quisquam in vitae quo adipisci commodi.
+            </p>
+          </div>
         </div>
       </div>
-      <div>YOU MAY ALSO LIKE</div>
+      <SectionTitle text="YOU MAY ALSO LIKE" />
     </main>
   );
 }

@@ -51,7 +51,10 @@ function AddToCartComponent({ item }: { item: any }) {
         quantity={quantity}
         setQuantity={setQuantity}
       />
-      <DeviceSlector setValue={setValue} value={value} />
+      <div className="flex flex-col gap-2">
+        <p className="text-xl uppercase">Size:</p>
+        <DeviceSlector setValue={setValue} value={value} />
+      </div>
       <div className="flex flex-col gap-2">
         <Button
           onClick={() => addToCart(item.sys.id, item.price || 0)}

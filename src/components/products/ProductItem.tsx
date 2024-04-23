@@ -37,7 +37,7 @@ function ProductItem({ item }: { item: PhoneCasesProduct }) {
   };
 
   return (
-    <div className="relative h-full rounded-xl border-4 bg-slate-200">
+    <div className="relative h-full rounded-xl border-4 bg-slate-50">
       <div className="h-2/3 w-full cursor-pointer p-5">
         <Link href={"/products/" + item.sys.id}>
           <LazyLoadImage
@@ -62,7 +62,7 @@ function ProductItem({ item }: { item: PhoneCasesProduct }) {
         </Button>
       </div>
       <Badge
-        className="tex-white absolute left-1 top-1 rounded-full bg-sky-400 hover:bg-opacity-80"
+        className="tex-white absolute left-1 top-1 rounded-full bg-yellow-500 hover:bg-opacity-80"
         variant="default"
       >
         {item.trending && "Trending"}
