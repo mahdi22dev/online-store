@@ -178,10 +178,7 @@ export const getCartLength: () => Promise<number> = async () => {
       return 0;
     }
   } catch (error) {
-    console.log(error);
-
     throw new Error("Error getting cart length");
-    return 0;
   } finally {
     await prisma.$disconnect();
   }

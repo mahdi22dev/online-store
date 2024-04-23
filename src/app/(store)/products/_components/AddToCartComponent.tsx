@@ -49,13 +49,19 @@ function AddToCartComponent({ item }: { item: any }) {
   );
 
   useEffect(() => {
-    if (firstMount.current == true) {
+    if (firstMount.current) {
       const size = searchParams.get("size");
-      setValue(size || "");
+      if (size) {
+        setValue(size);
+        console.log("size", size);
+      }
       firstMount.current = false;
-      return;
+    } else {
+      console.log("run");
+      if (value) {
+        router.push(pathname + "?" + createQueryString("size", value));
+      }
     }
-    router.push(pathname + "?" + createQueryString("size", value));
   }, [value]);
   return (
     <div className={`relative flex flex-col gap-10`}>
@@ -104,7 +110,6 @@ const QuantityInput = ({
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
   quantity: number;
 }) => {
-  console.log(item);
   const plusItem = async () => {
     setQuantity((prev) => prev + 1);
   };

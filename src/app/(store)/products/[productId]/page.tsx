@@ -74,10 +74,10 @@ async function page({ params }: { params: { productId: string } }) {
           </div>
         </div>
       </div>
-      <section>
+      <div className="mt-3">
         <SectionTitle text="YOU MAY ALSO LIKE" />
-        <div></div>
-      </section>
+        <div>random 4 products</div>
+      </div>
     </main>
   );
 }
