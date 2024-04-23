@@ -9,25 +9,18 @@ import {
 } from "@/actions/cart-actions";
 import { toast } from "sonner";
 import { ProductICartitemstype } from "@/lib/types";
-import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { toggleCartLoading, toggleCartRefetch } from "@/redux/cart/cartSlice";
-import BeatLoader from "react-spinners/BeatLoader";
-import { fetchSingleProduct } from "@/actions/products-actions";
-import { GetContentSingleProductQuery } from "@/__generated__/graphql";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { DeviceSlector } from "@/components/products/Deviceselector";
 
 function AddToCartComponent({ item }: { item: any }) {
-  const [loading, setloading] = useState(false);
-  const [cartItem, setcartitem] = useState<GetContentSingleProductQuery>();
   const dispatch: AppDispatch = useDispatch();
   const [value, setValue] = React.useState("");
-  const [error, setError] = useState({ accured: false, message: "" });
+  const [quantity, setQuantity] = useState<number>(1);
   const router = useRouter();
   const addToCart = async (productId: string, price: number) => {
     try {
@@ -35,7 +28,7 @@ function AddToCartComponent({ item }: { item: any }) {
         toast("Please chose a device for the phone case");
         return;
       }
-      addToCartAction(productId, price, value);
+      addToCartAction(productId, price, value, quantity);
       dispatch(toggleCartRefetch());
       toast("Product has been added to your cart", {
         action: {
@@ -47,9 +40,6 @@ function AddToCartComponent({ item }: { item: any }) {
       toast.error("Error adding item to your cart");
     }
   };
-  if (error.accured) {
-    toast.error(error.message);
-  }
 
   //   if (!cartItem) {
   //     return;
@@ -58,9 +48,8 @@ function AddToCartComponent({ item }: { item: any }) {
     <div className={`relative flex flex-col gap-10`}>
       <QuantityInput
         item={item}
-        dispatch={dispatch}
-        setError={setError}
-        setLoading={setloading}
+        quantity={quantity}
+        setQuantity={setQuantity}
       />
       <DeviceSlector setValue={setValue} value={value} />
       <div className="flex flex-col gap-2">
@@ -88,64 +77,19 @@ function AddToCartComponent({ item }: { item: any }) {
 
 const QuantityInput = ({
   item,
-  dispatch,
-  setError,
-  setLoading,
+  quantity,
+  setQuantity,
 }: {
   item: ProductICartitemstype;
-  dispatch: AppDispatch;
-  setError: React.Dispatch<
-    React.SetStateAction<{
-      accured: boolean;
-      message: string;
-    }>
-  >;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  quantity: number;
 }) => {
-  const [quantity, setQuantity] = useState<number>();
-
-  useEffect(() => {
-    setQuantity(item.quantity);
-  }, [item.quantity]);
-
+  console.log(item);
   const plusItem = async () => {
-    try {
-      setLoading(true);
-      const adjustedProduct = await adjustProductQuantity(item.id, 1);
-      setQuantity(adjustedProduct.quantity);
-      dispatch(toggleCartRefetch());
-    } catch (error) {
-      setError({
-        accured: true,
-        message:
-          "Error accured when adjusting item quantity please try again later",
-      });
-    } finally {
-      setLoading(false);
-    }
+    setQuantity((prev) => prev + 1);
   };
   const minusItem = async () => {
-    try {
-      if (quantity === 1) {
-        setLoading(true);
-        await reomveProductfromcart(item.id);
-        dispatch(toggleCartLoading());
-        dispatch(toggleCartRefetch());
-      } else {
-        setLoading(true);
-        const adjustedProduct = await adjustProductQuantity(item.id, -1);
-        setQuantity(adjustedProduct.quantity);
-        dispatch(toggleCartRefetch());
-      }
-    } catch (error) {
-      setError({
-        accured: true,
-        message:
-          "Error accured when adjusting item quantity please try again later",
-      });
-    } finally {
-      setLoading(false);
-    }
+    setQuantity((prev) => prev - 1);
   };
 
   return (

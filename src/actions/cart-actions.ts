@@ -9,6 +9,7 @@ export const addToCartAction = async (
   productId: string,
   price: number,
   device: string,
+  quantity?: number,
 ) => {
   try {
     const session: UserServerSession = await getServerSession(authOptions);
@@ -106,7 +107,9 @@ export const addToCartAction = async (
       await prisma.productItem.update({
         where: { id: itemtExists.id },
         data: {
-          quantity: itemtExists.quantity + 1,
+          quantity: quantity
+            ? quantity + itemtExists.quantity
+            : itemtExists.quantity + 1,
           device: device,
         },
       });
@@ -114,7 +117,7 @@ export const addToCartAction = async (
       await prisma.productItem.create({
         data: {
           productId: productId,
-          quantity: 1,
+          quantity: quantity ? quantity : 1,
           price: price,
           device: device,
           Cart: { connect: { id: cart?.id } },

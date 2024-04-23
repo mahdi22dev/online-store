@@ -15,7 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\nquery GetContentfullProducts {\n  phoneCasesProductCollection(limit: 10) {\n    items {\n      sys {\n        id\n      }\n      name\n      price\n      imagesCollection {\n        items {\n          url\n        }\n      }\n    }\n  }\n}\n": types.GetContentfullProductsDocument,
     "\nquery GetContentfullProductsByTrending($limit: Int!) {\n  phoneCasesProductCollection(limit: $limit, where: {trending : true}) {\n    items {\n      sys {\n        id\n      }\n      name\n      price\n      new\n      trending\n      imagesCollection {\n        items {\n          url\n        }\n      }\n    }\n  }\n}\n": types.GetContentfullProductsByTrendingDocument,
-    "\nquery GetContentSingleProduct($id: String!) {\n  phoneCasesProduct(id: $id) {\n    name\n    price\n    imagesCollection {\n      items {\n        url\n      }\n    }\n  }\n}\n": types.GetContentSingleProductDocument,
+    "\nquery GetContentSingleProduct($id: String!) {\n  phoneCasesProduct(id: $id) {\n    sys {\n        id\n      }\n    name\n    price\n    imagesCollection {\n      items {\n        url\n      }\n    }\n  }\n}\n": types.GetContentSingleProductDocument,
     "\nquery GetContentHomeBanners {\n  phonearmomorBannerCollection {\n    items {\n      sys {\n        id\n      }\n      title\n      destantion\n      buttonText\n      banner{\n        url\n      }\n    }\n  }\n}\n": types.GetContentHomeBannersDocument,
     "\nquery GetContentfulCollections {\n  phonearmomorCollectionsCollection(limit: 6) {\n    items {\n      sys {\n        id\n      }\n      name\n      slug\n      collectionImage {\n        url\n      }\n    }\n  }\n}\n": types.GetContentfulCollectionsDocument,
 };
@@ -45,7 +45,7 @@ export function gql(source: "\nquery GetContentfullProductsByTrending($limit: In
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\nquery GetContentSingleProduct($id: String!) {\n  phoneCasesProduct(id: $id) {\n    name\n    price\n    imagesCollection {\n      items {\n        url\n      }\n    }\n  }\n}\n"): (typeof documents)["\nquery GetContentSingleProduct($id: String!) {\n  phoneCasesProduct(id: $id) {\n    name\n    price\n    imagesCollection {\n      items {\n        url\n      }\n    }\n  }\n}\n"];
+export function gql(source: "\nquery GetContentSingleProduct($id: String!) {\n  phoneCasesProduct(id: $id) {\n    sys {\n        id\n      }\n    name\n    price\n    imagesCollection {\n      items {\n        url\n      }\n    }\n  }\n}\n"): (typeof documents)["\nquery GetContentSingleProduct($id: String!) {\n  phoneCasesProduct(id: $id) {\n    sys {\n        id\n      }\n    name\n    price\n    imagesCollection {\n      items {\n        url\n      }\n    }\n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

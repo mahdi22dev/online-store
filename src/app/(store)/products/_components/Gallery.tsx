@@ -23,13 +23,11 @@ export function Gallery({
 }) {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
-  const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
     if (!api) {
       return;
     }
-    setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap() + 1);
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap() + 1);
@@ -42,11 +40,11 @@ export function Gallery({
         <CarouselContent>
           {Images?.map((img, index) => (
             <CarouselItem key={index}>
-              <Card className="">
-                <CardContent className="p-5">
+              <Card>
+                <CardContent className="min-h-[550px] p-5">
                   <LazyLoadImage
                     alt={"iPhone 15 pro"}
-                    src={`${img?.url}?w=700&h=700&fm=webp&q=80`}
+                    src={`${img?.url}?w=600&h=600&fm=webp&q=80`}
                     className="duration-350 h-full w-full object-cover"
                     threshold={10}
                   />

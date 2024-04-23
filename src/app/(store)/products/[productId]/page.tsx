@@ -11,26 +11,21 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { IoStarSharp } from "react-icons/io5";
-import AddToCartComponent from "../_components/QuantityInput";
+import AddToCartComponent from "../_components/AddToCartComponent";
 import { fetchSingleProduct } from "@/actions/products-actions";
 import { notFound } from "next/navigation";
-
-const Images = [
-  { id: 1, img: "1" },
-  { id: 2, img: "2" },
-  { id: 3, img: "3" },
-];
 
 async function page({ params }: { params: { productId: string } }) {
   const product = await fetchSingleProduct(params.productId);
   if (!product.phoneCasesProduct) {
     return notFound();
   }
-  console.log(product.phoneCasesProduct.imagesCollection?.items);
 
   return (
     <main className="min-h-screen w-full p-5 md:px-24 md:py-10">
-      <BreadcrumbComponent title="products title" />
+      {product.phoneCasesProduct?.name && (
+        <BreadcrumbComponent title={product.phoneCasesProduct?.name} />
+      )}
       <div className="w-full items-start justify-between gap-16 lg:flex">
         <Gallery
           Images={
@@ -60,7 +55,7 @@ async function page({ params }: { params: { productId: string } }) {
           {/* add to cart section */}
           <p>Quantity</p>
 
-          <AddToCartComponent item={""} />
+          <AddToCartComponent item={product.phoneCasesProduct} />
         </div>
       </div>
       <div>YOU MAY ALSO LIKE</div>

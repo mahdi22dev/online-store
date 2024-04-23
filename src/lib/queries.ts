@@ -46,6 +46,9 @@ query GetContentfullProductsByTrending($limit: Int!) {
 export const GET_CONTENTFUL_SINGLE_PRODUCT = gql(`
 query GetContentSingleProduct($id: String!) {
   phoneCasesProduct(id: $id) {
+    sys {
+        id
+      }
     name
     price
     imagesCollection {
