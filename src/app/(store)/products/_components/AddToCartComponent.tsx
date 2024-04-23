@@ -53,11 +53,9 @@ function AddToCartComponent({ item }: { item: any }) {
       const size = searchParams.get("size");
       if (size) {
         setValue(size);
-        console.log("size", size);
       }
       firstMount.current = false;
     } else {
-      console.log("run");
       if (value) {
         router.push(pathname + "?" + createQueryString("size", value));
       }
