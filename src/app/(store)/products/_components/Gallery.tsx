@@ -36,12 +36,12 @@ export function Gallery({
 
   return (
     <div className="w-full lg:w-2/4">
-      <Carousel setApi={setApi} className="max-w-3xl">
+      <Carousel setApi={setApi} className="max-w-[700px]">
         <CarouselContent>
           {Images?.map((img, index) => (
             <CarouselItem key={index}>
               <Card>
-                <CardContent className="min-h-[550px] p-5">
+                <CardContent className="p-5">
                   <LazyLoadImage
                     alt={"iPhone 15 pro"}
                     src={`${img?.url}?w=600&h=600&fm=webp&q=80`}

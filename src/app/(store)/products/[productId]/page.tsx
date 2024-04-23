@@ -16,6 +16,7 @@ import { fetchSingleProduct } from "@/actions/products-actions";
 import { notFound } from "next/navigation";
 import SectionTitle from "@/components/text/SectionTitle";
 
+export const dynamicParams = true;
 async function page({ params }: { params: { productId: string } }) {
   const product = await fetchSingleProduct(params.productId);
   if (!product.phoneCasesProduct) {
@@ -43,7 +44,7 @@ async function page({ params }: { params: { productId: string } }) {
             US ${product.phoneCasesProduct?.price}
           </p>
           {/* reviews section */}
-          <div className="flex gap-4">
+          <div className="flex items-center gap-4">
             <div className="flex gap-1">
               <IoStarSharp className="text-2xl text-yellow-200" />
               <IoStarSharp className="text-2xl text-yellow-200" />
@@ -73,7 +74,10 @@ async function page({ params }: { params: { productId: string } }) {
           </div>
         </div>
       </div>
-      <SectionTitle text="YOU MAY ALSO LIKE" />
+      <section>
+        <SectionTitle text="YOU MAY ALSO LIKE" />
+        <div></div>
+      </section>
     </main>
   );
 }
