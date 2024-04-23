@@ -21,8 +21,8 @@ async function page({ params }: { params: { productId: string } }) {
   if (!product.phoneCasesProduct) {
     return notFound();
   }
-
   const randomN = Math.floor(Math.random() * 20) + 1;
+
   return (
     <main className="min-h-screen w-full p-5 md:px-24 md:py-10">
       {product.phoneCasesProduct?.name && (

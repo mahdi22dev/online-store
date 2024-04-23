@@ -22,9 +22,11 @@ import { devices } from "@/config/devices";
 export function DeviceSlector({
   value,
   setValue,
+  selectedValue,
 }: {
   setValue: React.Dispatch<React.SetStateAction<string>>;
   value: string;
+  selectedValue?: string;
 }) {
   const [open, setOpen] = React.useState(false);
 

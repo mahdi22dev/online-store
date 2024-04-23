@@ -1,27 +1,26 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
-import {
-  addToCartAction,
-  adjustProductQuantity,
-  reomveProductfromcart,
-} from "@/actions/cart-actions";
+import { addToCartAction } from "@/actions/cart-actions";
 import { toast } from "sonner";
 import { ProductICartitemstype } from "@/lib/types";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { toggleCartLoading, toggleCartRefetch } from "@/redux/cart/cartSlice";
+import { toggleCartRefetch } from "@/redux/cart/cartSlice";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DeviceSlector } from "@/components/products/Deviceselector";
 
 function AddToCartComponent({ item }: { item: any }) {
   const dispatch: AppDispatch = useDispatch();
-  const [value, setValue] = React.useState("");
   const [quantity, setQuantity] = useState<number>(1);
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [value, setValue] = React.useState("");
+  const firstMount = useRef(true);
   const addToCart = async (productId: string, price: number) => {
     try {
       if (!value) {
@@ -40,10 +39,24 @@ function AddToCartComponent({ item }: { item: any }) {
       toast.error("Error adding item to your cart");
     }
   };
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams],
+  );
 
-  //   if (!cartItem) {
-  //     return;
-  //   }
+  useEffect(() => {
+    if (firstMount.current == true) {
+      const size = searchParams.get("size");
+      setValue(size || "");
+      firstMount.current = false;
+      return;
+    }
+    router.push(pathname + "?" + createQueryString("size", value));
+  }, [value]);
   return (
     <div className={`relative flex flex-col gap-10`}>
       <QuantityInput
@@ -53,7 +66,11 @@ function AddToCartComponent({ item }: { item: any }) {
       />
       <div className="flex flex-col gap-2">
         <p className="text-xl uppercase">Size:</p>
-        <DeviceSlector setValue={setValue} value={value} />
+        <DeviceSlector
+          setValue={setValue}
+          value={value}
+          selectedValue="poor phone"
+        />
       </div>
       <div className="flex flex-col gap-2">
         <Button
