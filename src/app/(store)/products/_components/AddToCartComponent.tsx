@@ -81,7 +81,7 @@ function AddToCartComponent({ item }: { item: any }) {
         <Button
           onClick={() => addToCart(item.sys.id, item.price || 0)}
           variant={"default"}
-          className="h-16 cursor-pointer disabled:cursor-not-allowed"
+          className="h-16 cursor-pointer bg-teal-700 hover:bg-teal-700/80 focus:bg-teal-700/60 disabled:cursor-not-allowed"
           disabled={!value ? true : false}
         >
           add to cart

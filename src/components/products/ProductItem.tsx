@@ -43,7 +43,7 @@ function ProductItem({
   };
 
   return (
-    <div className="relative rounded-xl border-4 bg-slate-50 py-5">
+    <div className="relative rounded-xl border-4 bg-white py-5 hover:shadow-md">
       <div className="h-2/3 w-full cursor-pointer p-5">
         <Link href={"/products/" + item.sys.id}>
           <LazyLoadImage
@@ -55,7 +55,7 @@ function ProductItem({
         </Link>
       </div>
       <div className="mt-1 flex flex-col items-center gap-3 ">
-        <p className="text-md px-3 text-[clamp(14px,3vw,20px)] capitalize ">
+        <p className="text-md px-5 text-[clamp(14px,3vw,20px)] capitalize ">
           {item.name}
         </p>
         <p className="p-1 text-sm capitalize">${item.price}</p>
@@ -63,7 +63,7 @@ function ProductItem({
         <Button
           onClick={() => addToCart(item.sys.id, item.price || 0)}
           variant={"default"}
-          className=" cursor-pointer disabled:cursor-not-allowed"
+          className="cursor-pointer bg-teal-700 hover:bg-teal-700/80 focus:bg-teal-700/60 disabled:cursor-not-allowed"
           disabled={!value ? true : false}
         >
           add to cart
@@ -76,6 +76,14 @@ function ProductItem({
           variant="default"
         >
           Trending
+        </Badge>
+      )}
+      {showBadge && item.new && (
+        <Badge
+          className="tex-white absolute left-1 top-1 rounded-full bg-sky-500 hover:bg-opacity-80"
+          variant="default"
+        >
+          New
         </Badge>
       )}
     </div>

@@ -880,6 +880,7 @@ export enum NextBlogOrder {
 /** Phone cases product content type for online store for selling phone cases [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phoneCasesProduct) */
 export type PhoneCasesProduct = Entry & {
   __typename?: 'PhoneCasesProduct';
+  bestseller?: Maybe<Scalars['Boolean']['output']>;
   brand?: Maybe<Scalars['String']['output']>;
   collection?: Maybe<Entry>;
   contentfulMetadata: ContentfulMetadata;
@@ -889,8 +890,15 @@ export type PhoneCasesProduct = Entry & {
   name?: Maybe<Scalars['String']['output']>;
   new?: Maybe<Scalars['Boolean']['output']>;
   price?: Maybe<Scalars['Float']['output']>;
+  style?: Maybe<Scalars['String']['output']>;
   sys: Sys;
   trending?: Maybe<Scalars['Boolean']['output']>;
+};
+
+
+/** Phone cases product content type for online store for selling phone cases [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phoneCasesProduct) */
+export type PhoneCasesProductBestsellerArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -942,6 +950,12 @@ export type PhoneCasesProductNewArgs = {
 
 /** Phone cases product content type for online store for selling phone cases [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phoneCasesProduct) */
 export type PhoneCasesProductPriceArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Phone cases product content type for online store for selling phone cases [See type definition](https://app.contentful.com/spaces/xp3ehvbs6dy6/content_types/phoneCasesProduct) */
+export type PhoneCasesProductStyleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1010,6 +1024,9 @@ export type PhoneCasesProductDescriptionResourcesInline = ResourceLink & {
 export type PhoneCasesProductFilter = {
   AND?: InputMaybe<Array<InputMaybe<PhoneCasesProductFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PhoneCasesProductFilter>>>;
+  bestseller?: InputMaybe<Scalars['Boolean']['input']>;
+  bestseller_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  bestseller_not?: InputMaybe<Scalars['Boolean']['input']>;
   brand?: InputMaybe<Scalars['String']['input']>;
   brand_contains?: InputMaybe<Scalars['String']['input']>;
   brand_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1042,6 +1059,13 @@ export type PhoneCasesProductFilter = {
   price_lte?: InputMaybe<Scalars['Float']['input']>;
   price_not?: InputMaybe<Scalars['Float']['input']>;
   price_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  style?: InputMaybe<Scalars['String']['input']>;
+  style_contains?: InputMaybe<Scalars['String']['input']>;
+  style_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  style_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  style_not?: InputMaybe<Scalars['String']['input']>;
+  style_not_contains?: InputMaybe<Scalars['String']['input']>;
+  style_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   sys?: InputMaybe<SysFilter>;
   trending?: InputMaybe<Scalars['Boolean']['input']>;
   trending_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1062,6 +1086,8 @@ export type PhoneCasesProductLinkingCollectionsEntryCollectionArgs = {
 };
 
 export enum PhoneCasesProductOrder {
+  BestsellerAsc = 'bestseller_ASC',
+  BestsellerDesc = 'bestseller_DESC',
   BrandAsc = 'brand_ASC',
   BrandDesc = 'brand_DESC',
   NameAsc = 'name_ASC',
@@ -1070,6 +1096,8 @@ export enum PhoneCasesProductOrder {
   NewDesc = 'new_DESC',
   PriceAsc = 'price_ASC',
   PriceDesc = 'price_DESC',
+  StyleAsc = 'style_ASC',
+  StyleDesc = 'style_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1542,7 +1570,7 @@ export type CfAuthorNestedFilter = {
 export type GetContentRandomProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetContentRandomProductsQuery = { __typename?: 'Query', phoneCasesProductCollection?: { __typename?: 'PhoneCasesProductCollection', items: Array<{ __typename?: 'PhoneCasesProduct', name?: string | null, price?: number | null, sys: { __typename?: 'Sys', id: string }, imagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null } | null> } | null } | null> } | null };
+export type GetContentRandomProductsQuery = { __typename?: 'Query', phoneCasesProductCollection?: { __typename?: 'PhoneCasesProductCollection', items: Array<{ __typename?: 'PhoneCasesProduct', name?: string | null, price?: number | null, new?: boolean | null, trending?: boolean | null, bestseller?: boolean | null, sys: { __typename?: 'Sys', id: string }, imagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null } | null> } | null } | null> } | null };
 
 export type GetContentfullProductsByTrendingQueryVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -1569,7 +1597,7 @@ export type GetContentfulCollectionsQueryVariables = Exact<{ [key: string]: neve
 export type GetContentfulCollectionsQuery = { __typename?: 'Query', phonearmomorCollectionsCollection?: { __typename?: 'PhonearmomorCollectionsCollection', items: Array<{ __typename?: 'PhonearmomorCollections', name?: string | null, slug?: string | null, sys: { __typename?: 'Sys', id: string }, collectionImage?: { __typename?: 'Asset', url?: string | null } | null } | null> } | null };
 
 
-export const GetContentRandomProductsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentRandomProducts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phoneCasesProductCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"OR"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"trending"},"value":{"kind":"BooleanValue","value":true}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"new"},"value":{"kind":"BooleanValue","value":true}}]}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"imagesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentRandomProductsQuery, GetContentRandomProductsQueryVariables>;
+export const GetContentRandomProductsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentRandomProducts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phoneCasesProductCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"new"}},{"kind":"Field","name":{"kind":"Name","value":"trending"}},{"kind":"Field","name":{"kind":"Name","value":"bestseller"}},{"kind":"Field","name":{"kind":"Name","value":"imagesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentRandomProductsQuery, GetContentRandomProductsQueryVariables>;
 export const GetContentfullProductsByTrendingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentfullProductsByTrending"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phoneCasesProductCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"trending"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"new"}},{"kind":"Field","name":{"kind":"Name","value":"trending"}},{"kind":"Field","name":{"kind":"Name","value":"imagesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentfullProductsByTrendingQuery, GetContentfullProductsByTrendingQueryVariables>;
 export const GetContentSingleProductDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentSingleProduct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phoneCasesProduct"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"imagesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentSingleProductQuery, GetContentSingleProductQueryVariables>;
 export const GetContentHomeBannersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetContentHomeBanners"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phonearmomorBannerCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"destantion"}},{"kind":"Field","name":{"kind":"Name","value":"buttonText"}},{"kind":"Field","name":{"kind":"Name","value":"banner"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentHomeBannersQuery, GetContentHomeBannersQueryVariables>;

@@ -32,7 +32,7 @@ export default async function Home() {
       {/* @ts-expect-error */}
       <Collections />
       <FeaturedProducts data={Trending_data} />
-      <section className="mt-20 h-96"></section>
+      <section className="mt-20 h-96">Shop our Instagram</section>
     </main>
   );
 }
