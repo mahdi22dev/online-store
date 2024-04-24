@@ -3,9 +3,14 @@ import { gql } from "@/__generated__";
 // products
 
 // product pagination
-export const GET_CONTENTFUL_PRODUCTS = gql(`
-query GetContentfullProducts {
-  phoneCasesProductCollection(limit: 10) {
+export const GET_CONTENTFUL_RANDOM_PRODUCTS = gql(`
+query GetContentRandomProducts {
+  phoneCasesProductCollection(limit: 100, where: {
+      OR: [
+        { trending: true }
+        { new: true }
+      ]
+    }) {
     items {
       sys {
         id

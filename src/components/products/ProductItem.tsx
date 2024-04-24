@@ -13,7 +13,13 @@ import { Badge } from "../ui/badge";
 import { DeviceSlector } from "./Deviceselector";
 import Link from "next/link";
 
-function ProductItem({ item }: { item: PhoneCasesProduct }) {
+function ProductItem({
+  item,
+  showBadge = true,
+}: {
+  item: PhoneCasesProduct;
+  showBadge?: boolean;
+}) {
   const [value, setValue] = React.useState("");
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
@@ -61,12 +67,15 @@ function ProductItem({ item }: { item: PhoneCasesProduct }) {
           add to cart
         </Button>
       </div>
-      <Badge
-        className="tex-white absolute left-1 top-1 rounded-full bg-yellow-500 hover:bg-opacity-80"
-        variant="default"
-      >
-        {item.trending && "Trending"}
-      </Badge>
+
+      {showBadge && item.trending && (
+        <Badge
+          className="tex-white absolute left-1 top-1 rounded-full bg-yellow-500 hover:bg-opacity-80"
+          variant="default"
+        >
+          Trending
+        </Badge>
+      )}
     </div>
   );
 }

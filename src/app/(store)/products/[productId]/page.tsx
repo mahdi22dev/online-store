@@ -12,16 +12,35 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { IoStarSharp } from "react-icons/io5";
 import AddToCartComponent from "../_components/AddToCartComponent";
-import { fetchSingleProduct } from "@/actions/products-actions";
+import {
+  fetchRandomProducts,
+  fetchSingleProduct,
+} from "@/actions/products-actions";
 import { notFound } from "next/navigation";
 import SectionTitle from "@/components/text/SectionTitle";
+import { getRandomProducts } from "@/lib/utils";
+import ProductItem from "@/components/products/ProductItem";
+import { PhoneCasesProduct } from "@/__generated__/graphql";
 
 export const dynamicParams = true;
+
 async function page({ params }: { params: { productId: string } }) {
   const product = await fetchSingleProduct(params.productId);
   if (!product.phoneCasesProduct) {
     return notFound();
   }
+
+  const randomProducts = await fetchRandomProducts();
+  if (!randomProducts.phoneCasesProductCollection?.items.length) {
+    return notFound();
+  }
+
+  const shuffleProducts = getRandomProducts(
+    randomProducts.phoneCasesProductCollection.items,
+    4,
+  );
+  console.log(shuffleProducts);
+
   const randomN = Math.floor(Math.random() * 20) + 1;
 
   return (
@@ -76,7 +95,11 @@ async function page({ params }: { params: { productId: string } }) {
       </div>
       <div className="mt-3">
         <SectionTitle text="YOU MAY ALSO LIKE" />
-        <div>random 4 products</div>
+        <div className="mx-auto mt-20 flex h-full min-h-[300px] w-full items-start gap-3">
+          {shuffleProducts.map((item: PhoneCasesProduct) => {
+            return <ProductItem item={item} showBadge />;
+          })}
+        </div>
       </div>
     </main>
   );
