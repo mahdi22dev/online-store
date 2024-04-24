@@ -35,6 +35,7 @@ function AddToCartComponent({ item }: { item: any }) {
           onClick: () => router.push("/cart"),
         },
       });
+      setQuantity(0);
     } catch (error) {
       toast.error("Error adding item to your cart");
     }

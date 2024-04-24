@@ -55,7 +55,7 @@ function ProductItem({
         </Link>
       </div>
       <div className="mt-1 flex flex-col items-center gap-3 ">
-        <p className="text-md px-3 text-[clamp(12px,3vw,25px)] capitalize ">
+        <p className="text-md px-3 text-[clamp(14px,3vw,20px)] capitalize ">
           {item.name}
         </p>
         <p className="p-1 text-sm capitalize">${item.price}</p>
