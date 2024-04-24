@@ -14,12 +14,12 @@ function TrendingProducts({
   data: GetContentfullProductsByTrendingQuery;
 }) {
   return (
-    <section className="mt-20 h-[60vh] ">
+    <section className="mt-20 ">
       <SectionTitle text="Trending Products" />
       <Swiper
         navigation={true}
         modules={[Navigation, Pagination]}
-        className="mySwiper mx-auto mt-20 flex h-full min-h-[300px] w-full items-start gap-3"
+        className="mySwiper mx-auto mt-20 flex w-full items-start gap-3"
         lazyPreloadPrevNext={1}
         breakpoints={{
           640: {

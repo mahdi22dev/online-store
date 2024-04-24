@@ -43,7 +43,7 @@ function ProductItem({
   };
 
   return (
-    <div className="relative h-full rounded-xl border-4 bg-slate-50">
+    <div className="relative rounded-xl border-4 bg-slate-50 py-5">
       <div className="h-2/3 w-full cursor-pointer p-5">
         <Link href={"/products/" + item.sys.id}>
           <LazyLoadImage
@@ -55,13 +55,15 @@ function ProductItem({
         </Link>
       </div>
       <div className="mt-1 flex flex-col items-center gap-3 ">
-        <p className="text-md capitalize">{item.name}</p>
-        <p className="text-sm capitalize ">${item.price}</p>
+        <p className="text-md px-3 text-[clamp(12px,3vw,25px)] capitalize ">
+          {item.name}
+        </p>
+        <p className="p-1 text-sm capitalize">${item.price}</p>
         <DeviceSlector setValue={setValue} value={value} />
         <Button
           onClick={() => addToCart(item.sys.id, item.price || 0)}
           variant={"default"}
-          className="cursor-pointer disabled:cursor-not-allowed"
+          className=" cursor-pointer disabled:cursor-not-allowed"
           disabled={!value ? true : false}
         >
           add to cart

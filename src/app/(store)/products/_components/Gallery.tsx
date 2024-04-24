@@ -41,7 +41,7 @@ export function Gallery({
           {Images?.map((img, index) => (
             <CarouselItem key={index}>
               <Card>
-                <CardContent className="min-h-[700px] p-5">
+                <CardContent className="p-5 md:min-h-[700px]">
                   <LazyLoadImage
                     alt={"iPhone 15 pro"}
                     src={`${img?.url}?w=600&h=600&fm=webp&q=80`}

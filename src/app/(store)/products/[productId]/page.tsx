@@ -44,7 +44,7 @@ async function page({ params }: { params: { productId: string } }) {
   const randomN = Math.floor(Math.random() * 20) + 1;
 
   return (
-    <main className="min-h-screen w-full p-5 md:px-24 md:py-10">
+    <main className="min-h-screen w-full p-5 md:px-20 md:py-10">
       {product.phoneCasesProduct?.name && (
         <BreadcrumbComponent title={product.phoneCasesProduct?.name} />
       )}
@@ -93,9 +93,9 @@ async function page({ params }: { params: { productId: string } }) {
           </div>
         </div>
       </div>
-      <div className="mt-3">
+      <div className="mt-20">
         <SectionTitle text="YOU MAY ALSO LIKE" />
-        <div className="mx-auto mt-20 flex h-full min-h-[300px] w-full items-start gap-3">
+        <div className="mx-auto mt-20 grid grid-cols-1 items-start gap-5 md:grid-cols-3 lg:grid-cols-4">
           {shuffleProducts.map((item: PhoneCasesProduct) => {
             return <ProductItem item={item} showBadge />;
           })}
