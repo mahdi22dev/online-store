@@ -5,7 +5,7 @@ import { gql } from "@/__generated__";
 // product pagination
 export const GET_CONTENTFUL_RANDOM_PRODUCTS = gql(`
 query GetContentRandomProducts {
-  phoneCasesProductCollection(limit: 100) {
+  phoneCasesProductCollection(limit: 12) {
     items {
       sys {
         id

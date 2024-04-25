@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\nquery GetContentRandomProducts {\n  phoneCasesProductCollection(limit: 100) {\n    items {\n      sys {\n        id\n      }\n      name\n      price\n      new\n      trending\n      bestseller\n      imagesCollection {\n        items {\n          url\n        }\n      }\n    }\n  }\n}\n": types.GetContentRandomProductsDocument,
+    "\nquery GetContentRandomProducts {\n  phoneCasesProductCollection(limit: 12) {\n    items {\n      sys {\n        id\n      }\n      name\n      price\n      new\n      trending\n      bestseller\n      imagesCollection {\n        items {\n          url\n        }\n      }\n    }\n  }\n}\n": types.GetContentRandomProductsDocument,
     "\nquery GetContentfullProductsByTrending($limit: Int!) {\n  phoneCasesProductCollection(limit: $limit, where: {trending : true}) {\n    items {\n      sys {\n        id\n      }\n      name\n      price\n      new\n      trending\n      imagesCollection {\n        items {\n          url\n        }\n      }\n    }\n  }\n}\n": types.GetContentfullProductsByTrendingDocument,
     "\nquery GetContentSingleProduct($id: String!) {\n  phoneCasesProduct(id: $id) {\n    sys {\n        id\n      }\n    name\n    price\n    imagesCollection {\n      items {\n        url\n      }\n    }\n  }\n}\n": types.GetContentSingleProductDocument,
     "\nquery GetContentHomeBanners {\n  phonearmomorBannerCollection {\n    items {\n      sys {\n        id\n      }\n      title\n      destantion\n      buttonText\n      banner{\n        url\n      }\n    }\n  }\n}\n": types.GetContentHomeBannersDocument,
@@ -37,7 +37,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\nquery GetContentRandomProducts {\n  phoneCasesProductCollection(limit: 100) {\n    items {\n      sys {\n        id\n      }\n      name\n      price\n      new\n      trending\n      bestseller\n      imagesCollection {\n        items {\n          url\n        }\n      }\n    }\n  }\n}\n"): (typeof documents)["\nquery GetContentRandomProducts {\n  phoneCasesProductCollection(limit: 100) {\n    items {\n      sys {\n        id\n      }\n      name\n      price\n      new\n      trending\n      bestseller\n      imagesCollection {\n        items {\n          url\n        }\n      }\n    }\n  }\n}\n"];
+export function gql(source: "\nquery GetContentRandomProducts {\n  phoneCasesProductCollection(limit: 12) {\n    items {\n      sys {\n        id\n      }\n      name\n      price\n      new\n      trending\n      bestseller\n      imagesCollection {\n        items {\n          url\n        }\n      }\n    }\n  }\n}\n"): (typeof documents)["\nquery GetContentRandomProducts {\n  phoneCasesProductCollection(limit: 12) {\n    items {\n      sys {\n        id\n      }\n      name\n      price\n      new\n      trending\n      bestseller\n      imagesCollection {\n        items {\n          url\n        }\n      }\n    }\n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
