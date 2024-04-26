@@ -29,8 +29,6 @@ export const getProductsLength = async () => {
 
     return data;
   } catch (error: any) {
-    console.log(error.message);
-
     throw new Error("Error Fetching Products");
   }
 };

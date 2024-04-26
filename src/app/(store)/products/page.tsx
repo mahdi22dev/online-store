@@ -23,6 +23,7 @@ import { SlashIcon } from "@radix-ui/react-icons";
 import Filters from "./_components/Filters";
 import { PaginationComponent } from "./_components/Pagination";
 import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Products() {
   const [loading, setLoading] = useState(true);
@@ -45,21 +46,31 @@ export default function Products() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const length = await getProductsLength();
-      console.log(length.phoneCasesProductCollection?.items.length);
-
       const data = await fetchAllProducts(skip);
       if (data) {
         setProductsData(data);
       }
-      if (length) {
-        setProductLength(length);
-      }
     } catch (error) {
+      toast.error("something wrong happend please try again later");
     } finally {
       setLoading(false);
     }
   };
+
+  const getlength = async () => {
+    try {
+      const length = await getProductsLength();
+      if (length) {
+        setProductLength(length);
+      }
+    } catch (error) {
+      toast.error("something wrong happend please try again later");
+    }
+  };
+
+  useEffect(() => {
+    getlength();
+  }, []);
 
   useEffect(() => {
     fetchProducts();

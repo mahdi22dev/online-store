@@ -39,7 +39,6 @@ async function page({ params }: { params: { productId: string } }) {
     randomProducts.phoneCasesProductCollection.items,
     4,
   );
-  console.log(shuffleProducts);
 
   const randomN = Math.floor(Math.random() * 20) + 1;
 
