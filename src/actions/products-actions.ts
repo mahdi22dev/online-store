@@ -2,6 +2,7 @@
 
 import { getClient } from "@/lib/apolloClient";
 import {
+  GET_CONTENTFUL_FULL_PRODUCTS,
   GET_CONTENTFUL_PRODUCTS_TOTAL,
   GET_CONTENTFUL_RANDOM_PRODUCTS,
   GET_CONTENTFUL_SINGLE_PRODUCT,
@@ -11,8 +12,19 @@ import {
 export const fetchAllProducts = async (skip: number) => {
   try {
     const { data } = await getClient().query({
-      query: GET_CONTENTFUL_RANDOM_PRODUCTS,
+      query: GET_CONTENTFUL_FULL_PRODUCTS,
       variables: { skip: skip },
+    });
+
+    return data;
+  } catch (error) {
+    throw new Error("Error Fetching Products");
+  }
+};
+export const fetchRandomProducts = async () => {
+  try {
+    const { data } = await getClient().query({
+      query: GET_CONTENTFUL_RANDOM_PRODUCTS,
     });
 
     return data;
@@ -33,21 +45,9 @@ export const getProductsLength = async () => {
   }
 };
 
-export const fetchRandomProducts = async () => {
-  try {
-    const { data } = await getClient().query({
-      query: GET_CONTENTFUL_RANDOM_PRODUCTS,
-    });
-
-    return data;
-  } catch (error) {
-    throw new Error("Error Fetching Products");
-  }
-};
-
 export const fetchSingleProduct = async (id: string) => {
   try {
-    const { data, error } = await getClient().query({
+    const { data } = await getClient().query({
       query: GET_CONTENTFUL_SINGLE_PRODUCT,
       variables: { id: id },
     });

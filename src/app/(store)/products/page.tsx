@@ -55,7 +55,7 @@ export default function Products() {
     } catch (error) {
       toast.error("something wrong happend please try again later");
     } finally {
-      setLoading(true);
+      setLoading(false);
     }
   };
 

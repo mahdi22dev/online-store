@@ -3,8 +3,8 @@ import { gql } from "@/__generated__";
 // products
 
 // product pagination
-export const GET_CONTENTFUL_RANDOM_PRODUCTS = gql(`
-query GetContentRandomProducts($skip:Int!) {
+export const GET_CONTENTFUL_FULL_PRODUCTS = gql(`
+query GetContentFullProducts($skip:Int!) {
   phoneCasesProductCollection(limit: 12,skip:$skip) {
     items {
       sys {
@@ -25,6 +25,27 @@ query GetContentRandomProducts($skip:Int!) {
 }
 `);
 
+export const GET_CONTENTFUL_RANDOM_PRODUCTS = gql(`
+query GetContentRandomProducts {
+  phoneCasesProductCollection(limit: 100) {
+    items {
+      sys {
+        id
+      }
+      name
+      price
+      new
+      trending
+      bestseller
+      imagesCollection {
+        items {
+          url
+        }
+      }
+    }
+  }
+}
+`);
 export const GET_CONTENTFUL_PRODUCTS_TOTAL = gql(`
 query GetContentProductsTotal {
   phoneCasesProductCollection(limit:10000) {
