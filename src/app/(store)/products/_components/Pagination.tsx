@@ -19,6 +19,7 @@ export function PaginationComponent({ itemsLength }: { itemsLength: number }) {
 
   const itemsPerPage = 12;
   const totalPages = Math.ceil(itemsLength / itemsPerPage);
+  console.log(totalPages);
 
   useEffect(() => {
     setCurrentPage(Number(searchParams.get("page") || 1));

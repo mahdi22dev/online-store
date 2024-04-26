@@ -4,8 +4,8 @@ import { gql } from "@/__generated__";
 
 // product pagination
 export const GET_CONTENTFUL_RANDOM_PRODUCTS = gql(`
-query GetContentRandomProducts {
-  phoneCasesProductCollection(limit: 12) {
+query GetContentRandomProducts($skip:Int!) {
+  phoneCasesProductCollection(limit: 12,skip:$skip) {
     items {
       sys {
         id
@@ -19,6 +19,18 @@ query GetContentRandomProducts {
         items {
           url
         }
+      }
+    }
+  }
+}
+`);
+
+export const GET_CONTENTFUL_PRODUCTS_TOTAL = gql(`
+query GetContentProductsTotal {
+  phoneCasesProductCollection(limit:10000) {
+    items {
+      sys {
+        id
       }
     }
   }

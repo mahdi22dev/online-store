@@ -1,8 +1,12 @@
 "use client";
-import { fetchAllProducts } from "@/actions/products-actions";
+import {
+  fetchAllProducts,
+  getProductsLength,
+} from "@/actions/products-actions";
 import { useEffect, useState } from "react";
 import Loading from "../cart/_components/Loading";
 import {
+  GetContentProductsTotalQuery,
   GetContentRandomProductsQuery,
   PhoneCasesProduct,
 } from "@/__generated__/graphql";
@@ -18,18 +22,38 @@ import {
 import { SlashIcon } from "@radix-ui/react-icons";
 import Filters from "./_components/Filters";
 import { PaginationComponent } from "./_components/Pagination";
+import { useSearchParams } from "next/navigation";
 
 export default function Products() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [productsData, setProductsData] =
     useState<GetContentRandomProductsQuery>();
+  const [productsLength, setProductLength] =
+    useState<GetContentProductsTotalQuery>();
+  const searchParams = useSearchParams();
+  const pages = Number(searchParams.get("page"));
+  let skip = 0;
+  if (pages == 0) {
+    skip = 0;
+  }
+  if (pages == 1) {
+    skip = 0;
+  } else {
+    skip = 12 * (pages - 1);
+  }
 
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const data = await fetchAllProducts();
+      const length = await getProductsLength();
+      console.log(length.phoneCasesProductCollection?.items.length);
+
+      const data = await fetchAllProducts(skip);
       if (data) {
         setProductsData(data);
+      }
+      if (length) {
+        setProductLength(length);
       }
     } catch (error) {
     } finally {
@@ -39,7 +63,7 @@ export default function Products() {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [pages]);
 
   if (loading) {
     return (
@@ -64,7 +88,11 @@ export default function Products() {
           },
         )}
       </div>
-      <PaginationComponent itemsLength={200} />
+      <PaginationComponent
+        itemsLength={
+          productsLength?.phoneCasesProductCollection?.items.length || 0
+        }
+      />
     </main>
   );
 }
