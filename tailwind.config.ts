@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        xl: "1280px",
+        "2xl": "1536px",
+      },
       fontFamily: {
         poppins: ["var(--font-poppins)", "sans-serif"],
       },

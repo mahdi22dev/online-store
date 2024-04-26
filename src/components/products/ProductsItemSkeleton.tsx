@@ -1,13 +1,12 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function SkeletonDemo() {
+export function ProductsItemSkeleton() {
   return (
-    <div className="flex items-center space-x-4">
-      <Skeleton className="h-12 w-12 rounded-full" />
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-[250px]" />
-        <Skeleton className="h-4 w-[200px]" />
-      </div>
+    <div className="flex  h-full flex-col items-center gap-3 space-x-4 rounded-xl border-4 bg-white p-5 hover:shadow-md">
+      <Skeleton className="h-96 w-full p-5" />
+      <Skeleton className="h-4 w-[90%]" />
+      <Skeleton className="h-8 w-[90%]" />
+      <Skeleton className="h-12 w-[90%]" />
     </div>
   );
 }
