@@ -52,7 +52,10 @@ export default function Products() {
     <main className="w-full p-12 md:px-12 md:py-5 lg:px-28">
       <BreadcrumbComponent />
       <SectionTitle text="all products" />
-      <Filters />
+      <div className="mt-10 flex items-center  justify-between">
+        <Filters />
+        sort by
+      </div>
       <div className="mx-auto mb-20 mt-20 grid grid-cols-1 items-start gap-5 md:grid-cols-3 lg:grid-cols-4">
         {productsData?.phoneCasesProductCollection?.items.map(
           //@ts-expect-error
