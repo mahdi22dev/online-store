@@ -25,6 +25,7 @@ import { PaginationComponent } from "./_components/Pagination";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { ProductsItemSkeleton } from "@/components/products/ProductsItemSkeleton";
+import { Sort } from "./_components/Sort";
 
 export default function Products() {
   const [loading, setLoading] = useState(true);
@@ -34,7 +35,7 @@ export default function Products() {
     useState<GetContentProductsTotalQuery>();
   const searchParams = useSearchParams();
   const pages = Number(searchParams.get("page"));
-
+  const [value, setValue] = useState("Featured");
   let skip = 0;
   if (pages == 0) {
     skip = 0;
@@ -84,7 +85,10 @@ export default function Products() {
       <SectionTitle text="all products" />
       <div className="mt-10 flex items-center  justify-between">
         <Filters />
-        sort by
+        <div className="flex items-center gap-5">
+          <p className="opacity-50">Sort By</p>
+          <Sort value={value} setValue={setValue} />
+        </div>
       </div>
       <div className="mx-auto mb-20 mt-20 grid grid-cols-1 items-start gap-5 md:grid-cols-3 lg:grid-cols-4">
         {loading

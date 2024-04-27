@@ -71,11 +71,7 @@ function AddToCartComponent({ item }: { item: any }) {
       />
       <div className="flex flex-col gap-2">
         <p className="text-xl uppercase">Size:</p>
-        <DeviceSlector
-          setValue={setValue}
-          value={value}
-          selectedValue="poor phone"
-        />
+        <DeviceSlector setValue={setValue} value={value} />
       </div>
       <div className="flex flex-col gap-2">
         <Button

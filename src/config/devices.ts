@@ -29,3 +29,22 @@ export const devices = [
     label: "iPhone 15 Pro",
   },
 ];
+
+export const Sorts = [
+  {
+    value: "Featured",
+    label: "Featured",
+  },
+  {
+    value: "Best Selling",
+    label: "Best Selling",
+  },
+  {
+    value: "Price: High to Low ",
+    label: "Price: High to Low",
+  },
+  {
+    value: "Price: Low to High",
+    label: "Price: Low to High",
+  },
+];

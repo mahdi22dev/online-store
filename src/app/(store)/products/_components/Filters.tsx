@@ -7,7 +7,8 @@ function Filters() {
   return (
     <Sheet>
       <SheetTrigger className="flex items-center justify-between gap-2">
-        <CgMenuGridR className="cursor-pointer text-4xl" /> Show filters
+        <CgMenuGridR className="cursor-pointer text-4xl" />{" "}
+        <p className="opacity-50">Show Filters</p>
       </SheetTrigger>
       <SheetContent side={"left"} className="w-3/4 p-0">
         <p className="mt-5 px-5 text-xl font-medium uppercase">Filters</p>
