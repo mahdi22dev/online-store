@@ -4,7 +4,6 @@ import {
   getProductsLength,
 } from "@/actions/products-actions";
 import { useEffect, useState } from "react";
-import Loading from "../cart/_components/Loading";
 import {
   GetContentProductsTotalQuery,
   GetContentRandomProductsQuery,
