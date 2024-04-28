@@ -8,18 +8,26 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
 export function PaginationComponent({ itemsLength }: { itemsLength: number }) {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [currentPage, setCurrentPage] = useState(
     Number(searchParams.get("page") || 1),
   );
 
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams],
+  );
   const itemsPerPage = 12;
   const totalPages = Math.ceil(itemsLength / itemsPerPage);
-  console.log(totalPages);
 
   useEffect(() => {
     setCurrentPage(Number(searchParams.get("page") || 1));
@@ -48,7 +56,7 @@ export function PaginationComponent({ itemsLength }: { itemsLength: number }) {
       paginationItems.push(
         <PaginationItem key={i}>
           <PaginationLink
-            href={`/products?page=${i}`}
+            href={pathname + "?" + createQueryString("page", String(i))}
             isActive={currentPage === i}
           >
             {i}

@@ -36,11 +36,15 @@ export const Sorts = [
     label: "Featured",
   },
   {
+    value: "Trending",
+    label: "Trending",
+  },
+  {
     value: "Best Selling",
     label: "Best Selling",
   },
   {
-    value: "Price: High to Low ",
+    value: "Price: High to Low",
     label: "Price: High to Low",
   },
   {

@@ -44,13 +44,14 @@ function ProductItem({
 
   return (
     <div className="relative rounded-xl border-4 bg-white py-5 hover:shadow-md">
-      <div className="h-2/3 w-full cursor-pointer p-5">
+      <div className="h-2/3 min-h-[60%] w-full cursor-pointer p-5">
         <Link href={"/products/" + item.sys.id}>
           <LazyLoadImage
             alt={item.name || "iPhone 15 pro"}
             src={`${item.imagesCollection?.items[0]?.url}?w=500&h=500&fm=webp&q=80`}
             className="duration-350 h-full w-full object-cover"
             threshold={10}
+            loading="lazy"
           />
         </Link>
       </div>

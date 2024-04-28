@@ -9,13 +9,23 @@ import {
 } from "@/lib/queries";
 
 // this action for products pagination need to coded first
-export const fetchAllProducts = async (skip: number) => {
+export const fetchAllProducts = async (
+  skip: number,
+  sort?: string,
+  filters?: string,
+) => {
   try {
-    const { data } = await getClient().query({
-      query: GET_CONTENTFUL_FULL_PRODUCTS,
-      variables: { skip: skip },
-    });
-
+    if (sort?.toLowerCase() == "featured") {
+      const { data } = await getClient().query({
+        query: GET_CONTENTFUL_FULL_PRODUCTS,
+        variables: { skip: skip, trending: true, bestseller: true },
+      });
+    } else if (sort?.toLowerCase() == "best selling") {
+      const { data } = await getClient().query({
+        query: GET_CONTENTFUL_FULL_PRODUCTS,
+        variables: { skip: skip },
+      });
+    }
     return data;
   } catch (error) {
     throw new Error("Error Fetching Products");

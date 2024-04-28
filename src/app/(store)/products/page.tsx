@@ -3,7 +3,7 @@ import {
   fetchAllProducts,
   getProductsLength,
 } from "@/actions/products-actions";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   GetContentProductsTotalQuery,
   GetContentRandomProductsQuery,
@@ -34,12 +34,13 @@ export default function Products() {
     useState<GetContentProductsTotalQuery>();
   const searchParams = useSearchParams();
   const pages = Number(searchParams.get("page"));
-  const [value, setValue] = useState("Featured");
+
+  const [sort_by, setSort_by_Value] = useState(
+    searchParams.get("sort_by") || "Featured",
+  );
+
   let skip = 0;
-  if (pages == 0) {
-    skip = 0;
-  }
-  if (pages == 1) {
+  if (pages == 0 || pages == 1) {
     skip = 0;
   } else {
     skip = 12 * (pages - 1);
@@ -48,7 +49,8 @@ export default function Products() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const data = await fetchAllProducts(skip);
+      getlength();
+      const data = await fetchAllProducts(skip, sort_by, "");
       if (data) {
         setProductsData(data);
       }
@@ -62,6 +64,7 @@ export default function Products() {
   const getlength = async () => {
     try {
       const length = await getProductsLength();
+      console.log("new length: ", length);
       if (length) {
         setProductLength(length);
       }
@@ -70,13 +73,13 @@ export default function Products() {
     }
   };
 
-  useEffect(() => {
-    getlength();
-  }, []);
+  // useEffect(() => {
+  //   getlength();
+  // }, []);
 
   useEffect(() => {
     fetchProducts();
-  }, [pages]);
+  }, [searchParams]);
 
   return (
     <main className="w-full p-12 md:px-12 md:py-5 lg:px-14 xl:px-28">
@@ -86,7 +89,7 @@ export default function Products() {
         <Filters />
         <div className="flex items-center gap-5">
           <p className="opacity-50">Sort By</p>
-          <Sort value={value} setValue={setValue} />
+          <Sort value={sort_by} setValue={setSort_by_Value} />
         </div>
       </div>
       <div className="mx-auto mb-20 mt-20 grid grid-cols-1 items-start gap-5 md:grid-cols-3 lg:grid-cols-4">
