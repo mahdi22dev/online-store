@@ -19,7 +19,7 @@ export default async function Home() {
   const { data: Trending_data, error: getting_Trendings_error } =
     await getClient().query({
       query: GET_CONTENTFUL_PRODUCTS_BY_trending,
-      variables: { limit: 10 },
+      variables: { limit: 10, skip: 0 },
     });
 
   if (getting_Trendings_error) {
