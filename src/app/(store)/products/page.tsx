@@ -85,9 +85,9 @@ export default function Products() {
     <main className="w-full p-12 md:px-12 md:py-5 lg:px-14 xl:px-28">
       <BreadcrumbComponent />
       <SectionTitle text="all products" />
-      <div className="mt-10 flex items-center  justify-between">
+      <div className="mt-10 flex items-center justify-between">
         <Filters />
-        <div className="flex items-center gap-5">
+        <div className="flex flex-col items-center gap-2 md:flex-row md:gap-5 ">
           <p className="opacity-50">Sort By</p>
           <Sort value={sort_by} setValue={setSort_by_Value} />
         </div>

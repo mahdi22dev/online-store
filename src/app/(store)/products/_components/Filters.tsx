@@ -6,7 +6,7 @@ import { FilterOptions } from "./FilterOptions";
 function Filters() {
   return (
     <Sheet>
-      <SheetTrigger className="flex items-center justify-between gap-2">
+      <SheetTrigger className="flex flex-col-reverse items-center gap-2 md:flex-row md:gap-5">
         <CgMenuGridR className="cursor-pointer text-4xl" />{" "}
         <p className="opacity-50">Show Filters</p>
       </SheetTrigger>

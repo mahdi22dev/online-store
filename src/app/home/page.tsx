@@ -1,11 +1,9 @@
 import { getClient } from "@/lib/apolloClient";
-import {
-  GET_CONTENTFUL_HOME_BANNERS,
-  GET_CONTENTFUL_PRODUCTS_BY_trending,
-} from "@/lib/queries";
+import { GET_CONTENTFUL_HOME_BANNERS } from "@/lib/queries";
 import Banner from "./_components/Banner";
 import Collections from "./_components/Collections";
 import FeaturedProducts from "@/app/home/_components/TrendingProducts";
+import { GET_CONTENTFUL_PRODUCTS_BY_TRENDING } from "@/lib/queries/products";
 
 export default async function Home() {
   const { data: Banners_Data, error: getting_banners_error } =
@@ -18,7 +16,7 @@ export default async function Home() {
 
   const { data: Trending_data, error: getting_Trendings_error } =
     await getClient().query({
-      query: GET_CONTENTFUL_PRODUCTS_BY_trending,
+      query: GET_CONTENTFUL_PRODUCTS_BY_TRENDING,
       variables: { limit: 10, skip: 0 },
     });
 
