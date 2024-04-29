@@ -63,38 +63,35 @@ export function Sort({
           <CommandGroup>
             <CommandList data-disabled="true">
               {Sorts.map((sort) => (
-                <CommandItem
-                  key={sort.value}
-                  value={sort.value}
-                  onSelect={(currentValue) => {
-                    setValue(
-                      currentValue.toLowerCase() === value.toLowerCase()
-                        ? ""
-                        : currentValue,
-                    );
-                    setOpen(false);
-                  }}
+                <Link
+                  href={
+                    pathname +
+                    "?" +
+                    createQueryString("sort_by", sort.label.toLocaleLowerCase())
+                  }
                 >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === sort.value ? "opacity-100" : "opacity-0",
-                    )}
-                  />
-                  <Link
-                    href={
-                      pathname +
-                      "?" +
-                      createQueryString(
-                        "sort_by",
-                        sort.label.toLocaleLowerCase(),
-                      )
-                    }
+                  <CommandItem
+                    key={sort.value}
+                    value={sort.value}
+                    className="cursor-pointer"
+                    onSelect={(currentValue) => {
+                      setValue(
+                        currentValue.toLowerCase() === value.toLowerCase()
+                          ? ""
+                          : currentValue,
+                      );
+                      setOpen(false);
+                    }}
                   >
-                    {" "}
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4",
+                        value === sort.value ? "opacity-100" : "opacity-0",
+                      )}
+                    />
                     {sort.label}
-                  </Link>
-                </CommandItem>
+                  </CommandItem>
+                </Link>
               ))}
             </CommandList>
           </CommandGroup>
