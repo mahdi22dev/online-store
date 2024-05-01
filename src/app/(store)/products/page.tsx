@@ -34,10 +34,10 @@ export default function Products() {
     useState<GetContentProductsTotalQuery>();
   const searchParams = useSearchParams();
   const pages = Number(searchParams.get("page"));
-
   const [sort_by, setSort_by_Value] = useState(
     searchParams.get("sort_by") || "Featured",
   );
+  const [selectedStyle, setSelectedStyle] = useState("");
 
   let skip = 0;
   if (pages == 0 || pages == 1) {
@@ -50,7 +50,7 @@ export default function Products() {
     try {
       setLoading(true);
       getlength();
-      const data = await fetchAllProducts(skip, sort_by, "");
+      const data = await fetchAllProducts(skip, sort_by, selectedStyle);
       if (data) {
         setProductsData(data);
       }
@@ -63,7 +63,7 @@ export default function Products() {
 
   const getlength = async () => {
     try {
-      const length = await getProductsLength(sort_by);
+      const length = await getProductsLength(sort_by, selectedStyle);
       console.log(
         "new length: ",
         length?.phoneCasesProductCollection?.items.length,
@@ -76,20 +76,23 @@ export default function Products() {
     }
   };
 
-  // useEffect(() => {
-  //   getlength();
-  // }, []);
-
   useEffect(() => {
     fetchProducts();
   }, [searchParams]);
+
+  useEffect(() => {
+    console.log(selectedStyle);
+  }, [selectedStyle]);
 
   return (
     <main className="w-full p-12 md:px-12 md:py-5 lg:px-14 xl:px-28">
       <BreadcrumbComponent />
       <SectionTitle text="all products" />
       <div className="mt-10 flex items-center justify-between">
-        <Filters />
+        <Filters
+          selectedStyle={selectedStyle}
+          setSelectedStyle={setSelectedStyle}
+        />
         <div className="flex flex-col items-center gap-2 md:flex-row md:gap-5 ">
           <p className="opacity-50">Sort By</p>
           <Sort value={sort_by} setValue={setSort_by_Value} />

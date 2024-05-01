@@ -19,40 +19,40 @@ import {
 // this action for products pagination need to coded first
 export const fetchAllProducts = async (
   skip: number,
-  sort?: string,
-  filters?: string,
+  sort: string,
+  filters: string,
 ) => {
   let data;
   try {
     if (sort?.toLowerCase() == "featured") {
       data = await getClient().query({
         query: GET_CONTENTFUL_FULL_PRODUCTS,
-        variables: { skip: skip, style: "" },
+        variables: { skip: skip, style: filters },
       });
     } else if (sort?.toLowerCase() == "best selling") {
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_BY_BESTSELLER,
-        variables: { limit: 12, skip: skip, style: "" },
+        variables: { limit: 12, skip: skip, style: filters },
       });
     } else if (sort?.toLowerCase() == "trending") {
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_BY_TRENDING,
-        variables: { limit: 12, skip: skip, style: "" },
+        variables: { limit: 12, skip: skip, style: filters },
       });
     } else if (sort?.toLowerCase() == "price: high to low") {
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_BY_HIGH_TO_LOW,
-        variables: { limit: 12, skip: skip, style: "" },
+        variables: { limit: 12, skip: skip, style: filters },
       });
     } else if (sort?.toLowerCase() == "price: low to high") {
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_BY_LOW_TO_HIGH,
-        variables: { limit: 12, skip: skip, style: "" },
+        variables: { limit: 12, skip: skip, style: filters },
       });
     } else {
       data = await getClient().query({
         query: GET_CONTENTFUL_FULL_PRODUCTS,
-        variables: { skip: skip, style: "" },
+        variables: { skip: skip, style: filters },
       });
     }
     return data?.data;
@@ -61,28 +61,28 @@ export const fetchAllProducts = async (
   }
 };
 
-export const getProductsLength = async (sort?: string, filters?: string) => {
+export const getProductsLength = async (sort: string, filters: string) => {
   try {
     let data;
     if (sort?.toLowerCase() == "featured") {
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_TOTAL,
-        variables: { style: "" },
+        variables: { style: filters },
       });
     } else if (sort?.toLowerCase() == "best selling") {
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_BY_TRENDING_TOTAL,
-        variables: { style: "" },
+        variables: { style: filters },
       });
     } else if (sort?.toLowerCase() == "trending") {
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_BY_BESTSELLER_TOTAL,
-        variables: { style: "" },
+        variables: { style: filters },
       });
     } else {
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_TOTAL,
-        variables: { style: "" },
+        variables: { style: filters },
       });
     }
     return data?.data;
