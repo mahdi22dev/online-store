@@ -40,8 +40,6 @@ export const fetchAllProducts = async (
         variables: { limit: 12, skip: skip, style: "" },
       });
     } else if (sort?.toLowerCase() == "price: high to low") {
-      console.log("high to low");
-
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_BY_HIGH_TO_LOW,
         variables: { limit: 12, skip: skip, style: "" },
