@@ -22,8 +22,33 @@ query GetContentRandomProducts {
 }
 `);
 export const GET_CONTENTFUL_PRODUCTS_TOTAL = gql(`
-query GetContentProductsTotal {
-  phoneCasesProductCollection(limit:10000) {
+query GetContentProductsTotal($style:String!) {
+  phoneCasesProductCollection(limit:10000,where:{OR: [{style_contains:$style}]}) {
+    items {
+      sys {
+        id
+      }
+    }
+  }
+}
+`);
+
+export const GET_CONTENTFUL_PRODUCTS_BY_TRENDING_TOTAL = gql(`
+query GetContentfullProductsByTrendingTotal($style:String!) {
+  phoneCasesProductCollection(limit:10000 ,where:{AND: [{style_contains:$style}, {trending: true}]}) {
+    items {
+      sys {
+        id
+      }
+  
+    }
+  }
+}
+`);
+
+export const GET_CONTENTFUL_PRODUCTS_BY_BESTSELLER_TOTAL = gql(`
+query GetContentfullProductsByBestsellerTotal($style:String!) {
+  phoneCasesProductCollection(limit: 10000,where:{AND: [{style_contains:$style}, {bestseller: true}]}) {
     items {
       sys {
         id

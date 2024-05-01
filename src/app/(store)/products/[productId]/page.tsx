@@ -30,19 +30,20 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  return {
-    title: "big title",
-    openGraph: {
-      images: [
-        "https://images.ctfassets.net/xp3ehvbs6dy6/6xinZ0n52In2Ke8afv3vwT/8549fe69cd4c8353ae67f09ad055d889/JacquardBearPersonalisedMagSafeiPhoneCase.jpg?w=500&h=500&fm=webp&q=80",
-      ],
-    },
-  };
-}
+// export async function generateMetadata(
+//   { params, searchParams }: Props,
+//   parent: ResolvingMetadata,
+// ): Promise<Metadata> {
+//   return {
+//     title: "big title",
+//     description: "bla bla bla",
+//     openGraph: {
+//       images: [
+//         "https://images.ctfassets.net/xp3ehvbs6dy6/6xinZ0n52In2Ke8afv3vwT/8549fe69cd4c8353ae67f09ad055d889/JacquardBearPersonalisedMagSafeiPhoneCase.jpg?w=250&h=250&fm=webp&q=80",
+//       ],
+//     },
+//   };
+// }
 
 async function page({ params }: { params: { productId: string } }) {
   const product = await fetchSingleProduct(params.productId);

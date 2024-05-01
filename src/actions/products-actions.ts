@@ -2,13 +2,17 @@
 
 import { getClient } from "@/lib/apolloClient";
 import {
+  GET_CONTENTFUL_PRODUCTS_BY_BESTSELLER_TOTAL,
+  GET_CONTENTFUL_PRODUCTS_BY_TRENDING_TOTAL,
   GET_CONTENTFUL_PRODUCTS_TOTAL,
   GET_CONTENTFUL_RANDOM_PRODUCTS,
   GET_CONTENTFUL_SINGLE_PRODUCT,
-} from "@/lib/queries";
+} from "@/lib/queries/queries";
 import {
   GET_CONTENTFUL_FULL_PRODUCTS,
   GET_CONTENTFUL_PRODUCTS_BY_BESTSELLER,
+  GET_CONTENTFUL_PRODUCTS_BY_HIGH_TO_LOW,
+  GET_CONTENTFUL_PRODUCTS_BY_LOW_TO_HIGH,
   GET_CONTENTFUL_PRODUCTS_BY_TRENDING,
 } from "@/lib/queries/products";
 
@@ -23,20 +27,34 @@ export const fetchAllProducts = async (
     if (sort?.toLowerCase() == "featured") {
       data = await getClient().query({
         query: GET_CONTENTFUL_FULL_PRODUCTS,
-        variables: { skip: skip },
+        variables: { skip: skip, style: "" },
       });
     } else if (sort?.toLowerCase() == "best selling") {
-      console.log("is best selling");
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_BY_BESTSELLER,
-        variables: { limit: 12, skip: skip },
+        variables: { limit: 12, skip: skip, style: "" },
       });
     } else if (sort?.toLowerCase() == "trending") {
-      console.log("is trending");
-
       data = await getClient().query({
         query: GET_CONTENTFUL_PRODUCTS_BY_TRENDING,
-        variables: { limit: 12, skip: skip },
+        variables: { limit: 12, skip: skip, style: "" },
+      });
+    } else if (sort?.toLowerCase() == "price: high to low") {
+      console.log("high to low");
+
+      data = await getClient().query({
+        query: GET_CONTENTFUL_PRODUCTS_BY_HIGH_TO_LOW,
+        variables: { limit: 12, skip: skip, style: "" },
+      });
+    } else if (sort?.toLowerCase() == "price: low to high") {
+      data = await getClient().query({
+        query: GET_CONTENTFUL_PRODUCTS_BY_LOW_TO_HIGH,
+        variables: { limit: 12, skip: skip, style: "" },
+      });
+    } else {
+      data = await getClient().query({
+        query: GET_CONTENTFUL_FULL_PRODUCTS,
+        variables: { skip: skip, style: "" },
       });
     }
     return data?.data;
@@ -44,6 +62,37 @@ export const fetchAllProducts = async (
     throw new Error("Error Fetching Products");
   }
 };
+
+export const getProductsLength = async (sort?: string, filters?: string) => {
+  try {
+    let data;
+    if (sort?.toLowerCase() == "featured") {
+      data = await getClient().query({
+        query: GET_CONTENTFUL_PRODUCTS_TOTAL,
+        variables: { style: "" },
+      });
+    } else if (sort?.toLowerCase() == "best selling") {
+      data = await getClient().query({
+        query: GET_CONTENTFUL_PRODUCTS_BY_TRENDING_TOTAL,
+        variables: { style: "" },
+      });
+    } else if (sort?.toLowerCase() == "trending") {
+      data = await getClient().query({
+        query: GET_CONTENTFUL_PRODUCTS_BY_BESTSELLER_TOTAL,
+        variables: { style: "" },
+      });
+    } else {
+      data = await getClient().query({
+        query: GET_CONTENTFUL_PRODUCTS_TOTAL,
+        variables: { style: "" },
+      });
+    }
+    return data?.data;
+  } catch (error: any) {
+    throw new Error("Error Fetching Products");
+  }
+};
+
 export const fetchRandomProducts = async () => {
   try {
     const { data } = await getClient().query({
@@ -55,19 +104,6 @@ export const fetchRandomProducts = async () => {
     throw new Error("Error Fetching Products");
   }
 };
-
-export const getProductsLength = async () => {
-  try {
-    const { data } = await getClient().query({
-      query: GET_CONTENTFUL_PRODUCTS_TOTAL,
-    });
-
-    return data;
-  } catch (error: any) {
-    throw new Error("Error Fetching Products");
-  }
-};
-
 export const fetchSingleProduct = async (id: string) => {
   try {
     const { data } = await getClient().query({

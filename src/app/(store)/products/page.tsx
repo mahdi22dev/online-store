@@ -63,8 +63,11 @@ export default function Products() {
 
   const getlength = async () => {
     try {
-      const length = await getProductsLength();
-      console.log("new length: ", length);
+      const length = await getProductsLength(sort_by);
+      console.log(
+        "new length: ",
+        length?.phoneCasesProductCollection?.items.length,
+      );
       if (length) {
         setProductLength(length);
       }

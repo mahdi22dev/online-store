@@ -1,6 +1,6 @@
 import SectionTitle from "@/components/text/SectionTitle";
 import { getClient } from "@/lib/apolloClient";
-import { GET_CONTENTFUL_COLLECTIONS } from "@/lib/queries";
+import { GET_CONTENTFUL_COLLECTIONS } from "@/lib/queries/queries";
 import React from "react";
 import CollectionsItems from "./CollectionsItems";
 
