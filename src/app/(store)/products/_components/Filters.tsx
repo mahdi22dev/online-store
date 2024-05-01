@@ -89,10 +89,7 @@ function Filters({
           </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger>Collections</AccordionTrigger>
-            <AccordionContent>
-              Yes. It comes with default styles that matches the other
-              components&apos; aesthetic.
-            </AccordionContent>
+            <AccordionContent>I will complete it later</AccordionContent>
           </AccordionItem>
         </Accordion>
       </SheetContent>
