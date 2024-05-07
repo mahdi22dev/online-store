@@ -14,9 +14,9 @@ function NavLinks({ className }: { className?: string }) {
       <Link href={"/home"} className={buttonVariants({ variant: "link" })}>
         home
       </Link>
-      <Link href={"/products"} className={buttonVariants({ variant: "link" })}>
+      <a href={"/products"} className={buttonVariants({ variant: "link" })}>
         products
-      </Link>
+      </a>
       <Link href={"/customize"} className={buttonVariants({ variant: "link" })}>
         custom case
       </Link>
