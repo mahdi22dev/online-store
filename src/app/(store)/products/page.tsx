@@ -64,10 +64,6 @@ export default function Products() {
   const getlength = async () => {
     try {
       const length = await getProductsLength(sort_by, selectedStyle);
-      console.log(
-        "new length: ",
-        length?.phoneCasesProductCollection?.items.length,
-      );
       if (length) {
         setProductLength(length);
       }
@@ -84,6 +80,17 @@ export default function Products() {
     console.log(selectedStyle);
   }, [selectedStyle]);
 
+  // if (
+  //   !loading &&
+  //   productsData?.phoneCasesProductCollection?.items.length == 0
+  // ) {
+  //   return (
+  //     <div className="w-full p-12 md:px-12 md:py-5 lg:px-14 xl:px-28">
+  //       <h1>No Products Found</h1>
+  //     </div>
+  //   );
+  // }
+
   return (
     <main className="w-full p-12 md:px-12 md:py-5 lg:px-14 xl:px-28">
       <BreadcrumbComponent />
@@ -98,23 +105,32 @@ export default function Products() {
           <Sort value={sort_by} setValue={setSort_by_Value} />
         </div>
       </div>
-      <div className="mx-auto mb-20 mt-20 grid grid-cols-1 items-start gap-5 md:grid-cols-3 lg:grid-cols-4">
-        {loading
-          ? Array.from({ length: 12 }).map((_, index) => {
-              return <ProductsItemSkeleton />;
-            })
-          : productsData?.phoneCasesProductCollection?.items.map(
-              //@ts-expect-error
-              (item: PhoneCasesProduct) => {
-                return <ProductItem item={item} />;
-              },
-            )}
-      </div>
-      <PaginationComponent
-        itemsLength={
-          productsLength?.phoneCasesProductCollection?.items.length || 0
-        }
-      />
+      {!loading &&
+      productsData?.phoneCasesProductCollection?.items.length == 0 ? (
+        <div className="flex h-[60vh] w-full items-center justify-center">
+          No Products found
+        </div>
+      ) : (
+        <>
+          <div className="mx-auto mb-20 mt-20 grid grid-cols-1 items-start gap-5 md:grid-cols-3 lg:grid-cols-4">
+            {loading
+              ? Array.from({ length: 12 }).map((_, index) => {
+                  return <ProductsItemSkeleton />;
+                })
+              : productsData?.phoneCasesProductCollection?.items.map(
+                  //@ts-expect-error
+                  (item: PhoneCasesProduct) => {
+                    return <ProductItem item={item} />;
+                  },
+                )}
+          </div>
+          <PaginationComponent
+            itemsLength={
+              productsLength?.phoneCasesProductCollection?.items.length || 0
+            }
+          />
+        </>
+      )}
     </main>
   );
 }
