@@ -80,17 +80,6 @@ export default function Products() {
     console.log(selectedStyle);
   }, [selectedStyle]);
 
-  // if (
-  //   !loading &&
-  //   productsData?.phoneCasesProductCollection?.items.length == 0
-  // ) {
-  //   return (
-  //     <div className="w-full p-12 md:px-12 md:py-5 lg:px-14 xl:px-28">
-  //       <h1>No Products Found</h1>
-  //     </div>
-  //   );
-  // }
-
   return (
     <main className="w-full p-12 md:px-12 md:py-5 lg:px-14 xl:px-28">
       <BreadcrumbComponent />
