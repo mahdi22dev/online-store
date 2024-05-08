@@ -1,15 +1,19 @@
 import React from "react";
-import { CiShoppingCart } from "react-icons/ci";
-import { CiUser } from "react-icons/ci";
+import { CiShoppingCart, CiUser } from "react-icons/ci";
 import Saerch from "./Saerch";
 import Link from "next/link";
 import ResponsiveNav from "./ResponsiveNav";
 import NavLinks from "./NavLinks";
 import { getCartLength } from "@/actions/cart-actions";
 import CartTotal from "../cart/CartTotal";
-
+import { Usermenu } from "./UserMenue";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/services/auth/auth.service";
+import { UserServerSession } from "@/lib/types";
 async function Navbar(): Promise<JSX.Element> {
   const cartLength: number = await getCartLength();
+  const session: UserServerSession = await getServerSession(authOptions);
+
   return (
     <>
       <div className="flex items-center justify-center gap-5 bg-black p-3 text-center text-white">
@@ -45,9 +49,14 @@ async function Navbar(): Promise<JSX.Element> {
             <div className="hidden sm:block">
               <Saerch />
             </div>
-            <Link href={"/login"}>
-              <CiUser className="cursor-pointer text-3xl" />
-            </Link>
+
+            {session ? (
+              <Usermenu />
+            ) : (
+              <Link href={"/login"}>
+                <CiUser className="cursor-pointer text-3xl" />
+              </Link>
+            )}
             <Link
               href={"/cart"}
               className="flex cursor-pointer items-center justify-between"
