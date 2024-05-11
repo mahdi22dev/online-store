@@ -30,6 +30,8 @@ model Cart {
   userId       String?
   ProductItems ProductItem[]
   createdAt    DateTime?     @default(now())
+  cost         Int           @default(0)
+  currencyCode String        @default("USA")
 
   @@index([id])
 }

@@ -26,6 +26,8 @@ export type cartType =
     } & {
       id: string;
       userId: string | null;
+      cost: number;
+      currencyCode: string;
     })
   | null;
 

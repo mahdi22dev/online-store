@@ -13,7 +13,7 @@ interface CartState {
   cartfetchloading: boolean;
 }
 const initialState: CartState = {
-  cart: { id: "", userId: "", ProductItems: [] },
+  cart: { id: "", userId: "", ProductItems: [], cost: 0, currencyCode: "" },
   refetchCart: false,
   cartfetchloading: true,
 };
@@ -28,7 +28,7 @@ export const cartSlice = createSlice({
             if (a.productId < b.productId) return -1;
             if (a.productId > b.productId) return 1;
             return 0;
-          }
+          },
         );
 
         state.cart = { ...action.payload, ProductItems: sortedData };

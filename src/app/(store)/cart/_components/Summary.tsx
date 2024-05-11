@@ -1,23 +1,23 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button } from "../../../../components/ui/button";
 import { Separator } from "../../../../components/ui/separator";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { cartType } from "@/lib/types";
+
 function Summary() {
-  const [totalPrice, setTotalPrice] = useState(0);
   const cartData: cartType = useSelector((state: RootState) => state.cart.cart);
-  const [cart, setCart] = useState<cartType>(cartData);
-  useEffect(() => {
-    setCart(cartData);
-    const totalsum = cart?.ProductItems.reduce((total, item) => {
+
+  const totalPrice =
+    cartData?.ProductItems.reduce((total, item) => {
       const itemTotal: number = item.price * item.quantity;
       return total + itemTotal;
-    }, 0);
-    // @ts-expect-error
-    setTotalPrice(totalsum);
+    }, 0) || 0;
+
+  useEffect(() => {
+    // Additional side effects can be added here if needed
   }, [cartData]);
 
   return (

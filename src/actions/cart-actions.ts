@@ -16,7 +16,6 @@ export const addToCartAction = async (
     const cookieStore = cookies();
     const hasCartCookie = cookieStore.get("cart");
     let cart;
-
     if (hasCartCookie) {
       if (session) {
         const userExists = await prisma.user.findUnique({
@@ -130,6 +129,24 @@ export const addToCartAction = async (
     await prisma.$disconnect();
   }
 };
+
+const updateCartTotalCost = async (cartId: string): Promise<void> => {
+  const cartItems = await prisma.productItem.findMany({
+    where: { CartId: cartId },
+    select: { quantity: true, price: true },
+  });
+
+  const totalCost = cartItems.reduce((acc, item) => {
+    const itemCost = item.quantity * item.price;
+    return acc + itemCost;
+  }, 0);
+
+  await prisma.cart.update({
+    where: { id: cartId },
+    data: { cost: totalCost },
+  });
+};
+
 export const fetchCartData = async () => {
   const cookieStore = cookies();
   const hasCartCookie = cookieStore.get("cart");
