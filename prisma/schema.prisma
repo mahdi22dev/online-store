@@ -49,9 +49,10 @@ model ProductItem {
   @@index([CartId])
 }
 
-model Order {
+model Orders {
   id           String    @id @default(cuid())
   userId       String?
+  carCartIdtId String?
   createdAt    DateTime? @default(now())
   cost         Int       @default(0)
   currencyCode String    @default("USA")

@@ -1,19 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ProductICartitemstype, cartType } from "@/lib/types";
+import { cartType } from "@/lib/types";
 
-// interface cartStateType {
-//   byID: {
-//     id: string;
-//   };
-//   items: cartType[];
-// }
 interface CartState {
   cart: cartType;
   refetchCart: boolean;
   cartfetchloading: boolean;
 }
 const initialState: CartState = {
-  cart: { id: "", userId: "", ProductItems: [], cost: 0, currencyCode: "" },
+  cart: { id: "", userId: "", ProductItems: [] },
   refetchCart: false,
   cartfetchloading: true,
 };
