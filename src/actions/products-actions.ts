@@ -12,6 +12,7 @@ import {
   GET_CONTENTFUL_FULL_PRODUCTS,
   GET_CONTENTFUL_PRODUCTS_BY_BESTSELLER,
   GET_CONTENTFUL_PRODUCTS_BY_HIGH_TO_LOW,
+  GET_CONTENTFUL_PRODUCTS_BY_KEYWORDS,
   GET_CONTENTFUL_PRODUCTS_BY_LOW_TO_HIGH,
   GET_CONTENTFUL_PRODUCTS_BY_TRENDING,
 } from "@/lib/queries/products";
@@ -112,5 +113,18 @@ export const fetchSingleProduct = async (id: string) => {
     return data;
   } catch (error) {
     throw new Error("Error Fetching Single Product");
+  }
+};
+
+export const fetchByKeywords = async (keyword: string) => {
+  try {
+    const { data } = await getClient().query({
+      query: GET_CONTENTFUL_PRODUCTS_BY_KEYWORDS,
+      variables: { keyword: keyword },
+    });
+
+    return data;
+  } catch (error) {
+    throw new Error("Error Fetching Products");
   }
 };

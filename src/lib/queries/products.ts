@@ -104,3 +104,24 @@ query GetContentfullProductsByLowToHigh($limit: Int!,$skip:Int!,$style:String!) 
   }
 }
 `);
+
+export const GET_CONTENTFUL_PRODUCTS_BY_KEYWORDS = gql(`
+query GetContentfullProductsByKeywords($keyword: String!) {
+  phoneCasesProductCollection(limit: 20, where: {name_contains: $keyword}) {
+    items {
+      sys {
+        id
+      }
+      name
+      price
+      new
+      trending
+      imagesCollection(limit: 1) {
+        items {
+          url
+        }
+      }
+    }
+  }
+}
+`);
