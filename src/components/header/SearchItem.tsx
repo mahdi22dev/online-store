@@ -1,13 +1,13 @@
+"use client";
 import { PhoneCasesProduct } from "@/__generated__/graphql";
 import Link from "next/link";
-import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function SearchItem({ item }: { item: PhoneCasesProduct }) {
   return (
     <Link
-      href={"products/" + item.sys.id}
-      className="flex w-full bg-gray-400 shadow-sm"
+      href={"/products/" + item.sys.id}
+      className="flex w-full gap-3 shadow-sm transition-shadow duration-300 hover:shadow-lg"
     >
       <div className="h-36 w-1/5 cursor-pointer ">
         <LazyLoadImage
@@ -18,9 +18,11 @@ function SearchItem({ item }: { item: PhoneCasesProduct }) {
           loading="lazy"
         />
       </div>
-      <div className="w-2/3 space-y-1">
-        <p>title</p>
-        <p>price</p>
+      <div className="w-2/3 space-y-2">
+        <p className="text-md text-[clamp(14px,3vw,20px)] capitalize">
+          {item.name}
+        </p>
+        <p className="text-md capitalize">${item.price}</p>
       </div>
     </Link>
   );
