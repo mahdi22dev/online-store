@@ -30,8 +30,6 @@ model Cart {
   userId       String?
   ProductItems ProductItem[]
   createdAt    DateTime?     @default(now())
-  cost         Int           @default(0)
-  currencyCode String        @default("USA")
 
   @@index([id])
 }
@@ -49,4 +47,14 @@ model ProductItem {
   @@index([id])
   @@index([productId])
   @@index([CartId])
+}
+
+model Order {
+  id           String    @id @default(cuid())
+  userId       String?
+  createdAt    DateTime? @default(now())
+  cost         Int       @default(0)
+  currencyCode String    @default("USA")
+
+  @@index([id])
 }

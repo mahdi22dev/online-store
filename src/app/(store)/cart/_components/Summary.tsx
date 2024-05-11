@@ -11,10 +11,12 @@ function Summary() {
   const cartData: cartType = useSelector((state: RootState) => state.cart.cart);
 
   const totalPrice = useCallback(() => {
-    cartData?.ProductItems.reduce((total, item) => {
-      const itemTotal: number = item.price * item.quantity;
-      return total + itemTotal;
-    }, 0) || 0;
+    const cost =
+      cartData?.ProductItems.reduce((total, item) => {
+        const itemTotal: number = item.price * item.quantity;
+        return total + itemTotal;
+      }, 0) || 0;
+    return cost;
   }, [cartData]);
 
   return (
@@ -22,14 +24,14 @@ function Summary() {
       <h2 className="text-xl font-bold">Summary</h2>
       <div className="flex items-center justify-between gap-5">
         <p>Subtotal</p>
-        <p>US ${totalPrice}</p>
+        <p>US ${totalPrice()}</p>
       </div>
       <div className="flex items-center justify-between gap-5">
         <p>Shipping fee</p>
         <p>free</p>
       </div>
       <div className="flex items-center justify-between gap-5">
-        <p className="font-bold">Total</p> <p> US ${totalPrice}</p>
+        <p className="font-bold">Total</p> <p> US ${totalPrice()}</p>
       </div>
       <Separator className="my-3" />
       <Button
