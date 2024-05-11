@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Button } from "../../../../components/ui/button";
 import { Separator } from "../../../../components/ui/separator";
 import { IoBagCheckOutline } from "react-icons/io5";
@@ -10,14 +10,11 @@ import { cartType } from "@/lib/types";
 function Summary() {
   const cartData: cartType = useSelector((state: RootState) => state.cart.cart);
 
-  const totalPrice =
+  const totalPrice = useCallback(() => {
     cartData?.ProductItems.reduce((total, item) => {
       const itemTotal: number = item.price * item.quantity;
       return total + itemTotal;
     }, 0) || 0;
-
-  useEffect(() => {
-    // Additional side effects can be added here if needed
   }, [cartData]);
 
   return (
