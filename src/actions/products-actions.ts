@@ -11,6 +11,7 @@ import {
 import {
   GET_CONTENTFUL_FULL_PRODUCTS,
   GET_CONTENTFUL_PRODUCTS_BY_BESTSELLER,
+  GET_CONTENTFUL_PRODUCTS_BY_COLLECTION,
   GET_CONTENTFUL_PRODUCTS_BY_HIGH_TO_LOW,
   GET_CONTENTFUL_PRODUCTS_BY_KEYWORDS,
   GET_CONTENTFUL_PRODUCTS_BY_LOW_TO_HIGH,
@@ -129,13 +130,24 @@ export const fetchByKeywords = async (keyword: string) => {
   }
 };
 
-export const fetchByCollection = async (keyword: string) => {
+export const getCollectionId = async (slug: string) => {
   try {
     const { data } = await getClient().query({
-      query: GET_CONTENTFUL_PRODUCTS_BY_KEYWORDS,
-      variables: { keyword: keyword },
+      query: GET_CONTENTFUL_PRODUCTS_BY_COLLECTION,
+      variables: { id: id },
     });
+    return data;
+  } catch (error) {
+    throw new Error("Error Fetching Products");
+  }
+};
 
+export const fetchByCollection = async (id: string) => {
+  try {
+    const { data } = await getClient().query({
+      query: GET_CONTENTFUL_PRODUCTS_BY_COLLECTION,
+      variables: { id: id },
+    });
     return data;
   } catch (error) {
     throw new Error("Error Fetching Products");

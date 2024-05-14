@@ -1,6 +1,9 @@
 "use client";
 import { GetContentRandomProductsQuery } from "@/__generated__/graphql";
-import { fetchAllProducts } from "@/actions/products-actions";
+import {
+  fetchAllProducts,
+  fetchByCollection,
+} from "@/actions/products-actions";
 import ProductItem from "@/components/products/ProductItem";
 import { ProductsItemSkeleton } from "@/components/products/ProductsItemSkeleton";
 import SectionTitle from "@/components/text/SectionTitle";
@@ -15,8 +18,9 @@ export default function page({ params }: { params: { collection: string } }) {
   const fetchProducts = async () => {
     try {
       setLoading(true);
+      // get collection id
 
-      const data = await fetchAllProducts(skip, sort_by, selectedStyle);
+      const data = await fetchByCollection("1fLE1GZ5DcL6CGkd3XmGM3");
       if (data) {
         setProductsData(data);
       }
