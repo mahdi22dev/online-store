@@ -128,3 +128,16 @@ export const fetchByKeywords = async (keyword: string) => {
     throw new Error("Error Fetching Products");
   }
 };
+
+export const fetchByCollection = async (keyword: string) => {
+  try {
+    const { data } = await getClient().query({
+      query: GET_CONTENTFUL_PRODUCTS_BY_KEYWORDS,
+      variables: { keyword: keyword },
+    });
+
+    return data;
+  } catch (error) {
+    throw new Error("Error Fetching Products");
+  }
+};
