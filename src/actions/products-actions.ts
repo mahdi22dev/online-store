@@ -9,6 +9,7 @@ import {
   GET_CONTENTFUL_SINGLE_PRODUCT,
 } from "@/lib/queries/queries";
 import {
+  GET_CONTENTFUL_COLLECTION_ID,
   GET_CONTENTFUL_FULL_PRODUCTS,
   GET_CONTENTFUL_PRODUCTS_BY_BESTSELLER,
   GET_CONTENTFUL_PRODUCTS_BY_COLLECTION,
@@ -133,8 +134,8 @@ export const fetchByKeywords = async (keyword: string) => {
 export const getCollectionId = async (slug: string) => {
   try {
     const { data } = await getClient().query({
-      query: GET_CONTENTFUL_PRODUCTS_BY_COLLECTION,
-      variables: { id: id },
+      query: GET_CONTENTFUL_COLLECTION_ID,
+      variables: { slug: slug },
     });
     return data;
   } catch (error) {

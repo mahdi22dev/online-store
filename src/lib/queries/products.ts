@@ -164,6 +164,18 @@ export const GET_CONTENTFUL_PRODUCTS_BY_KEYWORDS = gql(/* GraphQL */ `
   }
 `);
 
+export const GET_CONTENTFUL_COLLECTION_ID = gql(/* GraphQL */ `
+  query GetContentfullProductsCollectionId($slug: String!) {
+    phonearmomorCollectionsCollection(where: { slug_contains: $slug }) {
+      items {
+        sys {
+          id
+        }
+      }
+    }
+  }
+`);
+
 export const GET_CONTENTFUL_PRODUCTS_BY_COLLECTION = gql(/* GraphQL */ `
   query GetContentfullProductsByCollection($id: String!) {
     phonearmomorCollections(id: $id) {

@@ -1,9 +1,6 @@
 "use client";
-import { GetContentRandomProductsQuery } from "@/__generated__/graphql";
-import {
-  fetchAllProducts,
-  fetchByCollection,
-} from "@/actions/products-actions";
+import { GetContentfullProductsByCollectionQuery } from "@/__generated__/graphql";
+import { fetchByCollection, getCollectionId } from "@/actions/products-actions";
 import ProductItem from "@/components/products/ProductItem";
 import { ProductsItemSkeleton } from "@/components/products/ProductsItemSkeleton";
 import SectionTitle from "@/components/text/SectionTitle";
@@ -13,14 +10,21 @@ import { toast } from "sonner";
 export default function page({ params }: { params: { collection: string } }) {
   const [loading, setLoading] = useState(true);
   const [productsData, setProductsData] =
-    useState<GetContentRandomProductsQuery>();
+    useState<GetContentfullProductsByCollectionQuery>();
 
   const fetchProducts = async () => {
     try {
       setLoading(true);
       // get collection id
+      const id = await getCollectionId(params.collection);
+      const data = await fetchByCollection(
+        id.phonearmomorCollectionsCollection?.items[0]?.sys?.id || "",
+      );
+      console.log(
+        id.phonearmomorCollectionsCollection?.items[0]?.sys?.id,
+        data,
+      );
 
-      const data = await fetchByCollection("1fLE1GZ5DcL6CGkd3XmGM3");
       if (data) {
         setProductsData(data);
       }
@@ -36,10 +40,11 @@ export default function page({ params }: { params: { collection: string } }) {
   }, []);
   return (
     <main className="min-h-screen p-10">
-      <SectionTitle text={params.collection} />
+      <SectionTitle text={decodeURIComponent(params.collection)} />
 
       {!loading &&
-      productsData?.phoneCasesProductCollection?.items.length == 0 ? (
+      productsData?.phonearmomorCollections?.linkedFrom?.entryCollection?.items
+        .length == 0 ? (
         <div className="flex h-[60vh] w-full items-center justify-center">
           No Products found
         </div>
@@ -50,7 +55,7 @@ export default function page({ params }: { params: { collection: string } }) {
               ? Array.from({ length: 12 }).map((_, index) => {
                   return <ProductsItemSkeleton />;
                 })
-              : productsData?.phoneCasesProductCollection?.items.map(
+              : productsData?.phonearmomorCollections?.linkedFrom?.entryCollection?.items.map(
                   //@ts-expect-error
                   (item: PhoneCasesProduct) => {
                     return <ProductItem item={item} />;
