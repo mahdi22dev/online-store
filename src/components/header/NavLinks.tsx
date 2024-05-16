@@ -17,8 +17,14 @@ function NavLinks({ className }: { className?: string }) {
       <a href={"/products"} className={buttonVariants({ variant: "link" })}>
         products
       </a>
-      <Link href={"/customize"} className={buttonVariants({ variant: "link" })}>
+      {/* <Link href={"/customize"} className={buttonVariants({ variant: "link" })}>
         custom case
+      </Link> */}
+      <Link
+        href={"/collections"}
+        className={buttonVariants({ variant: "link" })}
+      >
+        collections
       </Link>
     </div>
   );

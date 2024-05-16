@@ -17,6 +17,14 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/collections/all",
+        destination: "/products",
+      },
+    ];
+  },
 
   typescript: {
     ignoreBuildErrors: true,

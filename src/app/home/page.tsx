@@ -4,6 +4,7 @@ import Banner from "./_components/Banner";
 import Collections from "./_components/Collections";
 import FeaturedProducts from "@/app/home/_components/TrendingProducts";
 import { GET_CONTENTFUL_PRODUCTS_BY_TRENDING } from "@/lib/queries/products";
+import InstagramCollection from "./_components/InstagramCollection";
 
 export default async function Home() {
   const { data: Banners_Data, error: getting_banners_error } =
@@ -30,7 +31,7 @@ export default async function Home() {
       {/* @ts-expect-error */}
       <Collections />
       <FeaturedProducts data={Trending_data} />
-      <section className="mt-20 h-96">Shop our Instagram</section>
+      <InstagramCollection />
     </main>
   );
 }

@@ -1,5 +1,11 @@
+import Collections from "@/app/home/_components/Collections";
 import React from "react";
 
 export default function page() {
-  return <div>all collections</div>;
+  return (
+    <div>
+      {/* @ts-expect-error */}
+      <Collections />
+    </div>
+  );
 }

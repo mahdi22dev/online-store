@@ -4,6 +4,15 @@ import { fetchByCollection, getCollectionId } from "@/actions/products-actions";
 import ProductItem from "@/components/products/ProductItem";
 import { ProductsItemSkeleton } from "@/components/products/ProductsItemSkeleton";
 import SectionTitle from "@/components/text/SectionTitle";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { SlashIcon } from "@radix-ui/react-icons";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -39,9 +48,9 @@ export default function page({ params }: { params: { collection: string } }) {
     fetchProducts();
   }, []);
   return (
-    <main className="min-h-screen p-10">
+    <main className="min-h-screen p-16">
+      <BreadcrumbComponent title={decodeURIComponent(params.collection)} />
       <SectionTitle text={decodeURIComponent(params.collection)} />
-
       {!loading &&
       productsData?.phonearmomorCollections?.linkedFrom?.entryCollection?.items
         .length == 0 ? (
@@ -65,5 +74,41 @@ export default function page({ params }: { params: { collection: string } }) {
         </>
       )}
     </main>
+  );
+}
+
+function BreadcrumbComponent({ title }: { title: string }) {
+  return (
+    <Breadcrumb className="">
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/" className="opacity-70">
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <SlashIcon />
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/collections" className="opacity-70">
+            Collections
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <SlashIcon />
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/collections/all" className="opacity-70">
+            All
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <SlashIcon />
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbPage>{title}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
   );
 }
