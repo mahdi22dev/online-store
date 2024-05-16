@@ -53,6 +53,11 @@ body {
   @apply font-poppins;
 }
 
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 400px; /* Set the height of the rows */
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

@@ -14,7 +14,7 @@ function TrendingProducts({
   data: GetContentfullProductsByTrendingQuery;
 }) {
   return (
-    <section className="mt-20 ">
+    <section className="mt-20  md:px-24">
       <SectionTitle text="Trending Products" />
       <Swiper
         navigation={true}

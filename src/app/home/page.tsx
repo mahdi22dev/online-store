@@ -26,7 +26,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen p-5 pt-1">
+    <main className="min-h-screen pt-1">
       <Banner data={Banners_Data} />
       {/* @ts-expect-error */}
       <Collections />
