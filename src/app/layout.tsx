@@ -4,6 +4,7 @@ import Providers from "@/providers/Providers";
 import Navbar from "@/components/header/Navbar";
 import { cn } from "@/lib/utils";
 import { Poppins } from "@/styles/fonts";
+import Footer from "./home/_components/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,6 +23,7 @@ export default function RootLayout({
           {/* @ts-expect-error Server Component */}
           <Navbar />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
