@@ -34,10 +34,10 @@ const AuthLoginForm = (): JSX.Element => {
           if (callback?.ok && !callback?.error) {
             toast.success("Sign in successfully");
             setTimeout(() => {
-              window.location.href = "/";
+              window.location.href = "/cart";
             }, 500);
           }
-        }
+        },
       );
     } catch (error) {
       toast.error("something wrong happend please try again later");

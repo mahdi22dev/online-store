@@ -1,6 +1,6 @@
 "use server";
 import { prisma } from "@/lib/prisma";
-import { UserServerSession, cartType } from "@/lib/types";
+import { UserServerSession } from "@/lib/types";
 import { authOptions } from "@/services/auth/auth.service";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
@@ -212,6 +212,42 @@ export const reomveProductfromcart = async (productId: string) => {
     });
   } catch (error) {
     throw new Error("can't remove the cart");
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+export const createOrderAfterPayment = async (
+  orderid: string,
+  sessionId: string,
+  user: string,
+  cost: number,
+) => {
+  try {
+    const cookieStore = cookies();
+    const hasCartCookie = cookieStore.get("cart");
+    const existingUser = await prisma.user.findUnique({
+      where: { id: user },
+    });
+
+    if (!existingUser) {
+      throw new Error("User not found");
+    }
+
+    await prisma.orders.create({
+      data: {
+        orderid: orderid,
+        sessionId: sessionId,
+        cartId: (hasCartCookie?.value as string) || "efwfwf",
+        cost: cost,
+        isPaid: true,
+        user: { connect: { id: user } },
+      },
+    });
+    // empty the cart
+    await prisma.cart.delete({ where: { id: hasCartCookie?.value as string } });
+  } catch (error: any) {
+    console.log(error.message);
   } finally {
     await prisma.$disconnect();
   }

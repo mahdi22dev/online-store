@@ -6,10 +6,14 @@ import { IoBagCheckOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { cartType } from "@/lib/types";
+import { signIn, useSession } from "next-auth/react";
+import { createOrderAfterPayment } from "@/actions/cart-actions";
 
 function Summary() {
   const cartData: cartType = useSelector((state: RootState) => state.cart.cart);
   const [loading, setLoading] = useState(false);
+  const session = useSession();
+
   const totalPrice = useCallback(() => {
     const cost =
       cartData?.ProductItems.reduce((total, item) => {
@@ -20,8 +24,10 @@ function Summary() {
   }, [cartData]);
 
   const handleCheckout = async () => {
-    console.log(cartData?.ProductItems);
-
+    if (session.status == "unauthenticated" || session.status == "loading") {
+      window.location.href = "/login";
+      return;
+    }
     try {
       setLoading(true);
       const response = await fetch("/api/stripe/checkout", {
@@ -35,11 +41,8 @@ function Summary() {
       });
 
       const { url } = await response.json();
-      console.log(url);
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
+      window.location.href = url;
+    } catch (error) {}
   };
 
   return (
