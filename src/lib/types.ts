@@ -35,4 +35,5 @@ export type ProductICartitemstype = {
   quantity: number;
   CartId: string;
   device: string;
+  price: number;
 };
