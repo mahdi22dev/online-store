@@ -26,16 +26,17 @@ model User {
 }
 
 model Orders {
-  id           String    @id @default(cuid())
+  id           String        @id @default(cuid())
   orderid      String
-  user         User      @relation(fields: [userId], references: [id])
+  user         User          @relation(fields: [userId], references: [id])
   userId       String
   cartId       String
-  createdAt    DateTime? @default(now())
-  cost         Int       @default(0)
-  currencyCode String    @default("USA")
-  isPaid       Boolean   @default(false)
+  createdAt    DateTime?     @default(now())
+  cost         Int           @default(0)
+  currencyCode String        @default("USA")
+  isPaid       Boolean       @default(false)
   sessionId    String
+  ProductItems ProductItem[]
 
   @@index([id])
   @@index([orderid])
@@ -54,12 +55,14 @@ model Cart {
 
 model ProductItem {
   id        String    @id @default(cuid())
-  productId String //used to grab asessts and title amd others frp, contentful
+  productId String //used to grab asessts and title and others frp, contentful
   quantity  Int
   price     Int
   device    String?
-  Cart      Cart      @relation(fields: [CartId], references: [id])
-  CartId    String
+  Cart      Cart?     @relation(fields: [CartId], references: [id])
+  CartId    String?
+  Order     Orders?   @relation(fields: [OrderId], references: [id])
+  OrderId   String?
   createdAt DateTime? @default(now())
 
   @@index([id])

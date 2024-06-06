@@ -8,6 +8,7 @@ import { RootState } from "@/redux/store";
 import { cartType } from "@/lib/types";
 import { signIn, useSession } from "next-auth/react";
 import { createOrderAfterPayment } from "@/actions/cart-actions";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Summary() {
   const cartData: cartType = useSelector((state: RootState) => state.cart.cart);
@@ -61,13 +62,19 @@ function Summary() {
       </div>
       <Separator className="my-3" />
       <Button
-        disabled={cartData?.ProductItems.length == 0 && true}
+        disabled={cartData?.ProductItems.length == 0 || (loading && true)}
         variant={"default"}
         className="mt-auto flex w-full items-center justify-center gap-1 rounded-xl font-normal uppercase"
         onClick={handleCheckout}
       >
         {loading ? (
-          "loading"
+          <ClipLoader
+            size={20}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+            loading={loading}
+            color="#fff"
+          />
         ) : (
           <>
             <IoBagCheckOutline className="text-xl" /> Checkout (

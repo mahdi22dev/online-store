@@ -124,7 +124,7 @@ export const addToCartAction = async (
       });
     }
   } catch (error: any) {
-    throw new Error("Error Adding item to cart");
+    console.log(error.message);
   } finally {
     await prisma.$disconnect();
   }
@@ -222,10 +222,10 @@ export const createOrderAfterPayment = async (
   sessionId: string,
   user: string,
   cost: number,
+  cartid: string,
+  productItemIds: string,
 ) => {
   try {
-    const cookieStore = cookies();
-    const hasCartCookie = cookieStore.get("cart");
     const existingUser = await prisma.user.findUnique({
       where: { id: user },
     });
@@ -234,20 +234,46 @@ export const createOrderAfterPayment = async (
       throw new Error("User not found");
     }
 
-    await prisma.orders.create({
+    const orderId = await prisma.orders.create({
       data: {
         orderid: orderid,
         sessionId: sessionId,
-        cartId: (hasCartCookie?.value as string) || "efwfwf",
+        cartId: cartid,
         cost: cost,
         isPaid: true,
         user: { connect: { id: user } },
       },
+      select: {
+        id: true,
+      },
+    });
+
+    // Update ProductItems to link them to the new order
+    await prisma.productItem.updateMany({
+      where: { id: { in: JSON.parse(productItemIds) } },
+      data: { OrderId: orderId.id },
     });
     // empty the cart
-    await prisma.cart.delete({ where: { id: hasCartCookie?.value as string } });
+    try {
+      const existingCart = await prisma.cart.findUnique({
+        where: { id: cartid },
+      });
+
+      if (!existingCart) {
+        throw new Error("Cart not found");
+      } else {
+        // desconnect cart items instead of deleting them
+        await prisma.productItem.updateMany({
+          where: { CartId: cartid },
+          data: { CartId: null },
+        });
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
   } catch (error: any) {
     console.log(error.message);
+    throw new Error(error);
   } finally {
     await prisma.$disconnect();
   }
