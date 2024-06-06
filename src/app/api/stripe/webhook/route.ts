@@ -2,13 +2,16 @@ import { createOrderAfterPayment } from "@/actions/cart-actions";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 export async function POST(req: NextRequest) {
-  const endpointSecret =
-    "whsec_411f173b3698a608b9988d6d6bd215064f8462507f7be3d921c7b3a78c6afae6";
   const sig = req.headers.get("stripe-signature") as string;
   const rawBody = await req.text();
   let event;
   try {
-    event = Stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
+    event = Stripe.webhooks.constructEvent(
+      rawBody,
+      sig,
+      // change to local for local testing
+      process.env.WEBHOOK_SERCRET_KEY as string,
+    );
     // Handle the event
     if (event.type === "checkout.session.completed") {
       const paymentIntent = event.data.object;
