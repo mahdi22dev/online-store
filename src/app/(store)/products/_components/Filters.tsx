@@ -47,7 +47,8 @@ function Filters({
       <SheetContent side={"left"} className="w-3/4 p-0">
         <p className="mt-5 px-5 text-xl font-medium uppercase">Filters</p>
         <Separator className="my-5" />
-        <Accordion type="single" collapsible className="w-full px-10">
+        {/* @ts-expect-error */}
+        <Accordion type="multiple" collapsible className="w-full px-10">
           <AccordionItem value="item-1">
             <AccordionTrigger>Style</AccordionTrigger>
             <AccordionContent>

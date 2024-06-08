@@ -96,3 +96,37 @@ input[type="number"]::-webkit-outer-spin-button {
 .footer_text {
   @apply cursor-pointer text-xl transition-opacity duration-300 hover:opacity-60;
 }
+
+.effect_link {
+  position: relative;
+}
+
+/* Underline hover effect */
+.effect_link::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 2px;
+  bottom: 0;
+  left: 10;
+  background-color: black;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.no_effect_link::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 2px;
+  bottom: 0;
+  left: 10;
+  background-color: black;
+  transform: scaleX(1);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.effect_link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

@@ -11,10 +11,16 @@ function NavLinks({ className }: { className?: string }) {
         className,
       )}
     >
-      <Link href={"/home"} className={buttonVariants({ variant: "link" })}>
+      <Link
+        href={"/home"}
+        className={cn(buttonVariants({ variant: "link" }), "effect_link")}
+      >
         home
       </Link>
-      <a href={"/products"} className={buttonVariants({ variant: "link" })}>
+      <a
+        href={"/products"}
+        className={cn(buttonVariants({ variant: "link" }), "effect_link")}
+      >
         products
       </a>
       {/* <Link href={"/customize"} className={buttonVariants({ variant: "link" })}>
@@ -22,7 +28,7 @@ function NavLinks({ className }: { className?: string }) {
       </Link> */}
       <Link
         href={"/collections"}
-        className={buttonVariants({ variant: "link" })}
+        className={cn(buttonVariants({ variant: "link" }), "effect_link")}
       >
         collections
       </Link>
