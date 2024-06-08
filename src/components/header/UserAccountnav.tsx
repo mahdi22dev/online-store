@@ -12,6 +12,7 @@ function UserAccountnav() {
       <div className="flex w-full items-center justify-center gap-5">
         <Button asChild variant={"link"} className="text-xl">
           <Link
+            onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
             href={"/orders"}
             className={`${pathname == "/orders" ? "no_effect_link relative" : "effect_link"} text-xl`}
           >
@@ -23,7 +24,12 @@ function UserAccountnav() {
           variant={"link"}
           className={`${pathname == "/settings" ? "no_effect_link relative" : "effect_link"} text-xl`}
         >
-          <Link href={"/settings"}>settings</Link>
+          <Link
+            onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
+            href={"/settings"}
+          >
+            settings
+          </Link>
         </Button>
       </div>
       <Separator className="mx-auto mt-5 w-[100%] bg-black" />
