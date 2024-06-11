@@ -25,6 +25,7 @@ export default async function Settings() {
                 order={item.ProductItems}
                 orderid={item.id}
                 key={item.id}
+                cost={item.cost}
               />
             );
           })}

@@ -15,9 +15,11 @@ import { useEffect, useState } from "react";
 export default function DisplayOrders({
   order,
   orderid,
+  cost,
 }: {
   order: ProductICartitemstype[];
   orderid: string;
+  cost: number;
 }) {
   const [orderItemsArray, setOrderItemsArray] =
     useState<GetContentSingleProductQuery[]>();
@@ -39,9 +41,7 @@ export default function DisplayOrders({
           order.map((item) => orderItemData(item.productId)),
         );
         setOrderItemsArray(data);
-      } catch (error) {
-        console.error("Error fetching order items:", error);
-      }
+      } catch (error) {}
     };
 
     fetchData();
@@ -63,6 +63,9 @@ export default function DisplayOrders({
             Your Order <p className="text-blue-500">#{orderid}</p>
             items
           </DialogTitle>
+          <DialogTitle className="flex gap-1 text-xs">
+            Your order total: US ${cost || 0}
+          </DialogTitle>
         </DialogHeader>
         <ul className="flex list-decimal flex-col gap-2 px-2">
           {order.map((item) => {
@@ -72,11 +75,13 @@ export default function DisplayOrders({
                   href={"/products/" + item.productId}
                   className="mt-2 flex items-center justify-between uppercase"
                 >
-                  {orderItemsArray?.map(
-                    (orderItem) =>
-                      orderItem.phoneCasesProduct?.sys.id == item.productId &&
-                      orderItem.phoneCasesProduct.name,
-                  )}
+                  <p className="hover:text-blue-700">
+                    {orderItemsArray?.map(
+                      (orderItem) =>
+                        orderItem.phoneCasesProduct?.sys.id == item.productId &&
+                        orderItem.phoneCasesProduct.name,
+                    )}
+                  </p>
                   <p className="text-blue-500 hover:text-blue-700 focus:text-blue-700">
                     #Link
                   </p>
