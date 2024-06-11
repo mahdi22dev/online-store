@@ -1,3 +1,6 @@
+"use client";
+import { GetContentSingleProductQuery } from "@/__generated__/graphql";
+import { fetchSingleProduct } from "@/actions/products-actions";
 import {
   Dialog,
   DialogContent,
@@ -7,12 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { ProductICartitemstype } from "@/lib/types";
 import Link from "next/link";
-
-const orderItems = [
-  { id: "12445efeff", name: "Iphone 13 pro max" },
-  { id: "12445efeff", name: "Iphone 13 pro max" },
-];
-const orderId = "";
+import { useEffect, useState } from "react";
 
 export default function DisplayOrders({
   order,
@@ -21,6 +19,33 @@ export default function DisplayOrders({
   order: ProductICartitemstype[];
   orderid: string;
 }) {
+  const [orderItemsArray, setOrderItemsArray] =
+    useState<GetContentSingleProductQuery[]>();
+
+  const orderItemData = async (id: string) => {
+    try {
+      const data = await fetchSingleProduct(id);
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await Promise.all(
+          order.map((item) => orderItemData(item.productId)),
+        );
+        setOrderItemsArray(data);
+      } catch (error) {
+        console.error("Error fetching order items:", error);
+      }
+    };
+
+    fetchData();
+  }, [order]);
   return (
     <Dialog>
       <div className="flex w-[90vw] justify-between gap-2 rounded-t-md bg-secondary px-3 py-5 md:w-[450px]">
@@ -40,14 +65,18 @@ export default function DisplayOrders({
           </DialogTitle>
         </DialogHeader>
         <ul className="flex list-decimal flex-col gap-2 px-2">
-          {orderItems.map((item) => {
+          {order.map((item) => {
             return (
               <li key={item.id}>
                 <Link
-                  href={"/products/" + item.id}
+                  href={"/products/" + item.productId}
                   className="mt-2 flex items-center justify-between uppercase"
                 >
-                  {item.name}
+                  {orderItemsArray?.map(
+                    (orderItem) =>
+                      orderItem.phoneCasesProduct?.sys.id == item.productId &&
+                      orderItem.phoneCasesProduct.name,
+                  )}
                   <p className="text-blue-500 hover:text-blue-700 focus:text-blue-700">
                     #Link
                   </p>

@@ -298,3 +298,22 @@ export const fetchUserorders = async () => {
     await prisma.$disconnect();
   }
 };
+
+export const fetchOrderItemData = async () => {
+  const session: UserServerSession = await getServerSession(authOptions);
+  try {
+    if (!session) {
+      throw error("user not logged in");
+    } else {
+      const orderItem = await prisma.orders.findMany({
+        where: { userId: session.user.id },
+        include: { ProductItems: true },
+      });
+      return orderItem;
+    }
+  } catch (error: any) {
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+};
