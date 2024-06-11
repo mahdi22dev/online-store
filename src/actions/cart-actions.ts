@@ -2,6 +2,7 @@
 import { prisma } from "@/lib/prisma";
 import { UserServerSession } from "@/lib/types";
 import { authOptions } from "@/services/auth/auth.service";
+import { error } from "console";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 
@@ -274,6 +275,25 @@ export const createOrderAfterPayment = async (
   } catch (error: any) {
     console.log(error.message);
     throw new Error(error);
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+export const fetchUserorders = async () => {
+  const session: UserServerSession = await getServerSession(authOptions);
+  try {
+    if (!session) {
+      throw error("user not logged in");
+    } else {
+      const orders = await prisma.orders.findMany({
+        where: { userId: session.user.id },
+        include: { ProductItems: true },
+      });
+      return orders;
+    }
+  } catch (error: any) {
+    throw error;
   } finally {
     await prisma.$disconnect();
   }
