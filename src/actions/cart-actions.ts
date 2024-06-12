@@ -5,6 +5,7 @@ import { authOptions } from "@/services/auth/auth.service";
 import { error } from "console";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
+import { sentorderNotifcation } from "./email";
 
 export const addToCartAction = async (
   productId: string,
@@ -248,6 +249,8 @@ export const createOrderAfterPayment = async (
         id: true,
       },
     });
+
+    await sentorderNotifcation({ orderid: orderid, email: existingUser.email });
 
     // Update ProductItems to link them to the new order
     await prisma.productItem.updateMany({

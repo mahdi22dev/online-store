@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
       rawBody,
       sig,
       // change to local for local testing
-      process.env.WEBHOOK_SERCRET_KEY as string,
+      process.env.WEBHOOK_SERCRET_KEY_LOCAL as string,
     );
     // Handle the event
     if (event.type === "checkout.session.completed") {

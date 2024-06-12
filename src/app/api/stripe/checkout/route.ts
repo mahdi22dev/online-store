@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
       line_items: line_items,
       mode: "payment",
       success_url: `${process.env.NEXTAUTH_URL}/success?orderid=` + orderid,
-      cancel_url: `${process.env.NEXTAUTH_URL}:3000/cart`,
+      cancel_url: `${process.env.NEXTAUTH_URL}/cart`,
       billing_address_collection: "required",
       customer_email: user?.user.email,
       metadata: {
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
       { status: 200 },
     );
   } catch (error: any) {
-    console.log(error.message);
+    console.log(error);
 
     return NextResponse.json({ message: error.message }, { status: 500 });
   }

@@ -1,15 +1,13 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Button } from "../../../../components/ui/button";
 import { Separator } from "../../../../components/ui/separator";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { cartType } from "@/lib/types";
-import { signIn, useSession } from "next-auth/react";
-import { createOrderAfterPayment } from "@/actions/cart-actions";
+import { useSession } from "next-auth/react";
 import ClipLoader from "react-spinners/ClipLoader";
-import { sentWelcome } from "@/actions/email";
 
 function Summary() {
   const cartData: cartType = useSelector((state: RootState) => state.cart.cart);
@@ -31,20 +29,19 @@ function Summary() {
       return;
     }
     try {
-      // setLoading(true);
-      await sentWelcome();
-      // const response = await fetch("/api/stripe/checkout", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     items: cartData?.ProductItems,
-      //   }),
-      // });
+      setLoading(true);
+      const response = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items: cartData?.ProductItems,
+        }),
+      });
 
-      // const { url } = await response.json();
-      // window.location.href = url;
+      const { url } = await response.json();
+      window.location.href = url;
     } catch (error: any) {
       console.log(error.message);
     }
