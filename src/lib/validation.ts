@@ -15,8 +15,9 @@ export const userAuthRigsterSchema = z
     name: z
       .string()
       .min(3, { message: "Full name must be at least 3 characters" })
-      .regex(/^[a-zA-Z]+$/, {
-        message: "Name should only contain letters and no numbers",
+      .regex(/^[a-zA-Z\s'-]+$/, {
+        message:
+          "Name should only contain letters, spaces, hyphens, and apostrophes",
       }),
     email: z
       .string()

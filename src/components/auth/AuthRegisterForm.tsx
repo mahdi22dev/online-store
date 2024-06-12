@@ -41,7 +41,6 @@ const AuthRegisterForm = (): JSX.Element => {
       if (res.status == 400) {
         toast.error(responseJson?.message);
       } else if (res.status == 200) {
-        console.log(responseJson);
         toast.success("new user registred successfully");
         await sentWelcome({
           fullName: responseJson.newUser.name,

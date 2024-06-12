@@ -50,7 +50,7 @@ export const EmailWelcomeTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           </Section>
           <Section className="mb-[32px] mt-[32px] text-center">
             <Text className="text-[14px] leading-[24px] text-black">
-              This email sent to you because you registred new account in{" "}
+              This email sent to you because you registred new account at{" "}
               <Link href="http://localhost:3000/home">phonearmor</Link>;
             </Text>
           </Section>
