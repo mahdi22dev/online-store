@@ -9,6 +9,7 @@ import { cartType } from "@/lib/types";
 import { signIn, useSession } from "next-auth/react";
 import { createOrderAfterPayment } from "@/actions/cart-actions";
 import ClipLoader from "react-spinners/ClipLoader";
+import { sentWelcome } from "@/actions/email";
 
 function Summary() {
   const cartData: cartType = useSelector((state: RootState) => state.cart.cart);
@@ -30,20 +31,23 @@ function Summary() {
       return;
     }
     try {
-      setLoading(true);
-      const response = await fetch("/api/stripe/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          items: cartData?.ProductItems,
-        }),
-      });
+      // setLoading(true);
+      await sentWelcome();
+      // const response = await fetch("/api/stripe/checkout", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     items: cartData?.ProductItems,
+      //   }),
+      // });
 
-      const { url } = await response.json();
-      window.location.href = url;
-    } catch (error) {}
+      // const { url } = await response.json();
+      // window.location.href = url;
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
 
   return (

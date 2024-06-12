@@ -19,7 +19,7 @@ function UserAccountnav() {
             Orders
           </Link>
         </Button>
-        <Button
+        {/* <Button
           asChild
           variant={"link"}
           className={`${pathname == "/settings" ? "no_effect_link relative" : "effect_link"} text-xl`}
@@ -30,7 +30,7 @@ function UserAccountnav() {
           >
             settings
           </Link>
-        </Button>
+        </Button> */}
       </div>
       <Separator className="mx-auto mt-5 w-[100%] bg-black" />
     </div>
