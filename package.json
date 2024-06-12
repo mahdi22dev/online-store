@@ -33,6 +33,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
+    "@react-email/components": "^0.0.19",
     "@reduxjs/toolkit": "^2.1.0",
     "@types/bcrypt": "^5.0.2",
     "apollo-cache-persist": "^0.1.1",

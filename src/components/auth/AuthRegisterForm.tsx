@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { RegisterFormData } from "@/lib/types";
 import { Button } from "../ui/button";
 import FormInput from "./FormInput";
+import { sentWelcome } from "@/actions/email";
 
 const AuthRegisterForm = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,7 +41,12 @@ const AuthRegisterForm = (): JSX.Element => {
       if (res.status == 400) {
         toast.error(responseJson?.message);
       } else if (res.status == 200) {
+        console.log(responseJson);
         toast.success("new user registred successfully");
+        await sentWelcome({
+          fullName: responseJson.newUser.name,
+          email: responseJson.newUser.email,
+        });
         setTimeout(() => {
           window.location.href = "/login";
         }, 500);

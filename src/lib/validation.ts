@@ -14,11 +14,14 @@ export const userAuthRigsterSchema = z
   .object({
     name: z
       .string()
-      .min(3, { message: "full name must be at least 3 characters" }),
+      .min(3, { message: "Full name must be at least 3 characters" })
+      .regex(/^[a-zA-Z]+$/, {
+        message: "Name should only contain letters and no numbers",
+      }),
     email: z
       .string()
       .min(1, { message: "Email is required" })
-      .email("Invalid email address"),
+      .email({ message: "Invalid email address" }),
     password: z
       .string()
       .min(6, { message: "Password must be at least 6 characters" }),
@@ -28,5 +31,5 @@ export const userAuthRigsterSchema = z
   })
   .refine((data) => data.password === data.confirm_password, {
     path: ["confirm_password"],
-    message: "Passwords does not match",
+    message: "Passwords do not match",
   });
