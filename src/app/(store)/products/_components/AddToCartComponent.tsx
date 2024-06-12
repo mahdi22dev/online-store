@@ -82,15 +82,6 @@ function AddToCartComponent({ item }: { item: any }) {
         >
           add to cart
         </Button>
-
-        <Button
-          onClick={() => addToCart(item.sys.id, item.price || 0)}
-          variant={"outline"}
-          className="h-16 cursor-pointer disabled:cursor-not-allowed"
-          disabled={!value ? true : false}
-        >
-          Buy Now
-        </Button>
       </div>
     </div>
   );
