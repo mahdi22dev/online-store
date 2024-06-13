@@ -1,6 +1,6 @@
 "use client";
 import { fetchCartData } from "@/actions/cart-actions";
-import CartComponent from "@/app/(store)/cart/_components/CartComponent";
+import CartComponent from "./_components/CartComponent";
 import { buttonVariants } from "@/components/ui/button";
 import {
   CartDataUpdate,

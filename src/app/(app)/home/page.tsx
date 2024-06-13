@@ -2,7 +2,7 @@ import { getClient } from "@/lib/apolloClient";
 import { GET_CONTENTFUL_HOME_BANNERS } from "@/lib/queries/queries";
 import Banner from "./_components/Banner";
 import Collections from "./_components/Collections";
-import FeaturedProducts from "@/app/home/_components/TrendingProducts";
+import FeaturedProducts from "./_components/TrendingProducts";
 import { GET_CONTENTFUL_PRODUCTS_BY_TRENDING } from "@/lib/queries/products";
 import InstagramCollection from "./_components/InstagramCollection";
 

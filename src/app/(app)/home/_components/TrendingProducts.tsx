@@ -1,5 +1,5 @@
 "use client";
-import SectionTitle from "../../../components/text/SectionTitle";
+import SectionTitle from "@/components/text/SectionTitle";
 import ProductItem from "@/components/products/ProductItem";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";

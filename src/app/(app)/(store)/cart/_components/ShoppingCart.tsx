@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
-import { Separator } from "../../../../components/ui/separator";
+import { Separator } from "@/components/ui/separator";
 import { AiOutlineShopping } from "react-icons/ai";
-import CartItem from "../../../../components/cart/CartItem";
+import CartItem from "@/components//cart/CartItem";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { cartType } from "@/lib/types";

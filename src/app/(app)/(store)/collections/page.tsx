@@ -1,4 +1,4 @@
-import Collections from "@/app/home/_components/Collections";
+import Collections from "@/app/(app)/home/_components/Collections";
 import React from "react";
 
 export default function page() {
