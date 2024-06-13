@@ -3,7 +3,7 @@ import NoOrder from "./_components/NoOrder";
 import DisplayOrders from "./_components/DisplayOrders";
 import { fetchUserorders } from "@/actions/cart-actions";
 
-export default async function Settings() {
+export default async function Orders() {
   const data = await fetchUserorders();
 
   return (
