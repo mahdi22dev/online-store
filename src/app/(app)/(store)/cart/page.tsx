@@ -1,10 +1,6 @@
 "use client";
 import { fetchCartData } from "@/actions/cart-actions";
-<<<<<<< HEAD
 import CartComponent from "./_components/CartComponent";
-=======
-import CartComponent from "@/app/(store)/cart/_components/CartComponent";
->>>>>>> 50726e06b949c3eb942f138757c3f4c24b51fe01
 import { buttonVariants } from "@/components/ui/button";
 import {
   CartDataUpdate,

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { ServerSession } from "../../../../services/auth/auth.service";
-=======
-import { ServerSession } from "../../../services/auth/auth.service";
->>>>>>> 50726e06b949c3eb942f138757c3f4c24b51fe01
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
