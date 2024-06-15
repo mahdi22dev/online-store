@@ -18,3 +18,17 @@ export const isUserAdmin = async () => {
     throw error;
   }
 };
+
+export const fetchRecentorders = async () => {
+  try {
+    const recentOrders = await prisma.orders.findMany({
+      where: {},
+      orderBy: { createdAt: "desc" },
+      include: { user: true },
+      take: 6,
+    });
+    return recentOrders;
+  } catch (error) {
+    throw error;
+  }
+};
