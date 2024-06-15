@@ -1,5 +1,9 @@
 "use client";
+<<<<<<< HEAD
 import SectionTitle from "@/components/text/SectionTitle";
+=======
+
+>>>>>>> 50726e06b949c3eb942f138757c3f4c24b51fe01
 import ProductItem from "@/components/products/ProductItem";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,6 +11,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { GetContentfullProductsByTrendingQuery } from "@/__generated__/graphql";
+<<<<<<< HEAD
+=======
+import SectionTitle from "@/components/text/SectionTitle";
+>>>>>>> 50726e06b949c3eb942f138757c3f4c24b51fe01
 
 function TrendingProducts({
   data,

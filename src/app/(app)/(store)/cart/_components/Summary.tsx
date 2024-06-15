@@ -1,7 +1,12 @@
 "use client";
 import React, { useCallback, useState } from "react";
+<<<<<<< HEAD
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components//ui/separator";
+=======
+import { Button } from "../../../../components/ui/button";
+import { Separator } from "../../../../components/ui/separator";
+>>>>>>> 50726e06b949c3eb942f138757c3f4c24b51fe01
 import { IoBagCheckOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";

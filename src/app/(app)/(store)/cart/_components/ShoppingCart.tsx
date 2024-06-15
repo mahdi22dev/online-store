@@ -1,8 +1,14 @@
 "use client";
 import React, { useEffect } from "react";
+<<<<<<< HEAD
 import { Separator } from "@/components/ui/separator";
 import { AiOutlineShopping } from "react-icons/ai";
 import CartItem from "@/components//cart/CartItem";
+=======
+import { Separator } from "../../../../components/ui/separator";
+import { AiOutlineShopping } from "react-icons/ai";
+import CartItem from "../../../../components/cart/CartItem";
+>>>>>>> 50726e06b949c3eb942f138757c3f4c24b51fe01
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { cartType } from "@/lib/types";
