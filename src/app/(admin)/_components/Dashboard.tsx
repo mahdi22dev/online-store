@@ -1,6 +1,5 @@
 "use client";
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   ChevronLeft,
@@ -12,14 +11,10 @@ import {
   LineChart,
   ListFilter,
   MoreVertical,
-  Package,
   Package2,
   PanelLeft,
-  Search,
-  Settings,
   ShoppingCart,
   Truck,
-  Users2,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -48,7 +43,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import {
   Pagination,
   PaginationContent,
