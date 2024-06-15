@@ -1,4 +1,4 @@
-import { ServerSession } from "../../../services/auth/auth.service";
+import { ServerSession } from "../../../../services/auth/auth.service";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";

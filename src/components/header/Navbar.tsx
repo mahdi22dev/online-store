@@ -10,7 +10,10 @@ import { Usermenu } from "./UserMenue";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/services/auth/auth.service";
 import { UserServerSession } from "@/lib/types";
+import { Button } from "../ui/button";
+import { isUserAdmin } from "@/actions/admin-actions";
 async function Navbar(): Promise<JSX.Element> {
+  const isAdmin = await isUserAdmin();
   const cartLength: number = await getCartLength();
   const session: UserServerSession = await getServerSession(authOptions);
 
@@ -27,6 +30,11 @@ async function Navbar(): Promise<JSX.Element> {
           {/* links */}
           <div className="flex items-center justify-between sm:hidden">
             <ResponsiveNav /> <Saerch />
+            {isAdmin == "ADMIN" && (
+              <Button asChild variant={"default"}>
+                <Link href={"/admin"}>admin dashboard</Link>
+              </Button>
+            )}
           </div>
           <NavLinks className="hidden sm:flex" />
 
@@ -47,6 +55,14 @@ async function Navbar(): Promise<JSX.Element> {
           {/* search cart etc */}
           <div className="flex items-center justify-between gap-4">
             <div className="hidden sm:block">
+              {isAdmin == "ADMIN" && (
+                <Button asChild variant={"default"}>
+                  <Link href={"/admin"}>admin dashboard</Link>
+                </Button>
+              )}
+            </div>
+
+            <div className="hidden sm:block">
               <Saerch />
             </div>
 
@@ -57,6 +73,7 @@ async function Navbar(): Promise<JSX.Element> {
                 <CiUser className="cursor-pointer text-3xl" />
               </Link>
             )}
+
             <Link
               href={"/cart"}
               className="flex cursor-pointer items-center justify-between"
