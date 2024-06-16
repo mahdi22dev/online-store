@@ -24,7 +24,7 @@ export const fetchRecentorders = async () => {
     const recentOrders = await prisma.orders.findMany({
       where: {},
       orderBy: { createdAt: "desc" },
-      include: { user: true },
+      include: { user: true, ProductItems: true },
       take: 6,
     });
     return recentOrders;

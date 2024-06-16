@@ -1,6 +1,6 @@
 import * as z from "zod";
 import { userAuthRigsterSchema, userAuthLoginSchema } from "./validation";
-import { Cart } from "@prisma/client";
+import { ProductItem, Orders, User } from "@prisma/client";
 
 export type LogInFormData = z.infer<typeof userAuthLoginSchema>;
 export type RegisterFormData = z.infer<typeof userAuthRigsterSchema>;
@@ -37,4 +37,9 @@ export type ProductICartitemstype = {
   CartId: string | null;
   device: string | null;
   price: number;
+};
+
+export type OrderType = Orders & {
+  user: User;
+  ProductItems: ProductItem[];
 };

@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Cart, ProductItem } from "@prisma/client";
 
-type OrderWithUser = Cart & {
+type CartType = Cart & {
   ProductItem?: ProductItem[];
 };
 interface CartState {
-  cart: OrderWithUser;
+  cart: CartType;
   refetchCart: boolean;
   cartfetchloading: boolean;
 }
@@ -18,7 +18,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    CartDataUpdate: (state, action: PayloadAction<OrderWithUser>) => {
+    CartDataUpdate: (state, action: PayloadAction<CartType>) => {
       if (action.payload) {
         const sortedData = action.payload?.ProductItem?.slice().sort((a, b) => {
           if (a.productId < b.productId) return -1;

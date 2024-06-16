@@ -12,7 +12,6 @@ export default async function Admin() {
 
   return (
     <main className="flex min-h-[80vh] min-w-full items-start justify-center pt-1 md:p-5">
-      {/* @ts-expect-error */}
       <Dashboard />
     </main>
   );

@@ -41,7 +41,9 @@ export default function DisplayOrders({
           order.map((item) => orderItemData(item.productId)),
         );
         setOrderItemsArray(data);
-      } catch (error) {}
+      } catch (error) {
+        throw error;
+      }
     };
 
     fetchData();
