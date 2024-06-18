@@ -21,8 +21,9 @@ function OrderViewr({
 }: {
   selectedOrder: OrderType | undefined;
 }) {
-  const [orderProductsItems, setOrderProductsItems] =
-    useState<GetContentSingleProductQuery[]>();
+  const [orderProductsItems, setOrderProductsItems] = useState<
+    GetContentSingleProductQuery[]
+  >([]);
   const [loading, setLoading] = useState(true);
 
   const formattedDate = selectedOrder?.createdAt
@@ -45,17 +46,14 @@ function OrderViewr({
       try {
         if (selectedOrder?.ProductItems) {
           const data = await Promise.all(
-            selectedOrder?.ProductItems.map((item) =>
+            selectedOrder.ProductItems.map((item) =>
               orderItemData(item.productId),
             ),
           );
-          if (data) {
-            console.log(data);
-            setOrderProductsItems(data);
-          }
+          setOrderProductsItems(data);
         }
       } catch (error) {
-        throw error;
+        console.error(error);
       } finally {
         setLoading(false);
       }
@@ -66,7 +64,7 @@ function OrderViewr({
 
   if (loading) {
     return (
-      <Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
+      <Card className="">
         <CardHeader className="flex flex-row items-start bg-muted/50">
           <div className="grid gap-0.5">
             <CardTitle className="group flex items-center gap-2 text-lg">
@@ -95,9 +93,10 @@ function OrderViewr({
       </Card>
     );
   }
+
   return (
-    <div>
-      <Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
+    <div className="">
+      <Card className="" x-chunk="dashboard-05-chunk-4">
         <CardHeader className="flex flex-row items-start bg-muted/50">
           <div className="grid gap-0.5">
             <CardTitle className="group flex items-center gap-2 text-lg">
@@ -119,13 +118,21 @@ function OrderViewr({
             <div className="font-semibold">Order Details</div>
 
             <ul className="grid gap-3">
-              {orderProductsItems?.map((item) => {
+              {orderProductsItems.map((item) => {
+                const productItem = selectedOrder?.ProductItems.find(
+                  (i) => i.productId === item.phoneCasesProduct?.sys.id,
+                );
+                const quantity = productItem?.quantity || 0;
+                const price = productItem?.price || 0;
                 return (
-                  <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">
-                      Glimmer Lamps x <span>2</span>
+                  <li
+                    key={item.phoneCasesProduct?.sys.id}
+                    className="flex items-center justify-between"
+                  >
+                    <span className="capitalize text-muted-foreground">
+                      {item.phoneCasesProduct?.name} x {quantity}
                     </span>
-                    <span>$250.00</span>
+                    <span>${(price * quantity).toFixed(2)}</span>
                   </li>
                 );
               })}
@@ -134,19 +141,19 @@ function OrderViewr({
             <ul className="grid gap-3">
               <li className="flex items-center justify-between">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span>${selectedOrder?.cost}.00</span>
+                <span>${selectedOrder?.cost?.toFixed(2)}</span>
               </li>
               <li className="flex items-center justify-between">
                 <span className="text-muted-foreground">Shipping</span>
-                <span>free</span>
+                <span>Free</span>
               </li>
               <li className="flex items-center justify-between">
                 <span className="text-muted-foreground">Tax</span>
-                <span>$0</span>
+                <span>$0.00</span>
               </li>
               <li className="flex items-center justify-between font-semibold">
                 <span className="text-muted-foreground">Total</span>
-                <span>${selectedOrder?.cost}.00</span>
+                <span>${selectedOrder?.cost?.toFixed(2)}</span>
               </li>
             </ul>
           </div>
@@ -162,7 +169,9 @@ function OrderViewr({
               <div className="flex items-center justify-between">
                 <dt className="text-muted-foreground">Email</dt>
                 <dd>
-                  <a href="mailto:">{selectedOrder?.user.email}</a>
+                  <a href={`mailto:${selectedOrder?.user.email}`}>
+                    {selectedOrder?.user.email}
+                  </a>
                 </dd>
               </div>
             </dl>

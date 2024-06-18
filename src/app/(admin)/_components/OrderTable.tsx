@@ -11,23 +11,24 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import React, { useEffect, useState } from "react";
-import { Orders, User } from "@prisma/client";
 import ClipLoader from "react-spinners/ClipLoader";
 import { OrderType } from "@/lib/types";
 
 function OrderTable({
   setSelectedOrder,
   selectedOrder,
+  currentPage,
 }: {
   setSelectedOrder: React.Dispatch<React.SetStateAction<OrderType | undefined>>;
   selectedOrder: OrderType | undefined;
+  currentPage: number;
 }) {
   const [recentOrders, setRecentorders] = useState<OrderType[]>();
   const [Loading, setLoading] = useState(true);
 
   const fetchRecentOrders = async () => {
     setLoading(true);
-    const data = await fetchRecentorders();
+    const data = await fetchRecentorders(currentPage);
     if (data) {
       setRecentorders(data);
       setSelectedOrder(data[0]);
@@ -40,7 +41,7 @@ function OrderTable({
 
   useEffect(() => {
     fetchRecentOrders();
-  }, []);
+  }, [currentPage]);
 
   if (Loading) {
     return (
@@ -57,7 +58,7 @@ function OrderTable({
   }
 
   return (
-    <Table>
+    <Table className="">
       <TableHeader>
         <TableRow>
           <TableHead>Customer</TableHead>
@@ -74,7 +75,7 @@ function OrderTable({
         )}
       </div>
 
-      <TableBody className="h-[384px]">
+      <TableBody className="h-[384px] overflow-visible">
         {recentOrders?.map((item) => {
           const formattedDate = item.createdAt
             ? moment(item.createdAt).format("YYYY-MM-DD")
@@ -105,7 +106,7 @@ function OrderTable({
               <TableCell className="text-right">${item.cost}.00</TableCell>
             </TableRow>
           );
-        })}
+        })}{" "}
       </TableBody>
     </Table>
   );
