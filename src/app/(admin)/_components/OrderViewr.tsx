@@ -116,7 +116,6 @@ function OrderViewr({
         <CardContent className="p-6 text-sm">
           <div className="grid gap-3">
             <div className="font-semibold">Order Details</div>
-
             <ul className="grid gap-3">
               {orderProductsItems.map((item) => {
                 const productItem = selectedOrder?.ProductItems.find(

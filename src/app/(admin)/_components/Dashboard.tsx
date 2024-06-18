@@ -32,6 +32,7 @@ import OrderViewr from "./OrderViewr";
 import { OrderType } from "@/lib/types";
 import OrdersPanigation from "./OrdersPanigation";
 import EarningsCard from "./Earnings";
+import OrderTracker from "./OrderTracker";
 export function Dashboard() {
   const [selectedorder, setSelectedOrder] = useState<OrderType>();
   const [currentPage, setCurrentPage] = useState(0);
@@ -117,16 +118,7 @@ export function Dashboard() {
           <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
             <EarningsCard />
             <Tabs defaultValue="week">
-              <div className="flex items-center">
-                <div className=" ml-auto flex items-center gap-1">
-                  <Button size="sm" variant="outline" className="h-8 gap-1">
-                    <Truck className="h-3.5 w-3.5" />
-                    <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
-                      Track Order
-                    </span>
-                  </Button>
-                </div>
-              </div>
+              <OrderTracker />
               <TabsContent value="week">
                 <Card x-chunk="dashboard-05-chunk-3">
                   <CardHeader className="px-7">

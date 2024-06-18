@@ -287,7 +287,7 @@ export const fetchUserorders = async () => {
   const session: UserServerSession = await getServerSession(authOptions);
   try {
     if (!session) {
-      throw error("user not logged in");
+      throw Error("user not logged in");
     } else {
       const orders = await prisma.orders.findMany({
         where: { userId: session.user.id },

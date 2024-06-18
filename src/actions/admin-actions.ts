@@ -61,3 +61,17 @@ export async function getPaymentsData(
 
   return payments.data;
 }
+
+export const fetchSingleOrder = async (id: string) => {
+  try {
+    const order = await prisma.orders.findFirst({
+      where: { orderid: id },
+      include: { ProductItems: true, user: true },
+    });
+    return order;
+  } catch (error: any) {
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+};

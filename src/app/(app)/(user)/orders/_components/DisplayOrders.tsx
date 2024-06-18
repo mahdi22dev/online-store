@@ -58,7 +58,6 @@ export default function DisplayOrders({
         </DialogTrigger>
         <p>completed</p>
       </div>
-
       <DialogContent className="max-h-[425px] max-w-[450px]">
         <DialogHeader>
           <DialogTitle className="flex gap-1 text-base">
