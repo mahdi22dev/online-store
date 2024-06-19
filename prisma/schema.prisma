@@ -27,8 +27,7 @@ model User {
   orders            Orders[]
   role              Role      @default(USER)
 
-  @@index([id])
-  @@index([userId])
+  @@index([email])
 }
 
 model Orders {
@@ -44,9 +43,7 @@ model Orders {
   sessionId    String
   ProductItems ProductItem[]
 
-  @@index([id])
-  @@index([orderid])
-  @@index([sessionId])
+  @@index([orderid, userId])
 }
 
 model Cart {
@@ -55,8 +52,6 @@ model Cart {
   userId       String?
   ProductItems ProductItem[]
   createdAt    DateTime?     @default(now())
-
-  @@index([id])
 }
 
 model ProductItem {
@@ -71,7 +66,6 @@ model ProductItem {
   OrderId   String?
   createdAt DateTime? @default(now())
 
-  @@index([id])
+  @@index([OrderId])
   @@index([productId])
-  @@index([CartId])
 }
