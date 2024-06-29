@@ -39,6 +39,7 @@
     "@react-email/components": "^0.0.19",
     "@reduxjs/toolkit": "^2.1.0",
     "@types/bcrypt": "^5.0.2",
+    "@vercel/speed-insights": "^1.0.12",
     "apollo-cache-persist": "^0.1.1",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",

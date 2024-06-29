@@ -3,6 +3,7 @@ import "./globals.css";
 import Providers from "@/providers/Providers";
 import { cn } from "@/lib/utils";
 import { Poppins } from "@/styles/fonts";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en" className="bg-slate-50">
       <body className={cn(Poppins.variable)}>
         <Providers>{children}</Providers>
+        <SpeedInsights />
       </body>
     </html>
   );
