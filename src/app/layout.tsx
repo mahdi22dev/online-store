@@ -4,6 +4,7 @@ import Providers from "@/providers/Providers";
 import { cn } from "@/lib/utils";
 import { Poppins } from "@/styles/fonts";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={cn(Poppins.variable)}>
         <Providers>{children}</Providers>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
