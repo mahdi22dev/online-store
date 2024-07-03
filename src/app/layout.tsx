@@ -18,6 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-slate-50">
+      {" "}
+      <script
+        type="text/javascript"
+        src="//pl23684301.highrevenuenetwork.com/ce/5e/1b/ce5e1be1e1f76ad4d4d04f84beea03b4.js"
+      ></script>
       <body className={cn(Poppins.variable)}>
         <Providers>{children}</Providers>
         <SpeedInsights />
